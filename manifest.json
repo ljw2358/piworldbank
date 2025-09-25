@@ -1,20 +1,13 @@
 {
   "name": "World Pi Bank",
-  "short_name": "WorldPiBank",
-  "start_url": ".",
+  "short_name": "WPB",
+  "start_url": "/worldpibank/",
+  "scope": "/worldpibank/",
   "display": "standalone",
-  "background_color": "#0b021a",
-  "theme_color": "#0b021a",
+  "background_color": "#120627",
+  "theme_color": "#1e0b3a",
   "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }
