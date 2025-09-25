@@ -27,11 +27,15 @@
     .log{max-height:260px;overflow:auto;background:#0d0720;border:1px solid var(--line);padding:12px;border-radius:12px;font-size:13px;white-space:pre-wrap}
     .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#211246;border:1px solid var(--line);padding:10px 14px;border-radius:12px;display:none;z-index:50}
     .banner{display:none;background:#2b0c12;border:1px solid var(--danger);color:#ffb3b5;margin:8px 0 6px;padding:10px 12px;border-radius:12px}
+    .qr{display:flex;justify-content:center;margin:18px 0}
   </style>
 </head>
 <body>
   <div class="wrap">
+    <!-- 안전 배너 -->
     <div id="safeBanner" class="banner"></div>
+
+    <!-- 헤더 -->
     <header>
       <div class="title" id="titleMain">World Pi Bank</div>
       <div class="lang">
@@ -44,8 +48,16 @@
       </div>
     </header>
 
-    <p class="muted" id="subtitle" style="text-align:center;margin-bottom:18px;">This is a digital bank demo on the Pi ecosystem.</p>
+    <p class="muted" id="subtitle" style="text-align:center;margin-bottom:18px;">
+      This is a digital bank demo on the Pi ecosystem.
+    </p>
 
+    <!-- QR (영문 자동실행) -->
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://ljw2358.github.io/worldpibank/?auto=1&lang=en" alt="QR Demo"/>
+    </div>
+
+    <!-- 본문 -->
     <div class="grid">
       <div class="card">
         <h2 id="secPayTitle">Payments / Transfer</h2>
@@ -99,14 +111,15 @@
   <div id="toast" class="toast"></div>
 
   <script>
+    // ========= 상태/유틸 =========
     const $=s=>document.querySelector(s);
     const state={balance:314.159,points:0,stake:0,lang:'en'};
     const fmt=n=>Number(n).toFixed(3);
     const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-    const log=(msg)=>{const l=$("#log");l.textContent=`[${new Date().toLocaleTimeString()}] ${msg}\n`+l.textContent;}
-    const toast=(msg)=>{const t=$("#toast");t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',1500);}
+    const log=msg=>{const l=$("#log");l.textContent=`[${new Date().toLocaleTimeString()}] ${msg}\n`+l.textContent;}
+    const toast=msg=>{const t=$("#toast");t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',1500);}
 
-    // 다국어 리소스
+    // ========= i18n (EN 기본 / KR·ZH 병기) =========
     const I={
       en:{title:"World Pi Bank",subtitle:"This is a digital bank demo on the Pi ecosystem.",
           payT:"Payments / Transfer",payD:"Fast Pi payments for everyone.",payBtn:"Payment simulation",trBtn:"Transfer simulation",
@@ -114,36 +127,51 @@
           sT:"Stake (APY 31.4%)",sD:"Flexible term with transparent rate.",sBtn:"Stake",uBtn:"Unstake",
           uT:"UBI (Basic Income)",uD:"Web3 basic income with Pi.",uClaim:"Claim UBI",uHist:"History",
           supT:"Support / FAQ",supEmail:"Support: support@worldpibank.example",
-          faq:["This demo runs as a simulation on a static site.","Actions show results via toast and logs.","PWA install banner depends on browser policy."],
+          faq:["This demo runs as a simulation on a static site.",
+               "All actions are logged for transparency.",
+               "PWA install banner depends on browser policy.",
+               "KYC will be included in full release.",
+               "Security & anti-hacking design is emphasized."],
           logT:"Event log",
           paid:"Payment succeeded",payFail:"Payment failed: insufficient balance",
           sent:"Transfer completed",rewardPlus:"Added 10 points",rewardUseFail:"Not enough points",
           stakeDone:"Staked successfully",unstakeNone:"No stake to withdraw",unstakeDone:"Unstaked successfully",
-          ubiPaid:"Received UBI 0.314 PI",auto:"Running one-click demo",autoBtn:"Run one-click demo"},
+          ubiPaid:"Received UBI 0.314 PI",
+          auto:"Running one-click demo",autoBtn:"Run one-click demo",autoFinish:"Auto demo finished"},
       ko:{title:"월드파이은행",subtitle:"파이 생태계 기반 세계 최초의 디지털 은행 데모입니다.",
           payT:"송금 / 결제",payD:"누구나 빠르게 파이로 결제하실 수 있습니다.",payBtn:"결제 시뮬레이션",trBtn:"송금 시뮬레이션",
           rT:"리워드",rD:"참여에 따라 포인트를 적립하고 사용하실 수 있습니다.",rEarn:"포인트 적립",rUse:"포인트 사용",
           sT:"예치 (APY 31.4%)",sD:"유연한 기간과 투명한 금리로 예치하실 수 있습니다.",sBtn:"예치하기",uBtn:"해지하기",
           uT:"UBI (기본소득)",uD:"파이로 구현하는 웹3 기본소득입니다.",uClaim:"UBI 수령",uHist:"지급 내역",
           supT:"고객센터 / FAQ",supEmail:"문의: support@worldpibank.example",
-          faq:["본 데모는 정적 페이지에서 동작하는 시뮬레이션입니다.","버튼을 누르시면 상단 알림과 하단 로그로 결과가 표시됩니다.","PWA 설치 배너는 브라우저 정책에 따라 다를 수 있습니다."],
+          faq:["본 데모는 정적 페이지 시뮬레이션입니다.",
+               "모든 동작은 투명하게 로그로 기록됩니다.",
+               "PWA 설치 배너는 브라우저 정책에 따라 다릅니다.",
+               "정식 서비스에서는 KYC가 포함됩니다.",
+               "보안·해킹 방지 설계를 강화했습니다."],
           logT:"이벤트 로그",
           paid:"결제를 완료했습니다",payFail:"잔액이 부족하여 결제에 실패했습니다",
           sent:"송금이 완료되었습니다",rewardPlus:"포인트 10점을 적립했습니다",rewardUseFail:"사용 가능한 포인트가 부족합니다",
           stakeDone:"예치를 완료했습니다",unstakeNone:"해지할 예치금이 없습니다",unstakeDone:"해지를 완료했습니다",
-          ubiPaid:"UBI 0.314 PI를 수령했습니다",auto:"원-클릭 데모를 실행합니다",autoBtn:"원-클릭 데모 실행"},
+          ubiPaid:"UBI 0.314 PI를 수령했습니다",
+          auto:"원-클릭 데모 실행 중",autoBtn:"원-클릭 데모 실행",autoFinish:"자동 데모 완료"},
       zh:{title:"世界派银行",subtitle:"这是基于 Pi 生态的数字银行演示。",
           payT:"支付 / 转账",payD:"人人都可快速使用 Pi 支付。",payBtn:"支付演示",trBtn:"转账演示",
           rT:"奖励",rD:"通过参与可积攒并使用积分。",rEarn:"积攒积分",rUse:"使用积分",
           sT:"质押 (APY 31.4%)",sD:"期限灵活，利率透明。",sBtn:"质押",uBtn:"赎回",
           uT:"UBI（基本收入）",uD:"用 Pi 实现的 Web3 基本收入。",uClaim:"领取 UBI",uHist:"发放记录",
           supT:"客服 / 常见问题",supEmail:"客服：support@worldpibank.example",
-          faq:["此演示在静态站点上运行。","点击按钮会以提示与日志显示结果。","PWA 安装横幅取决于浏览器策略。"],
+          faq:["此演示为静态页面仿真。",
+               "所有操作都会记录日志以确保透明。",
+               "PWA 安装横幅取决于浏览器策略。",
+               "正式服务将包含 KYC。",
+               "已加强安全与防黑设计。"],
           logT:"事件日志",
           paid:"支付成功",payFail:"支付失败：余额不足",
           sent:"转账完成",rewardPlus:"积分 +10",rewardUseFail:"积分不足",
           stakeDone:"质押完成",unstakeNone:"无可赎回质押",unstakeDone:"赎回完成",
-          ubiPaid:"已领取 UBI 0.314 PI",auto:"正在执行一键演示",autoBtn:"一键演示"}
+          ubiPaid:"已领取 UBI 0.314 PI",
+          auto:"正在执行一键演示",autoBtn:"一键演示",autoFinish:"自动演示完成"}
     };
 
     function applyLang(t){
@@ -159,54 +187,66 @@
       $("#secUbiTitle").textContent=t.uT; $("#secUbiDesc").textContent=t.uD;
       $("#btnUbi").textContent=t.uClaim; $("#btnUbiHist").textContent=t.uHist;
       $("#secSupportTitle").textContent=t.supT; $("#supportEmail").textContent=t.supEmail;
-      $("#secLogTitle").textContent=t.logT;
-      const ul=$("#faqList"); ul.innerHTML=""; t.faq.forEach(x=>{const li=document.createElement("li");li.textContent=x;ul.appendChild(li);});
-      $("#btnAuto").textContent=t.autoBtn;
+      $("#secLogTitle").textContent=t.logT; $("#btnAuto").textContent=t.autoBtn;
+      const ul=$("#faqList"); ul.innerHTML=""; t.faq.forEach(x=>{const li=document.createElement("li"); li.textContent=x; ul.appendChild(li);});
     }
-    function t(){return I[state.lang]}
+    const t = ()=>I[state.lang];
+    function setLang(lang){ state.lang=lang; applyLang(I[lang]); }
 
-    function setLang(lang){state.lang=lang;applyLang(I[lang]);}
-
-    // 시뮬레이션 고정값
+    // ========= 데모 액션 (고정값, 입력 프롬프트 없음) =========
     const AMOUNT_PAY=3.14, AMOUNT_TRANSFER=1.00, STAKE_AMOUNT=5.00, TRANSFER_TO="pioneer_demo";
-
-    function payDemo(){if(AMOUNT_PAY>state.balance){toast(t().payFail);log(t().payFail);return;}
-      state.balance-=AMOUNT_PAY;toast(`${t().paid} (${fmt(AMOUNT_PAY)} PI)`);log(`${t().paid} ${fmt(AMOUNT_PAY)} PI → ${fmt(state.balance)} PI`);}
-    function transferDemo(){if(AMOUNT_TRANSFER>state.balance){toast(t().payFail);log(t().payFail);return;}
-      state.balance-=AMOUNT_TRANSFER;toast(`${t().sent} → ${TRANSFER_TO} (${fmt(AMOUNT_TRANSFER)} PI)`);log(`${t().sent} ${fmt(AMOUNT_TRANSFER)} PI → ${fmt(state.balance)} PI`);}
-    function rewardDemo(){state.points+=10;toast(t().rewardPlus);log(t().rewardPlus);}
-    function redeemDemo(){if(state.points<10){toast(t().rewardUseFail);log(t().rewardUseFail);return;}
-      state.points-=10;toast(t().rUse);log(t().rUse);}
-    function stakeDemo(){if(STAKE_AMOUNT>state.balance){toast(t().payFail);log(t().payFail);return;}
-      state.balance-=STAKE_AMOUNT;state.stake=(state.stake||0)+STAKE_AMOUNT;
-      toast(`${t().stakeDone} (${fmt(STAKE_AMOUNT)} PI)`);log(`${t().stakeDone} ${fmt(STAKE_AMOUNT)} PI → stake ${fmt(state.stake)} / bal ${fmt(state.balance)}`);}
-    function unstakeDemo(){if((state.stake||0)<=0){toast(t().unstakeNone);log(t().unstakeNone);return;}
-      const amount=state.stake;state.stake=0;state.balance+=amount;toast(`${t().unstakeDone} (${fmt(amount)} PI)`);log(`${t().unstakeDone} ${fmt(amount)} PI → bal ${fmt(state.balance)}`);}
-    function ubiClaim(){state.balance+=0.314;toast(t().ubiPaid);log(t().ubiPaid);}
-    function ubiHistory(){toast("Recent 3 claims: +0.314 / +0.314 / +0.314");log("UBI: +0.314 / +0.314 / +0.314");}
-
-    async function runAutoDemo(){
-      $("#btnAuto").disabled=true;toast(t().auto);log(t().auto);
-      payDemo();await sleep(700);transferDemo();await sleep(700);
-      rewardDemo();await sleep(500);stakeDemo();await sleep(700);
-      ubiClaim();await sleep(500);
-      log("Auto demo finished");$("#btnAuto").disabled=false;
+    function payDemo(){ if(AMOUNT_PAY>state.balance){ toast(t().payFail); log(t().payFail); return; }
+      state.balance-=AMOUNT_PAY; toast(`${t().paid} (${fmt(AMOUNT_PAY)} PI)`); log(`${t().paid} ${fmt(AMOUNT_PAY)} PI`); }
+    function transferDemo(){ if(AMOUNT_TRANSFER>state.balance){ toast(t().payFail); log(t().payFail); return; }
+      state.balance-=AMOUNT_TRANSFER; toast(`${t().sent} → ${TRANSFER_TO} (${fmt(AMOUNT_TRANSFER)} PI)`); log(`${t().sent} ${fmt(AMOUNT_TRANSFER)} PI`); }
+    function rewardDemo(){ state.points+=10; toast(t().rewardPlus); log(t().rewardPlus); }
+    function redeemDemo(){ if(state.points<10){ toast(t().rewardUseFail); log(t().rewardUseFail); return; }
+      state.points-=10; toast(t().rUse); log(t().rUse); }
+    function stakeDemo(){ if(STAKE_AMOUNT>state.balance){ toast(t().payFail); log(t().payFail); return; }
+      state.balance-=STAKE_AMOUNT; state.stake=(state.stake||0)+STAKE_AMOUNT; toast(t().stakeDone); log(t().stakeDone); }
+    function unstakeDemo(){ if((state.stake||0)<=0){ toast(t().unstakeNone); log(t().unstakeNone); return; }
+      const amount=state.stake; state.stake=0; state.balance+=amount; toast(t().unstakeDone); log(t().unstakeDone); }
+    function ubiClaim(){ state.balance+=0.314; toast(t().ubiPaid); log(t().ubiPaid); }
+    function ubiHistory(){
+      const hist = (state.lang==='en') ? "Recent 3 claims: +0.314 / +0.314 / +0.314"
+                 : (state.lang==='ko') ? "최근 3회: +0.314 / +0.314 / +0.314"
+                 : "最近3次：+0.314 / +0.314 / +0.314";
+      toast(hist); log(hist);
     }
 
-    function qp(n){return new URL(location.href).searchParams.get(n);}
-    // 초기 언어: ?lang=ko|en|zh, 기본 en
-    const langFromUrl=(qp("lang")||"en").toLowerCase();
-    setLang(["ko","en","zh"].includes(langFromUrl)?langFromUrl:"en");
+    // ========= 원-클릭 데모 (언어 연동) =========
+    async function runAutoDemo(){
+      const btn=$("#btnAuto"); btn.disabled=true;
+      toast(t().auto); log(t().auto);
+      payDemo(); await sleep(700);
+      transferDemo(); await sleep(700);
+      rewardDemo(); await sleep(500);
+      stakeDemo(); await sleep(700);
+      ubiClaim(); await sleep(500);
+      log(t().autoFinish);
+      btn.disabled=false;
+    }
+
+    // ========= 초기설정(언어/자동실행/배너/SW) =========
+    const qp = n => new URL(location.href).searchParams.get(n);
+    const langFromUrl = (qp("lang")||"en").toLowerCase();
+    setLang(["en","ko","zh"].includes(langFromUrl)?langFromUrl:"en");
     if(qp("auto")==="1") runAutoDemo();
 
-    // 안전배너
-    (function(){
-      const okHost=location.host==="ljw2358.github.io";
-      const okPath=location.pathname.startsWith("/worldpibank/");
-      if(!(okHost&&okPath)){const el=$("#safeBanner");el.style.display="block";
-        el.innerHTML=`⚠️ Please check: <b>ljw2358.github.io/worldpibank/</b>`;}
+    (function(){ // 도메인 안전 배너
+      const okHost = location.host==="ljw2358.github.io";
+      const okPath = location.pathname.startsWith("/worldpibank/");
+      if(!(okHost && okPath)){
+        const el=$("#safeBanner"); el.style.display="block";
+        el.innerHTML = (state.lang==='ko')
+          ? `⚠️ 주소창에 <b>ljw2358.github.io/worldpibank/</b> 가 맞는지 확인하세요.`
+          : (state.lang==='zh')
+            ? `⚠️ 请确认地址栏为 <b>ljw2358.github.io/worldpibank/</b>。`
+            : `⚠️ Please check: <b>ljw2358.github.io/worldpibank/</b>`;
+      }
     })();
-    if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}
+
+    if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(()=>{}); }
   </script>
 </body>
 </html>
