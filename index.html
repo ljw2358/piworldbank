@@ -1,281 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>World Pi Bank</title>
-
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#0b021a" />
-
+  <link rel="icon" href="icon-192.png" />
   <style>
-    :root {
-      --bg: #0b021a;
-      --card: #1a0933;
-      --accent: #7a3cff;
-      --muted: #cfc8ff;
-      --text: #ffffff;
-      --sub: #b6a9ff;
-      --ring: rgba(255,255,255,.16);
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; padding: 16px;
-      /* leave space so floating QR/chat won't overlap content */
-      padding-bottom: 140px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans SC", "PingFang SC", "Malgun Gothic", "Segoe UI Symbol", sans-serif;
-      background: radial-gradient(1200px 600px at 80% -10%, #2a0a5f 0%, rgba(42,10,95,0) 60%), var(--bg);
-      color: var(--text);
-    }
-    header {
-      display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px;
-    }
-    .langs { display: inline-flex; gap: 6px; flex-wrap: nowrap; }
-    .langs button {
-      background: transparent; border: 1px solid var(--ring); color: var(--muted);
-      padding: 6px 10px; border-radius: 999px; font-size: 12px; cursor: pointer; line-height: 1;
-    }
-    .langs button.active { border-color: var(--accent); color: var(--text); }
-    h1 { font-size: 28px; line-height: 1.2; margin: 6px 0 6px; }
-    .sub { color: var(--sub); font-size: 13px; margin: 0 0 12px; }
-    .hero {
-      width: 96px; height: 96px; border-radius: 999px; margin: 10px auto; display: grid; place-items: center;
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.0));
-      border: 2px solid var(--ring);
-      box-shadow: 0 0 0 6px rgba(122,60,255,.15), inset 0 0 40px rgba(122,60,255,.1);
-      font-size: 44px;
-    }
-    .grid {
-      display: grid; gap: 10px;
-      grid-template-columns: 1fr;
-      margin-top: 12px;
-    }
-    @media (min-width: 820px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      border: 1px solid var(--ring); border-radius: 18px; padding: 16px;
-      box-shadow: 0 6px 24px rgba(0,0,0,.25);
-    }
-    .card h3 { margin: 0 0 6px; font-size: 16px; }
-    .card p { margin: 0; color: var(--muted); font-size: 13px; }
-    .cta {
-      display: grid; grid-auto-flow: column; gap: 10px; margin-top: 12px;
-      /* add bottom margin so floating buttons never overlap */
-      margin-bottom: 14px;
-    }
-    .cta a, .cta button {
-      text-decoration: none; text-align: center;
-      background: var(--accent); color: white; border: none; padding: 12px 14px; border-radius: 14px; font-weight: 700;
-      font-size: 15px; cursor: pointer;
-    }
-    /* Fixed QR & Chat - keep at the very bottom corners */
-    .qr {
-      position: fixed; left: 16px; bottom: 16px; width: 74px; height: 74px; border-radius: 10px;
-      background: rgba(255,255,255,.04); border: 1px dashed var(--ring); display: grid; place-items: center;
-      font-weight: 800; color: var(--muted); user-select: none; font-size: 16px;
-      z-index: 10;
-    }
-    .chat {
-      position: fixed; right: 16px; bottom: 16px; width: 56px; height: 56px; border-radius: 999px;
-      background: var(--accent); display: grid; place-items: center; font-size: 22px;
-      box-shadow: 0 10px 20px rgba(0,0,0,.3); z-index: 10;
-    }
-    .note { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; }
-    /* Install banner (custom) - sits above QR/Chat */
-    #installBanner {
-      position: fixed; inset-inline: 12px; bottom: 92px; background: #140a2a; color: #fff; border: 1px solid var(--ring);
-      border-radius: 14px; padding: 10px 12px; display: none; align-items: center; justify-content: space-between; gap: 10px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.4); z-index: 9;
-    }
-    #installBanner button { background: var(--accent); color: white; border: none; padding: 8px 12px; border-radius: 10px; font-weight: 700; }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Malgun Gothic,sans-serif;background:#140a2a;color:#fff;margin:0}
+    .wrap{max-width:720px;margin:0 auto;padding:24px}
+    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;margin:12px 0}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{flex:1;min-width:140px;padding:14px 16px;border-radius:12px;border:0;cursor:pointer;font-weight:700}
+    .btn.primary{background:#7b3fe4;color:#fff}
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}
+    .muted{color:#b9aee0}
+    .lang{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px}
+    .lang button{background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:999px;padding:4px 10px;cursor:pointer}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1f153a;border:1px solid rgba(255,255,255,.15);padding:12px 16px;border-radius:12px;display:none}
+    .log{max-height:220px;overflow:auto;font-size:14px;white-space:pre-wrap}
   </style>
 </head>
 <body>
-  <header>
-    <div style="font-weight:700">World Pi Bank</div>
-    <div class="langs">
-      <button data-lang="en" class="active">EN</button>
-      <button data-lang="ko">KR</button>
-      <button data-lang="zh">ZH</button>
+  <div class="wrap">
+    <div class="lang">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('ko')">KR</button>
+      <button onclick="setLang('zh')">ZH</button>
     </div>
-  </header>
 
-  <div class="hero">π</div>
+    <h1>World Pi Bank</h1>
+    <p class="muted" id="subtitle">파이 생태계 기반 세계 최초의 디지털 은행</p>
 
-  <h1 id="title"></h1>
-  <p class="sub" id="subtitle"></p>
+    <div class="row" style="margin:16px 0 8px">
+      <button class="btn primary" onclick="demoOpen()"><span id="demoBtn">데모 열기</span></button>
+      <button class="btn ghost" onclick="fakeLogin()"><span id="loginBtn">로그인</span></button>
+    </div>
 
-  <div class="cta">
-    <a id="loginBtn" href="#" onclick="alert(window.txt.loginNotice)"></a>
-    <button id="demoBtn" onclick="alert(window.txt.demoNotice)"></button>
-  </div>
+    <div class="card">
+      <h3>송금 / 결제</h3>
+      <p class="muted">누구나 빠른 파이 결제.</p>
+      <div class="row">
+        <button class="btn primary" onclick="payDemo()">결제 시뮬레이션</button>
+        <button class="btn ghost" onclick="transferDemo()">송금 시뮬레이션</button>
+      </div>
+    </div>
 
-  <div class="grid">
-    <div class="card"><h3 id="c1h"></h3><p id="c1p"></p></div>
-    <div class="card"><h3 id="c2h"></h3><p id="c2p"></p></div>
-    <div class="card"><h3 id="c3h"></h3><p id="c3p"></p></div>
-    <div class="card"><h3 id="c4h"></h3><p id="c4p"></p></div>
-    <div class="card"><h3 id="c5h"></h3><p id="c5p"></p></div>
-    <div class="card"><h3 id="c6h"></h3><p id="c6p"></p></div>
-  </div>
+    <div class="card">
+      <h3>리워드</h3>
+      <p class="muted">사용·참여에 따른 포인트 적립.</p>
+      <div class="row">
+        <button class="btn primary" onclick="rewardDemo()">포인트 적립</button>
+        <button class="btn ghost" onclick="redeemDemo()">포인트 사용</button>
+      </div>
+    </div>
 
-  <div id="installBanner">
-    <div id="installText">Install World Pi Bank?</div>
-    <div style="display:flex; gap:8px;">
-      <button id="installConfirm"></button>
-      <button id="installDismiss"></button>
+    <div class="card">
+      <h3>예치 (APY 31.4%)</h3>
+      <p class="muted">유연한 기간, 투명한 금리.</p>
+      <div class="row">
+        <button class="btn primary" onclick="stakeDemo()">예치하기</button>
+        <button class="btn ghost" onclick="unstakeDemo()">해지하기</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>UBI (기본소득)</h3>
+      <p class="muted">파이로 구현하는 웹3 기본소득.</p>
+      <div class="row">
+        <button class="btn primary" onclick="ubiClaim()">UBI 수령</button>
+        <button class="btn ghost" onclick="ubiHistory()">지급 내역</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>이벤트 로그</h3>
+      <div id="log" class="log"></div>
     </div>
   </div>
 
-  <!-- Floating elements -->
-  <div class="qr" title="QR">QR</div>
-  <div class="chat" title="FAQ / Chat">💬</div>
+  <div id="toast" class="toast"></div>
 
-  <p class="note" id="footnote"></p>
+  <script>
+    // ——— 데모 상태 ———
+    const state = { logged:false, balance: 314.159, points: 0, stake: 0, lang:'ko' };
+    const $ = s => document.querySelector(s);
+    const log = (msg) => { const l=$("#log"); l.textContent = `[${new Date().toLocaleTimeString()}] ${msg}\n` + l.textContent; }
+    const toast = (msg) => { const t=$("#toast"); t.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',1600); }
 
-<script>
-  // Language packs
-  const packs = {
-    en: {
-      title: "World Pi Bank",
-      subtitle: "The first global digital bank on the Pi ecosystem",
-      login: "Login",
-      demo: "Open Demo",
-      loginNotice: "Pi Browser login will be integrated after Core Team approval.",
-      demoNotice: "This is a static demo preview.",
-      c1h: "Transfer / Pay",
-      c1p: "Fast Pi payments for everyone.",
-      c2h: "Rewards",
-      c2p: "Earn points for use and participation.",
-      c3h: "Deposit (APY 31.4%)",
-      c3p: "Flexible term, transparent rate.",
-      c4h: "UBI (Basic Income)",
-      c4p: "Web3 basic income with Pi.",
-      c5h: "Customer Center / FAQ",
-      c5p: "KYC policy and anti-hacking measures inside.",
-      c6h: "View Demo (Static)",
-      c6p: "Preview the UI flow and screens.",
-      foot: "Fixed: QR (left) / Chat (right). PWA install banner appears on Chrome/Safari; Pi Browser may limit it.",
-      installAsk: "Install World Pi Bank?",
-      installYes: "Install",
-      installNo: "Later"
-    },
-    ko: {
-      title: "세계파이은행",
-      subtitle: "파이 생태계 기반 세계 최초의 디지털 은행",
-      login: "로그인",
-      demo: "데모 열기",
-      loginNotice: "Pi Browser 로그인은 코어팀 승인 후 연동됩니다.",
-      demoNotice: "이 화면은 정적 데모 미리보기입니다.",
-      c1h: "송금 / 결제",
-      c1p: "누구나 빠른 파이 결제.",
-      c2h: "리워드",
-      c2p: "사용·참여에 따른 포인트 적립.",
-      c3h: "예치 (APY 31.4%)",
-      c3p: "유연한 기간, 투명한 금리.",
-      c4h: "UBI (기본소득)",
-      c4p: "파이로 구현하는 웹3 기본소득.",
-      c5h: "고객센터 / FAQ",
-      c5p: "KYC 정책과 해킹 방지책 포함.",
-      c6h: "데모 보기 (정적)",
-      c6p: "UI 흐름과 화면을 미리 확인.",
-      foot: "좌하단 QR / 우하단 채팅 고정. PWA 설치 배너는 크롬/사파리에서 표시되며, Pi 브라우저에서는 제한될 수 있습니다.",
-      installAsk: "월드파이뱅크를 설치할까요?",
-      installYes: "설치",
-      installNo: "나중에"
-    },
-    zh: {
-      title: "世界 Pi 银行",
-      subtitle: "基于 Pi 生态的全球首家数字银行",
-      login: "登录",
-      demo: "打开演示",
-      loginNotice: "Pi 浏览器登录将在 Core Team 批准后集成。",
-      demoNotice: "这是静态演示预览。",
-      c1h: "转账 / 支付",
-      c1p: "人人可用的快速 Pi 支付。",
-      c2h: "奖励",
-      c2p: "使用与参与即可获得积分。",
-      c3h: "存款 (APY 31.4%)",
-      c3p: "灵活期限，透明利率。",
-      c4h: "UBI（基本收入）",
-      c4p: "用 Pi 实现 Web3 基本收入。",
-      c5h: "客服中心 / FAQ",
-      c5p: "含 KYC 政策与防黑客措施。",
-      c6h: "查看演示（静态）",
-      c6p: "预览 UI 流程与界面。",
-      foot: "左下角为二维码，右下角为聊天按钮。PWA 安装横幅在 Chrome/Safari 显示；Pi 浏览器可能受限。",
-      installAsk: "安装 World Pi Bank?",
-      installYes: "安装",
-      installNo: "稍后"
+    function setLang(lang){
+      state.lang=lang;
+      const text={
+        en:{subtitle:"The first digital bank on the Pi ecosystem",demo:"Open Demo",login:"Log in"},
+        ko:{subtitle:"파이 생태계 기반 세계 최초의 디지털 은행",demo:"데모 열기",login:"로그인"},
+        zh:{subtitle:"基于 Pi 生态的首个数字银行",demo:"打开演示",login:"登录"}
+      }[lang];
+      $("#subtitle").textContent=text.subtitle;
+      $("#demoBtn").textContent=text.demo;
+      $("#loginBtn").textContent=text.login;
+      toast(`Language: ${lang.toUpperCase()}`);
     }
-  };
 
-  // State
-  let currentLang = 'en';
-  let deferredPrompt = null;
+    function demoOpen(){ toast("데모 모드 활성화"); log("Demo mode ON (프론트엔드 시뮬레이션)"); }
+    function fakeLogin(){ state.logged=!state.logged; toast(state.logged?"로그인 완료":"로그아웃"); log(`로그인 상태: ${state.logged}`); }
 
-  function setLang(lang) {
-    currentLang = lang;
-    const txt = packs[lang];
-    document.querySelectorAll('.langs button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    document.getElementById('title').textContent = txt.title;
-    document.getElementById('subtitle').textContent = txt.subtitle;
-    document.getElementById('loginBtn').textContent = txt.login;
-    document.getElementById('demoBtn').textContent = txt.demo;
-    document.getElementById('c1h').textContent = txt.c1h; document.getElementById('c1p').textContent = txt.c1p;
-    document.getElementById('c2h').textContent = txt.c2h; document.getElementById('c2p').textContent = txt.c2p;
-    document.getElementById('c3h').textContent = txt.c3h; document.getElementById('c3p').textContent = txt.c3p;
-    document.getElementById('c4h').textContent = txt.c4h; document.getElementById('c4p').textContent = txt.c4p;
-    document.getElementById('c5h').textContent = txt.c5h; document.getElementById('c5p').textContent = txt.c5p;
-    document.getElementById('c6h').textContent = txt.c6h; document.getElementById('c6p').textContent = txt.c6p;
-    document.getElementById('footnote').textContent = txt.foot;
-    document.getElementById('installText').textContent = txt.installAsk;
-    document.getElementById('installConfirm').textContent = txt.installYes;
-    document.getElementById('installDismiss').textContent = txt.installNo;
-    window.txt = txt;
-  }
+    function payDemo(){
+      const amount = Number(prompt("결제 금액(PI) 입력:", "3.14"));
+      if(!amount || amount<=0) return;
+      if(amount>state.balance){ toast("잔액 부족"); log("결제 실패: 잔액 부족"); return; }
+      state.balance-=amount;
+      toast(`결제 성공: ${amount.toFixed(2)} PI`);
+      log(`결제 성공, 잔액: ${state.balance.toFixed(2)} PI`);
+    }
+    function transferDemo(){
+      const to = prompt("수취인(지갑 주소 또는 이름):", "pioneer_001");
+      const amount = Number(prompt("송금 금액(PI):", "1.00"));
+      if(!to || !amount) return;
+      if(amount>state.balance){ toast("잔액 부족"); log("송금 실패: 잔액 부족"); return; }
+      state.balance-=amount;
+      toast(`송금 완료 → ${to} (${amount.toFixed(2)} PI)`);
+      log(`송금 완료, 잔액: ${state.balance.toFixed(2)} PI`);
+    }
 
-  // Language auto-detect
-  (function initLang() {
-    try {
-      const l = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      if (l.startsWith('ko')) setLang('ko');
-      else if (l.startsWith('zh')) setLang('zh');
-      else setLang('en');
-    } catch (e) { setLang('en'); }
-  })();
+    function rewardDemo(){ state.points+=10; toast("포인트 +10"); log(`포인트 적립, 누적 ${state.points}`); }
+    function redeemDemo(){
+      if(state.points<10){ toast("포인트 부족"); log("포인트 사용 실패"); return; }
+      state.points-=10; toast("포인트 10 사용"); log(`포인트 사용, 잔여 ${state.points}`);
+    }
 
-  // Language buttons
-  document.querySelectorAll('.langs button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+    function stakeDemo(){
+      const amount = Number(prompt("예치 금액(PI):", "5.00"));
+      if(!amount || amount<=0) return;
+      if(amount>state.balance){ toast("잔액 부족"); log("예치 실패: 잔액 부족"); return; }
+      state.balance-=amount; state.stake+=amount;
+      toast(`예치 완료: ${amount.toFixed(2)} PI`);
+      log(`예치잔액 ${state.stake.toFixed(2)} PI / 지갑잔액 ${state.balance.toFixed(2)} PI`);
+    }
+    function unstakeDemo(){
+      if(state.stake<=0){ toast("예치 없음"); log("해지 실패: 예치 없음"); return; }
+      const amount = Math.min(state.stake, Number(prompt("해지 금액(PI):", state.stake.toFixed(2))));
+      if(!amount || amount<=0) return;
+      state.stake-=amount; state.balance+=amount;
+      toast(`해지 완료: ${amount.toFixed(2)} PI`);
+      log(`예치잔액 ${state.stake.toFixed(2)} / 지갑잔액 ${state.balance.toFixed(2)}`);
+    }
 
-  // PWA SW
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
-    });
-  }
+    function ubiClaim(){ toast("UBI 0.314 PI 지급(가상)"); state.balance+=0.314; log("UBI 지급 +0.314 PI"); }
+    function ubiHistory(){ toast("최근 3회 지급 내역(가상)"); log("UBI 내역: +0.314 / +0.314 / +0.314"); }
 
-  // Install banner
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    const banner = document.getElementById('installBanner');
-    banner.style.display = 'flex';
-  });
-
-  document.getElementById('installConfirm').addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    document.getElementById('installBanner').style.display = 'none';
-  });
-  document.getElementById('installDismiss').addEventListener('click', () => {
-    document.getElementById('installBanner').style.display = 'none';
-  });
-</script>
+    // PWA 등록(있으면)
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+    setLang('ko');
+  </script>
 </body>
-</html>
