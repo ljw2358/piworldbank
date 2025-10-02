@@ -248,5 +248,150 @@
 
     if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(()=>{}); }
   </script>
+<!-- PiWorldBank · Testnet DEX (Demo UI) -->
+<section id="dex-demo" style="max-width:960px;margin:24px auto;padding:20px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif;">
+  <header style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="width:40px;height:40px;border-radius:12px;background:#6d28d9;"></div>
+    <div>
+      <h2 style="margin:0;font-size:20px;font-weight:800;">Testnet DEX (Swap & Liquidity · Demo)</h2>
+      <p style="margin:4px 0 0;color:#6b7280;font-size:13px;">테스트넷에서 스왑/유동성 풀을 시연합니다 (심사용 데모 / no real funds)</p>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <nav style="display:flex;gap:8px;margin-bottom:16px;">
+    <button id="tab-swap" style="padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-weight:700;">Swap</button>
+    <button id="tab-liq" style="padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;">Liquidity</button>
+    <button id="tab-guide" style="padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;">Guide</button>
+  </nav>
+
+  <!-- Swap Panel -->
+  <div id="panel-swap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
+        <label style="font-size:12px;color:#6b7280;">From</label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <select id="fromToken" style="flex:0 0 130px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
+            <option value="TPI">TPI (Test Pi)</option>
+            <option value="USDT">tUSDT</option>
+            <option value="WBPI">wTPI</option>
+          </select>
+          <input id="fromAmount" type="number" min="0" placeholder="0.0" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
+        </div>
+      </div>
+
+      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
+        <label style="font-size:12px;color:#6b7280;">To</label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <select id="toToken" style="flex:0 0 130px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
+            <option value="USDT">tUSDT</option>
+            <option value="TPI">TPI (Test Pi)</option>
+            <option value="WBPI">wTPI</option>
+          </select>
+          <input id="toAmount" type="text" placeholder="0.0" disabled style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#f3f4f6;color:#374151;">
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;padding:12px;border:1px dashed #d1d5db;border-radius:12px;background:#fafafa;">
+      <div style="display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:#374151;">
+        <span id="priceLine">예상 환율: —</span>
+        <span>·</span>
+        <span id="slipLine">슬리피지(가정): 0.5%</span>
+        <span>·</span>
+        <span id="feeLine">수수료(가정): 0.30%</span>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button id="btnPreview" style="flex:1;padding:12px 14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:800;">Preview Swap (Demo)</button>
+      <button id="btnWallet" style="padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;font-weight:700;">Open Pi Wallet (Testnet)</button>
+    </div>
+
+    <div id="confirmBox" style="display:none;margin-top:12px;padding:14px;border:1px solid #fde68a;background:#fffbeb;border-radius:12px;color:#92400e;">
+      ⚠️ 데모 전송입니다. 실제 체결/전송은 일어나지 않습니다. Testnet 환경에서 UI·흐름만 시연합니다.
+    </div>
+  </div>
+
+  <!-- Liquidity Panel -->
+  <div id="panel-liq" style="display:none;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
+        <h3 style="margin:0 0 8px;font-size:16px;">Add Liquidity (Demo)</h3>
+        <div style="display:flex;gap:8px;margin-bottom:8px;">
+          <select id="liqA" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
+            <option value="TPI">TPI</option><option value="USDT">tUSDT</option><option value="WBPI">wTPI</option>
+          </select>
+          <input id="liqAmtA" type="number" placeholder="0.0" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
+        </div>
+        <div style="display:flex;gap:8px;">
+          <select id="liqB" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
+            <option value="USDT">tUSDT</option><option value="TPI">TPI</option><option value="WBPI">wTPI</option>
+          </select>
+          <input id="liqAmtB" type="number" placeholder="0.0" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
+        </div>
+        <button id="btnAddLiq" style="margin-top:10px;width:100%;padding:12px 14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:800;">Add Liquidity (Demo)</button>
+      </div>
+
+      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
+        <h3 style="margin:0 0 8px;font-size:16px;">Your LP (Mock)</h3>
+        <p id="lpInfo" style="margin:0;color:#374151;font-size:14px;">아직 예치 없음. (This is a mock display)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guide Panel -->
+  <div id="panel-guide" style="display:none;">
+    <ol style="margin:0 0 8px 20px;color:#374151;line-height:1.6;">
+      <li>Pi Browser에서 Testnet 로그인 상태인지 확인합니다.</li>
+      <li>Swap 또는 Liquidity를 선택하고, 수치 입력 후 <b>Preview</b>를 눌러 시연합니다.</li>
+      <li><b>Open Pi Wallet (Testnet)</b> 버튼은 지갑 열기 안내용입니다(실제 송금 미발생).</li>
+      <li>심사용 스크린샷/짧은 영상(15–30초)을 확보해 코어팀에 실사용성을 어필하세요.</li>
+    </ol>
+    <p style="margin:0;color:#6b7280;font-size:13px;">※ 본 모듈은 데모이며, Mainnet에서는 토큰 발행·체결이 제한될 수 있습니다.</p>
+  </div>
+</section>
+
+<script>
+  // Simple fake rates for demo
+  const rate = { "TPI:USDT": 3.14, "USDT:TPI": 1/3.14, "TPI:WBPI": 1.0, "WBPI:TPI": 1.0, "USDT:WBPI": 0.318, "WBPI:USDT": 1/0.318 };
+
+  const $ = (id)=>document.getElementById(id);
+  const show = (el, on)=> el.style.display = on? 'block':'none';
+
+  // Tabs
+  const tabs = { swap:$('tab-swap'), liq:$('tab-liq'), guide:$('tab-guide') };
+  const panels = { swap:$('panel-swap'), liq:$('panel-liq'), guide:$('panel-guide') };
+  Object.entries(tabs).forEach(([k,btn])=>{
+    btn.addEventListener('click', ()=>{
+      Object.values(panels).forEach(p=>show(p,false));
+      show(panels[k], true);
+      Object.values(tabs).forEach(b=>b.style.background='#fff');
+      btn.style.background='#f9fafb';
+    });
+  });
+
+  function refreshQuote(){
+    const a = $('fromToken').value, b = $('toToken').value;
+    const key = a+':'+b;
+    const r = rate[key] || 0;
+    $('priceLine').textContent = r? `예상 환율: 1 ${a} ≈ ${r.toFixed(6)} ${b}` : '예상 환율: —';
+    const amt = parseFloat($('fromAmount').value||'0');
+    $('toAmount').value = r? (amt*r).toFixed(6) : '';
+  }
+
+  ['fromToken','toToken','fromAmount'].forEach(id=>$(id).addEventListener('input', refreshQuote));
+  $('btnPreview').addEventListener('click', ()=> { $('confirmBox').style.display='block'; });
+  $('btnWallet').addEventListener('click', ()=>{
+    alert('Pi Wallet(Testnet)을 열어 테스트 기능을 확인하세요. (이 데모는 실제 전송을 수행하지 않습니다)');
+    // 안내용: 필요 시 지갑 딥링크/앱 라우트 연결
+  });
+  $('btnAddLiq').addEventListener('click', ()=>{
+    const a=$('liqA').value,b=$('liqB').value, x=$('liqAmtA').value, y=$('liqAmtB').value;
+    $('lpInfo').textContent = `예치(모의): ${x} ${a} + ${y} ${b} → 가상 LP 토큰 발급됨`;
+    alert('Liquidity (Demo) 완료: 심사용 화면 캡처를 진행하세요.');
+  });
+
+  refreshQuote();
 </body>
 </html>
