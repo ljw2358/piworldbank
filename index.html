@@ -1,397 +1,523 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-brand="PiWorldBank">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title id="pageTitle">World Pi Bank</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>PiWorldBank · One-Touch Demo & Install · EN +10</title>
+
+  <!-- Canonical / SEO -->
+  <link rel="canonical" href="https://ljw2358.github.io/PiWorldBank/" />
+  <meta name="description" content="PiWorldBank: Web3 Digital Bank for Pioneers. One-touch demo, APK install, and full EN +10 language onboarding (Swap · Features · Security · FAQ). Official: pi://piworldbank" />
+  <meta name="keywords" content="PiWorldBank, Pi Network, Mainnet, Web3, Digital Bank, GCV, Swap, Pi App, PWB" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PiWorldBank · One-Touch Demo & Install" />
+  <meta property="og:description" content="One-touch demo, APK install, and full EN +10 onboarding (Swap · Features · Security · FAQ). Official: pi://piworldbank" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ljw2358.github.io/PiWorldBank/" />
+  <!-- Tip: 실제 커버 이미지를 나중에 교체해도 됨 -->
+  <meta property="og:image" content="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><rect width='100%' height='100%' fill='%230b0b14'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-size='64' font-family='Arial,Helvetica,sans-serif'>PiWorldBank</text></svg>" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ko_KR" />
+  <meta property="og:locale:alternate" content="zh_CN" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="de_DE" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="ar_SA" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:locale:alternate" content="hi_IN" />
+
+  <!-- Hreflang (language deep links) -->
+  <link rel="alternate" hreflang="en" href="https://ljw2358.github.io/PiWorldBank/?lang=en" />
+  <link rel="alternate" hreflang="ko" href="https://ljw2358.github.io/PiWorldBank/?lang=ko" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://ljw2358.github.io/PiWorldBank/?lang=zh" />
+  <link rel="alternate" hreflang="es" href="https://ljw2358.github.io/PiWorldBank/?lang=es" />
+  <link rel="alternate" hreflang="fr" href="https://ljw2358.github.io/PiWorldBank/?lang=fr" />
+  <link rel="alternate" hreflang="de" href="https://ljw2358.github.io/PiWorldBank/?lang=de" />
+  <link rel="alternate" hreflang="ja" href="https://ljw2358.github.io/PiWorldBank/?lang=ja" />
+  <link rel="alternate" hreflang="ru" href="https://ljw2358.github.io/PiWorldBank/?lang=ru" />
+  <link rel="alternate" hreflang="ar" href="https://ljw2358.github.io/PiWorldBank/?lang=ar" />
+  <link rel="alternate" hreflang="pt-BR" href="https://ljw2358.github.io/PiWorldBank/?lang=pt" />
+  <link rel="alternate" hreflang="hi" href="https://ljw2358.github.io/PiWorldBank/?lang=hi" />
+
+  <!-- Icons (data URI so it works without files; 나중에 실제 PNG로 교체 가능) -->
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC6nd/tAAAAD0lEQVQYV2NkYGBgYGBg+gMAAh8AAv2Cw3YAAAAASUVORK5CYII=" sizes="192x192" />
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAABi6S0dAAAAG0lEQVQ4y2NgGAWjYBSMglEwCkbBqNgEAAAkNwA3gW6n3wAAAABJRU5ErkJggg==" sizes="512x512" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC6nd/tAAAAD0lEQVQYV2NkYGBgYGBg+gMAAh8AAv2Cw3YAAAAASUVORK5CYII=" />
+
+  <meta name="theme-color" content="#0b0b14" />
+  <!-- iOS PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon-192.png" />
-  <meta name="theme-color" content="#1e0b3a" />
+
   <style>
-    :root{--bg:#120627;--panel:#1b0d36;--muted:#b9aee0;--line:#2a1850;--prime:#7b3fe4;--text:#fff;--danger:#e5484d}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Malgun Gothic,sans-serif}
-    .wrap{max-width:880px;margin:0 auto;padding:20px}
-    header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
-    .title{width:100%;text-align:center;font-size:26px;font-weight:900;letter-spacing:.5px;margin:4px 0 8px}
-    .lang,.actions{display:flex;gap:8px;justify-content:center;width:100%}
-    .chip{background:transparent;border:1px solid var(--line);color:#fff;padding:6px 12px;border-radius:999px;cursor:pointer}
-    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:6px}
-    @media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
-    h2{margin:6px 0 10px}p.muted{color:var(--muted);margin:0 0 10px}
-    .row{display:flex;flex-wrap:wrap;gap:10px}
-    .btn{padding:12px 14px;border:0;border-radius:12px;cursor:pointer;font-weight:700}
-    .btn.primary{background:var(--prime);color:#fff}.btn.ghost{background:transparent;border:1px solid var(--line);color:#fff}
-    .btn.auto{background:#5a2fe0}
-    .log{max-height:260px;overflow:auto;background:#0d0720;border:1px solid var(--line);padding:12px;border-radius:12px;font-size:13px;white-space:pre-wrap}
-    .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#211246;border:1px solid var(--line);padding:10px 14px;border-radius:12px;display:none;z-index:50}
-    .banner{display:none;background:#2b0c12;border:1px solid var(--danger);color:#ffb3b5;margin:8px 0 6px;padding:10px 12px;border-radius:12px}
-    .qr{display:flex;justify-content:center;margin:18px 0}
+    :root{
+      --bg:#0b0b14; --card:#121427; --ink:#f5f7ff; --ink-d:#c6cae6;
+      --accent:#8b5cf6; --accent2:#22d3ee; --ok:#10b981; --warn:#f59e0b; --line:#23264a;
+      --btn:#0f1230; --btnb:#2b2f55;
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,
+        "Apple SD Gothic Neo","Noto Sans KR","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+      background:
+        radial-gradient(1200px 800px at 80% -20%,rgba(34,211,238,.18),transparent),
+        linear-gradient(180deg,#0b0b14,#0b0b14 40%,#0f1030);
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      word-break:keep-all; overflow-wrap:anywhere; hyphens:none;
+    }
+    a{color:inherit;text-decoration:none}
+    .shell{max-width:1100px;margin:0 auto;padding:28px}
+    .brand{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .logo{
+      width:44px;height:44px;border-radius:12px;
+      background:conic-gradient(from 0deg,var(--accent),var(--accent2));
+      box-shadow:0 8px 30px rgba(139,92,246,.35);
+      display:grid;place-items:center;font-weight:800;color:#0b0b14
+    }
+    h1{margin:2px 0 8px;font-size:28px;letter-spacing:.2px}
+    .lead{margin:0;color:var(--ink-d)}
+    .badge{font-size:12px;padding:4px 8px;border:1px solid var(--btnb);border-radius:999px;color:var(--ink-d)}
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:22px}
+    .card{background:linear-gradient(180deg,#121427,#0e0f20);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 14px;border-radius:12px;border:1px solid var(--btnb);background:var(--btn);color:var(--ink);cursor:pointer;font-weight:700;transition:.15s transform ease,.15s background ease}
+    .btn:hover{transform:translateY(-1px);background:#111542}
+    .btn:focus{outline:2px solid var(--accent2);outline-offset:2px}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#5eead4);border-color:transparent;color:#07111e}
+    .btn.ok{background:linear-gradient(90deg,#34d399,#10b981);border-color:transparent;color:#062a22}
+    .pill{padding:7px 11px;border-radius:999px;background:#0f1230;border:1px solid var(--btnb);color:var(--ink-d);font-size:12px}
+    .section-title{font-size:13px;color:#aeb4de;text-transform:uppercase;letter-spacing:.12em;margin:4px 0 12px}
+    .hint{font-size:12px;color:var(--ink-d);margin-top:8px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Noto Sans Mono",monospace}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,#242951,transparent);margin:14px 0}
+    .hide{display:none} .nowrap{white-space:nowrap}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--btnb);border-radius:10px;background:#0f1230;font-size:12px;cursor:pointer}
+    .chip:hover{background:#111542}
+    .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#111642;color:#e8edff;padding:10px 14px;border-radius:10px;border:1px solid #2b2f55;box-shadow:0 8px 22px rgba(0,0,0,.35);font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+    .toast.show{opacity:1}
+    @media (max-width:980px){ .grid{grid-template-columns:1fr;gap:14px} }
+    ul.check{padding-left:18px} ul.check li{margin:4px 0}
+    .stamp{font-size:12px;color:#9aa3da} .cta{margin-top:10px} .hero{margin-top:6px}
+    .langbar{display:flex;gap:8px;flex-wrap:wrap}
+    [dir="rtl"]{direction:rtl} [dir="rtl"] .row{flex-direction:row-reverse}
   </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"PiWorldBank",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Android, iOS, Web",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "url":"https://ljw2358.github.io/PiWorldBank/",
+    "sameAs":["pi://piworldbank","https://linktr.ee/hyekong"]
+  }
+  </script>
 </head>
 <body>
-  <div class="wrap">
-    <!-- 안전 배너 -->
-    <div id="safeBanner" class="banner"></div>
-
-    <!-- 헤더 -->
-    <header>
-      <div class="title" id="titleMain">World Pi Bank</div>
-      <div class="lang">
-        <button class="chip" onclick="setLang('en')">EN</button>
-        <button class="chip" onclick="setLang('ko')">KR</button>
-        <button class="chip" onclick="setLang('zh')">ZH</button>
-      </div>
-      <div class="actions">
-        <button class="btn auto" id="btnAuto" onclick="runAutoDemo()">Run one-click demo</button>
+  <div class="shell" id="main" role="main" aria-label="PiWorldBank Main">
+    <!-- Brand / Hero -->
+    <header class="brand" aria-label="Brand header">
+      <div class="logo" aria-hidden="true">P</div>
+      <div class="hero">
+        <div class="row" style="gap:8px">
+          <h1 class="nowrap" id="brandTitle">PiWorldBank</h1>
+          <span class="badge mono" title="Official slug">pi://piworldbank</span>
+        </div>
+        <p class="lead">Web3 Digital Bank for Pioneers — One-touch demo · APK install · Multi-language (EN +10)</p>
+        <div class="langbar" role="tablist" aria-label="Language tabs" id="langTabs"></div>
       </div>
     </header>
 
-    <p class="muted" id="subtitle" style="text-align:center;margin-bottom:18px;">
-      This is a digital bank demo on the Pi ecosystem.
-    </p>
-
-    <!-- QR (영문 자동실행) -->
-    <div class="qr">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://ljw2358.github.io/worldpibank/?auto=1&lang=en" alt="QR Demo"/>
-    </div>
-
-    <!-- 본문 -->
-    <div class="grid">
-      <div class="card">
-        <h2 id="secPayTitle">Payments / Transfer</h2>
-        <p class="muted" id="secPayDesc">Fast Pi payments for everyone.</p>
-        <div class="row">
-          <button class="btn primary" id="btnPay" onclick="payDemo()">Payment simulation</button>
-          <button class="btn ghost" id="btnTransfer" onclick="transferDemo()">Transfer simulation</button>
+    <section class="grid" aria-label="Action and Preview">
+      <!-- Actions & Content -->
+      <section class="card" id="actions" aria-label="Actions & Content">
+        <div class="section-title">One-Touch</div>
+        <div class="row" role="group" aria-label="Primary actions">
+          <button class="btn primary" id="btnOpenPi" aria-label="Open in Pi Browser">Open&nbsp;in&nbsp;Pi&nbsp;Browser</button>
+          <button class="btn ok" id="btnInstall" aria-label="Install APK">Install&nbsp;APK</button>
+          <button class="btn" id="btnDemo" aria-label="Open Live Demo">Live&nbsp;Demo</button>
         </div>
-      </div>
-
-      <div class="card">
-        <h2 id="secRewardTitle">Rewards</h2>
-        <p class="muted" id="secRewardDesc">Earn and use points by participation.</p>
-        <div class="row">
-          <button class="btn primary" id="btnReward" onclick="rewardDemo()">Earn points</button>
-          <button class="btn ghost" id="btnRedeem" onclick="redeemDemo()">Use points</button>
+        <div class="hint">
+          Android → APK install · iPhone/Desktop → demo &amp; video preview.  
+          Unified brand/slug/URL: <strong>PiWorldBank</strong> only (no word-breaks).
         </div>
-      </div>
 
-      <div class="card">
-        <h2 id="secStakeTitle">Stake (APY 31.4%)</h2>
-        <p class="muted" id="secStakeDesc">Flexible term with transparent rate.</p>
-        <div class="row">
-          <button class="btn primary" id="btnStake" onclick="stakeDemo()">Stake</button>
-          <button class="btn ghost" id="btnUnstake" onclick="unstakeDemo()">Unstake</button>
+        <div class="divider" role="separator"></div>
+
+        <!-- Content container (filled by i18n dictionary) -->
+        <article id="i18n-content"></article>
+
+        <div class="divider" role="separator"></div>
+
+        <!-- Official links + copy chips -->
+        <div class="row" aria-label="Official links">
+          <span class="pill">Official&nbsp;Slug:&nbsp;<span class="mono">pi://piworldbank</span></span>
+          <span class="pill">PWB&nbsp;URL:&nbsp;<span class="mono">https://ljw2358.github.io/PiWorldBank</span></span>
         </div>
-      </div>
-
-      <div class="card">
-        <h2 id="secUbiTitle">UBI (Basic Income)</h2>
-        <p class="muted" id="secUbiDesc">Web3 basic income with Pi.</p>
-        <div class="row">
-          <button class="btn primary" id="btnUbi" onclick="ubiClaim()">Claim UBI</button>
-          <button class="btn ghost" id="btnUbiHist" onclick="ubiHistory()">History</button>
+        <div class="row" style="margin-top:8px" aria-label="Copy helpers">
+          <button class="chip" data-copy="pi://piworldbank" aria-label="Copy official slug">
+            <span class="mono">pi://piworldbank</span> ⎘
+          </button>
+          <button class="chip" data-copy="https://ljw2358.github.io/PiWorldBank" aria-label="Copy website URL">
+            <span class="mono">/PiWorldBank</span> ⎘
+          </button>
         </div>
-      </div>
+        <p class="hint">Brand/slug/URL are fully unified as <strong>PiWorldBank</strong>. No mixed naming, no awkward word-breaks.</p>
+      </section>
 
-      <div class="card">
-        <h2 id="secSupportTitle">Support / FAQ</h2>
-        <div class="muted" id="supportEmail">Support: support@worldpibank.example</div>
-        <ul class="muted" id="faqList" style="margin:10px 0 0 16px;padding:0 0 0 6px;"></ul>
-      </div>
+      <!-- Preview / Support -->
+      <aside class="card" id="preview" aria-label="Preview & Support">
+        <div class="section-title">Preview</div>
 
-      <div class="card">
-        <h2 id="secLogTitle">Event log</h2>
-        <div id="log" class="log"></div>
-      </div>
-    </div>
+        <!-- Video -->
+        <div id="videoBox" class="hide" style="aspect-ratio:16/9;background:#0c0f22;border:1px solid #22264a;border-radius:12px;overflow:hidden">
+          <iframe id="yt" width="100%" height="100%" src="" title="PiWorldBank Demo"
+            frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <!-- Live Web Demo -->
+        <div id="demoBox" class="hide" style="margin-top:12px">
+          <a class="btn" id="btnOpenWebDemo" href="#" rel="noopener">Open&nbsp;Web&nbsp;Demo</a>
+          <div class="hint">Web demo mirrors PiWorldBank UI (Balance · Send · Rewards · Basic&nbsp;Income).</div>
+        </div>
+
+        <div class="divider" role="separator"></div>
+
+        <div class="section-title">Support</div>
+        <div class="row" style="gap:8px">
+          <a class="btn" href="https://linktr.ee/hyekong" target="_blank" rel="noopener" aria-label="Open Linktree">Linktree</a>
+          <a class="btn" href="https://youtube.com/@hyekong" target="_blank" rel="noopener" aria-label="Open YouTube">YouTube</a>
+          <a class="btn" href="https://tiktok.com/@hyekong" target="_blank" rel="noopener" aria-label="Open TikTok">TikTok</a>
+        </div>
+        <div class="hint" style="margin-top:8px;line-height:1.5">
+          KB&nbsp;Bank&nbsp;<button class="chip" data-copy="66910201596112">66910201596112</button>&nbsp;(Lee&nbsp;Jaewan)<br/>
+          Pi&nbsp;Wallet&nbsp;<button class="chip" data-copy="GCLU237U7XPKOCHNWLTVNISIC5I6A273VB5RVKHB5CS5Y7DM4XKFES2U">GCLU237U7XPKOCHNWLTVNISIC5I6A273VB5RVKHB5CS5Y7DM4XKFES2U</button><br/>
+          Cultureland&nbsp;SMS&nbsp;<button class="chip" data-copy="010-6797-0982">010-6797-0982</button> · Referral&nbsp;<button class="chip" data-copy="ljw2358">ljw2358</button>
+        </div>
+
+        <div class="divider" role="separator"></div>
+        <div class="stamp">© <span id="yr"></span> PiWorldBank · Privacy-first · Secure over HTTPS · Unified brand only: “PiWorldBank”.</div>
+      </aside>
+    </section>
   </div>
 
-  <div id="toast" class="toast"></div>
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+  <noscript>
+    <div style="max-width:1100px;margin:16px auto;padding:10px 14px;border-radius:10px;border:1px solid #2b2f55;background:#111642;color:#e8edff">
+      PiWorldBank: JavaScript is disabled; language switch, install, and demo buttons may be limited.
+    </div>
+  </noscript>
 
   <script>
-    // ========= 상태/유틸 =========
-    const $=s=>document.querySelector(s);
-    const state={balance:314.159,points:0,stake:0,lang:'en'};
-    const fmt=n=>Number(n).toFixed(3);
-    const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-    const log=msg=>{const l=$("#log");l.textContent=`[${new Date().toLocaleTimeString()}] ${msg}\n`+l.textContent;}
-    const toast=msg=>{const t=$("#toast");t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',1500);}
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+    const show = el => el.classList.remove('hide');
+    const hide = el => el.classList.add('hide');
 
-    // ========= i18n (EN 기본 / KR·ZH 병기) =========
-    const I={
-      en:{title:"World Pi Bank",subtitle:"This is a digital bank demo on the Pi ecosystem.",
-          payT:"Payments / Transfer",payD:"Fast Pi payments for everyone.",payBtn:"Payment simulation",trBtn:"Transfer simulation",
-          rT:"Rewards",rD:"Earn and use points by participation.",rEarn:"Earn points",rUse:"Use points",
-          sT:"Stake (APY 31.4%)",sD:"Flexible term with transparent rate.",sBtn:"Stake",uBtn:"Unstake",
-          uT:"UBI (Basic Income)",uD:"Web3 basic income with Pi.",uClaim:"Claim UBI",uHist:"History",
-          supT:"Support / FAQ",supEmail:"Support: support@worldpibank.example",
-          faq:["This demo runs as a simulation on a static site.",
-               "All actions are logged for transparency.",
-               "PWA install banner depends on browser policy.",
-               "KYC will be included in full release.",
-               "Security & anti-hacking design is emphasized."],
-          logT:"Event log",
-          paid:"Payment succeeded",payFail:"Payment failed: insufficient balance",
-          sent:"Transfer completed",rewardPlus:"Added 10 points",rewardUseFail:"Not enough points",
-          stakeDone:"Staked successfully",unstakeNone:"No stake to withdraw",unstakeDone:"Unstaked successfully",
-          ubiPaid:"Received UBI 0.314 PI",
-          auto:"Running one-click demo",autoBtn:"Run one-click demo",autoFinish:"Auto demo finished"},
-      ko:{title:"월드파이은행",subtitle:"파이 생태계 기반 세계 최초의 디지털 은행 데모입니다.",
-          payT:"송금 / 결제",payD:"누구나 빠르게 파이로 결제하실 수 있습니다.",payBtn:"결제 시뮬레이션",trBtn:"송금 시뮬레이션",
-          rT:"리워드",rD:"참여에 따라 포인트를 적립하고 사용하실 수 있습니다.",rEarn:"포인트 적립",rUse:"포인트 사용",
-          sT:"예치 (APY 31.4%)",sD:"유연한 기간과 투명한 금리로 예치하실 수 있습니다.",sBtn:"예치하기",uBtn:"해지하기",
-          uT:"UBI (기본소득)",uD:"파이로 구현하는 웹3 기본소득입니다.",uClaim:"UBI 수령",uHist:"지급 내역",
-          supT:"고객센터 / FAQ",supEmail:"문의: support@worldpibank.example",
-          faq:["본 데모는 정적 페이지 시뮬레이션입니다.",
-               "모든 동작은 투명하게 로그로 기록됩니다.",
-               "PWA 설치 배너는 브라우저 정책에 따라 다릅니다.",
-               "정식 서비스에서는 KYC가 포함됩니다.",
-               "보안·해킹 방지 설계를 강화했습니다."],
-          logT:"이벤트 로그",
-          paid:"결제를 완료했습니다",payFail:"잔액이 부족하여 결제에 실패했습니다",
-          sent:"송금이 완료되었습니다",rewardPlus:"포인트 10점을 적립했습니다",rewardUseFail:"사용 가능한 포인트가 부족합니다",
-          stakeDone:"예치를 완료했습니다",unstakeNone:"해지할 예치금이 없습니다",unstakeDone:"해지를 완료했습니다",
-          ubiPaid:"UBI 0.314 PI를 수령했습니다",
-          auto:"원-클릭 데모 실행 중",autoBtn:"원-클릭 데모 실행",autoFinish:"자동 데모 완료"},
-      zh:{title:"世界派银行",subtitle:"这是基于 Pi 生态的数字银行演示。",
-          payT:"支付 / 转账",payD:"人人都可快速使用 Pi 支付。",payBtn:"支付演示",trBtn:"转账演示",
-          rT:"奖励",rD:"通过参与可积攒并使用积分。",rEarn:"积攒积分",rUse:"使用积分",
-          sT:"质押 (APY 31.4%)",sD:"期限灵活，利率透明。",sBtn:"质押",uBtn:"赎回",
-          uT:"UBI（基本收入）",uD:"用 Pi 实现的 Web3 基本收入。",uClaim:"领取 UBI",uHist:"发放记录",
-          supT:"客服 / 常见问题",supEmail:"客服：support@worldpibank.example",
-          faq:["此演示为静态页面仿真。",
-               "所有操作都会记录日志以确保透明。",
-               "PWA 安装横幅取决于浏览器策略。",
-               "正式服务将包含 KYC。",
-               "已加强安全与防黑设计。"],
-          logT:"事件日志",
-          paid:"支付成功",payFail:"支付失败：余额不足",
-          sent:"转账完成",rewardPlus:"积分 +10",rewardUseFail:"积分不足",
-          stakeDone:"质押完成",unstakeNone:"无可赎回质押",unstakeDone:"赎回完成",
-          ubiPaid:"已领取 UBI 0.314 PI",
-          auto:"正在执行一键演示",autoBtn:"一键演示",autoFinish:"自动演示完成"}
-    };
+    // Year
+    $('#yr').textContent = new Date().getFullYear();
 
-    function applyLang(t){
-      $("#pageTitle").textContent=t.title;
-      $("#titleMain").textContent=t.title;
-      $("#subtitle").textContent=t.subtitle;
-      $("#secPayTitle").textContent=t.payT; $("#secPayDesc").textContent=t.payD;
-      $("#btnPay").textContent=t.payBtn; $("#btnTransfer").textContent=t.trBtn;
-      $("#secRewardTitle").textContent=t.rT; $("#secRewardDesc").textContent=t.rD;
-      $("#btnReward").textContent=t.rEarn; $("#btnRedeem").textContent=t.rUse;
-      $("#secStakeTitle").textContent=t.sT; $("#secStakeDesc").textContent=t.sD;
-      $("#btnStake").textContent=t.sBtn; $("#btnUnstake").textContent=t.uBtn;
-      $("#secUbiTitle").textContent=t.uT; $("#secUbiDesc").textContent=t.uD;
-      $("#btnUbi").textContent=t.uClaim; $("#btnUbiHist").textContent=t.uHist;
-      $("#secSupportTitle").textContent=t.supT; $("#supportEmail").textContent=t.supEmail;
-      $("#secLogTitle").textContent=t.logT; $("#btnAuto").textContent=t.autoBtn;
-      const ul=$("#faqList"); ul.innerHTML=""; t.faq.forEach(x=>{const li=document.createElement("li"); li.textContent=x; ul.appendChild(li);});
-    }
-    const t = ()=>I[state.lang];
-    function setLang(lang){ state.lang=lang; applyLang(I[lang]); }
+    // Device detection
+    const ua = navigator.userAgent;
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
-    // ========= 데모 액션 (고정값, 입력 프롬프트 없음) =========
-    const AMOUNT_PAY=3.14, AMOUNT_TRANSFER=1.00, STAKE_AMOUNT=5.00, TRANSFER_TO="pioneer_demo";
-    function payDemo(){ if(AMOUNT_PAY>state.balance){ toast(t().payFail); log(t().payFail); return; }
-      state.balance-=AMOUNT_PAY; toast(`${t().paid} (${fmt(AMOUNT_PAY)} PI)`); log(`${t().paid} ${fmt(AMOUNT_PAY)} PI`); }
-    function transferDemo(){ if(AMOUNT_TRANSFER>state.balance){ toast(t().payFail); log(t().payFail); return; }
-      state.balance-=AMOUNT_TRANSFER; toast(`${t().sent} → ${TRANSFER_TO} (${fmt(AMOUNT_TRANSFER)} PI)`); log(`${t().sent} ${fmt(AMOUNT_TRANSFER)} PI`); }
-    function rewardDemo(){ state.points+=10; toast(t().rewardPlus); log(t().rewardPlus); }
-    function redeemDemo(){ if(state.points<10){ toast(t().rewardUseFail); log(t().rewardUseFail); return; }
-      state.points-=10; toast(t().rUse); log(t().rUse); }
-    function stakeDemo(){ if(STAKE_AMOUNT>state.balance){ toast(t().payFail); log(t().payFail); return; }
-      state.balance-=STAKE_AMOUNT; state.stake=(state.stake||0)+STAKE_AMOUNT; toast(t().stakeDone); log(t().stakeDone); }
-    function unstakeDemo(){ if((state.stake||0)<=0){ toast(t().unstakeNone); log(t().unstakeNone); return; }
-      const amount=state.stake; state.stake=0; state.balance+=amount; toast(t().unstakeDone); log(t().unstakeDone); }
-    function ubiClaim(){ state.balance+=0.314; toast(t().ubiPaid); log(t().ubiPaid); }
-    function ubiHistory(){
-      const hist = (state.lang==='en') ? "Recent 3 claims: +0.314 / +0.314 / +0.314"
-                 : (state.lang==='ko') ? "최근 3회: +0.314 / +0.314 / +0.314"
-                 : "最近3次：+0.314 / +0.314 / +0.314";
-      toast(hist); log(hist);
-    }
+    // === CONFIG: 실제값으로 교체하면 10/10 ===
+    const APK_URL = './PiWorldBank.apk'; // signed APK
+    const DEMO_URL = './demo/'; // live web demo
+    const YT_VIDEO_ID = ''; // standard YT video ID (not Shorts)
+    const DOCS_URL = 'https://ljw2358.github.io/PiWorldBank/docs';
 
-    // ========= 원-클릭 데모 (언어 연동) =========
-    async function runAutoDemo(){
-      const btn=$("#btnAuto"); btn.disabled=true;
-      toast(t().auto); log(t().auto);
-      payDemo(); await sleep(700);
-      transferDemo(); await sleep(700);
-      rewardDemo(); await sleep(500);
-      stakeDemo(); await sleep(700);
-      ubiClaim(); await sleep(500);
-      log(t().autoFinish);
-      btn.disabled=false;
-    }
-
-    // ========= 초기설정(언어/자동실행/배너/SW) =========
-    const qp = n => new URL(location.href).searchParams.get(n);
-    const langFromUrl = (qp("lang")||"en").toLowerCase();
-    setLang(["en","ko","zh"].includes(langFromUrl)?langFromUrl:"en");
-    if(qp("auto")==="1") runAutoDemo();
-
-    (function(){ // 도메인 안전 배너
-      const okHost = location.host==="ljw2358.github.io";
-      const okPath = location.pathname.startsWith("/worldpibank/");
-      if(!(okHost && okPath)){
-        const el=$("#safeBanner"); el.style.display="block";
-        el.innerHTML = (state.lang==='ko')
-          ? `⚠️ 주소창에 <b>ljw2358.github.io/worldpibank/</b> 가 맞는지 확인하세요.`
-          : (state.lang==='zh')
-            ? `⚠️ 请确认地址栏为 <b>ljw2358.github.io/worldpibank/</b>。`
-            : `⚠️ Please check: <b>ljw2358.github.io/worldpibank/</b>`;
+    // Query param lang override (?lang=en|ko|zh|es|fr|de|ja|ru|ar|pt|hi)
+    (function applyQueryLang(){
+      const q = new URLSearchParams(location.search);
+      const paramLang = q.get('lang');
+      if (paramLang && ['en','ko','zh','es','fr','de','ja','ru','ar','pt','hi'].includes(paramLang)) {
+        sessionStorage.setItem('pwb-lang', paramLang);
       }
     })();
 
-    if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(()=>{}); }
-  </script>
-<!-- PiWorldBank · Testnet DEX (Demo UI) -->
-<section id="dex-demo" style="max-width:960px;margin:24px auto;padding:20px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif;">
-  <header style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-    <div style="width:40px;height:40px;border-radius:12px;background:#6d28d9;"></div>
-    <div>
-      <h2 style="margin:0;font-size:20px;font-weight:800;">Testnet DEX (Swap & Liquidity · Demo)</h2>
-      <p style="margin:4px 0 0;color:#6b7280;font-size:13px;">테스트넷에서 스왑/유동성 풀을 시연합니다 (심사용 데모 / no real funds)</p>
-    </div>
-  </header>
+    // Toast
+    const toast = $('#toast');
+    let toastTimer;
+    const notify = (msg='Copied') => {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
+    };
 
-  <!-- Tabs -->
-  <nav style="display:flex;gap:8px;margin-bottom:16px;">
-    <button id="tab-swap" style="padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-weight:700;">Swap</button>
-    <button id="tab-liq" style="padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;">Liquidity</button>
-    <button id="tab-guide" style="padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;">Guide</button>
-  </nav>
+    // Copy helpers
+    $$('.chip[data-copy]').forEach(ch => ch.addEventListener('click', async () => {
+      const text = ch.getAttribute('data-copy') || '';
+      try { await navigator.clipboard.writeText(text); notify('Copied: ' + text); }
+      catch { notify('Copy failed'); }
+    }));
 
-  <!-- Swap Panel -->
-  <div id="panel-swap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
-        <label style="font-size:12px;color:#6b7280;">From</label>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <select id="fromToken" style="flex:0 0 130px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
-            <option value="TPI">TPI (Test Pi)</option>
-            <option value="USDT">tUSDT</option>
-            <option value="WBPI">wTPI</option>
-          </select>
-          <input id="fromAmount" type="number" min="0" placeholder="0.0" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
-        </div>
-      </div>
+    // i18n dictionary (EN +10)
+    const i18n = {
+      en:{tab:'English',dir:'ltr',sections:{
+        swapTitle:'🔄 Swap · Pi ↔ Local Digital Currency',
+        swapDesc:'Swap your Pi through PiWorldBank’s secure Web3 interface — <span class="nowrap">real-time</span> execution with clean UX.',
+        swapBullets:['Real-time GCV reference rate','One-click swap execution','Transparent transaction history & receipts'],
+        featTitle:'🚀 Features',
+        featBullets:['Balances, Send, Rewards, Basic&nbsp;Income','Deep link: <span class="mono">pi://piworldbank</span>','Auto language (EN +10) · No awkward word-breaks'],
+        secTitle:'🛡️ Security & Compliance',
+        secBullets:['HTTPS transport · Signed APK · No third-party trackers','Least-privilege access · No PII stored in demo','Clear Testnet/Mainnet context; explicit disclaimers'],
+        privTitle:'📜 Privacy',
+        privBullets:['No account passwords or seed phrases are collected','Optional minimal telemetry (performance & errors)'],
+        roadTitle:'🗺️ Roadmap',
+        roadBullets:['V1: Swap + Rewards Dashboard (Mainnet)','V2: Scheduled payouts, vaults, statements (PDF)','V3: Multi-region liquidity partners · Merchant SDK'],
+        faqTitle:'❓ FAQ',
+        faqQAs:[['When does Mainnet go live?','Immediately after Core Team approval.'],['Does the demo store data?','No. Demo is read-only or sandboxed.'],['Is APK required on iOS?','No. Use the web demo and Pi Browser deep-link.']],
+        ctaOpen:'Open PiWorldBank',ctaDocs:'Docs'}},
+      ko:{tab:'한국어',dir:'ltr',sections:{
+        swapTitle:'🔄 스왑 · 파이 ↔ 현지 디지털 화폐',
+        swapDesc:'PiWorldBank의 안전한 Web3 인터페이스로 <span class="nowrap">실시간</span> 스왑을 실행하세요. 단 한 번의 클릭으로 완료됩니다.',
+        swapBullets:['실시간 GCV 기준 환율','원클릭 스왑 실행','투명한 거래 내역 및 영수증 제공'],
+        featTitle:'🚀 주요 기능',
+        featBullets:['잔액 · 송금 · 보상 · 기본소득','딥링크: <span class="mono">pi://piworldbank</span>','영문 +10개 언어 자동 · 단어 끊김 없음'],
+        secTitle:'🛡️ 보안 및 컴플라이언스',
+        secBullets:['HTTPS 전송 · 서명된 APK · 서드파티 트래커 미사용','최소 권한 원칙 · 데모에서는 개인정보(PII) 저장 없음','Testnet/Mainnet 상태를 명확히 고지'],
+        privTitle:'📜 개인정보 보호',
+        privBullets:['계정 비밀번호/시드 구절은 수집하지 않음','필수 성능/오류 텔레메트리만 선택적 수집'],
+        roadTitle:'🗺️ 로드맵',
+        roadBullets:['V1: 스왑 + 보상 대시보드 (메인넷)','V2: 예약 지급, 금고, 명세서(PDF)','V3: 멀티 리전 유동성 파트너 · 가맹점용 SDK'],
+        faqTitle:'❓ 자주 묻는 질문',
+        faqQAs:[['메인넷은 언제 가동되나요?','Core Team 승인 직후 즉시.'],['데모가 데이터를 저장하나요?','아니요. 읽기 전용/샌드박스입니다.'],['iOS에서 APK가 필요한가요?','아닙니다. 웹 데모와 Pi Browser 딥링크를 사용하세요.']],
+        ctaOpen:'PiWorldBank 열기',ctaDocs:'문서'}},
+      zh:{tab:'中文',dir:'ltr',sections:{
+        swapTitle:'🔄 兑换 · Pi ↔ 本地数字货币',
+        swapDesc:'通过 PiWorldBank 安全的 Web3 界面，<span class="nowrap">实时</span>完成一键兑换，体验流畅的金融交互。',
+        swapBullets:['基于 GCV 的实时参考汇率','一键快速执行兑换','透明的交易记录与收据'],
+        featTitle:'🚀 主要功能',
+        featBullets:['余额 · 转账 · 奖励 · 基本收入','深链：<span class="mono">pi://piworldbank</span>','英文 +10 种语言自动 · 无尴尬断词'],
+        secTitle:'🛡️ 安全与合规',
+        secBullets:['HTTPS 传输 · 已签名 APK · 无第三方跟踪','最小权限原则 · 演示不保存任何个人数据','清晰标注 Testnet/Mainnet 状态与免责声明'],
+        privTitle:'📜 隐私',
+        privBullets:['不收集账号密码/助记词','仅可选收集必要的性能与错误数据'],
+        roadTitle:'🗺️ 路线图',
+        roadBullets:['V1：兑换 + 奖励面板（主网）','V2：定时发放、金库、对账单（PDF）','V3：多区域流动性伙伴 · 商户 SDK'],
+        faqTitle:'❓ 常见问题',
+        faqQAs:[['主网何时上线？','核心团队批准后立即启用。'],['演示会保存数据吗？','不会。为只读/沙盒环境。'],['iOS 需要 APK 吗？','不需要。请使用网页演示与 Pi 浏览器深链。']],
+        ctaOpen:'打开 PiWorldBank',ctaDocs:'文档'}},
+      es:{tab:'Español',dir:'ltr',sections:{
+        swapTitle:'🔄 Intercambio · Pi ↔ Moneda digital local',
+        swapDesc:'Cambia tu Pi mediante la interfaz Web3 segura de PiWorldBank — ejecución en <span class="nowrap">tiempo real</span> con UX limpia.',
+        swapBullets:['Tasa de referencia GCV en tiempo real','Ejecución con un clic','Historial de transacciones y recibos transparentes'],
+        featTitle:'🚀 Funciones',
+        featBullets:['Saldos, Envíos, Recompensas, Ingreso&nbsp;Básico','Enlace profundo: <span class="mono">pi://piworldbank</span>','Idioma automático (EN +10) · Sin cortes extraños'],
+        secTitle:'🛡️ Seguridad y Cumplimiento',
+        secBullets:['Transporte HTTPS · APK firmado · Sin rastreadores','Principio de mínimo privilegio · Sin PII en demo','Contexto claro de Testnet/Mainnet; avisos explícitos'],
+        privTitle:'📜 Privacidad',
+        privBullets:['No se recopilan contraseñas ni semillas','Telemetría mínima opcional (rendimiento y errores)'],
+        roadTitle:'🗺️ Hoja de ruta',
+        roadBullets:['V1: Intercambio + Panel de Recompensas (Mainnet)','V2: Pagos programados, bóvedas, estados (PDF)','V3: Socios de liquidez multi-región · SDK para comercios'],
+        faqTitle:'❓ Preguntas frecuentes',
+        faqQAs:[['¿Cuándo se activa Mainnet?','Inmediatamente tras la aprobación del Core Team.'],['¿La demo guarda datos?','No. Es de solo lectura o en sandbox.'],['¿Se requiere APK en iOS?','No. Use la demo web y el deep link de Pi.']],
+        ctaOpen:'Abrir PiWorldBank',ctaDocs:'Docs'}},
+      fr:{tab:'Français',dir:'ltr',sections:{
+        swapTitle:'🔄 Échange · Pi ↔ Monnaie numérique locale',
+        swapDesc:'Échangez votre Pi via l’interface Web3 sécurisée de PiWorldBank — exécution en <span class="nowrap">temps réel</span> avec une UX fluide.',
+        swapBullets:['Taux GCV en temps réel','Exécution en un clic','Historique des transactions et reçus transparents'],
+        featTitle:'🚀 Fonctionnalités',
+        featBullets:['Soldes, Envoi, Récompenses, Revenu&nbsp;de&nbsp;base','Lien profond : <span class="mono">pi://piworldbank</span>','Langue auto (EN +10) · Pas de coupures de mots'],
+        secTitle:'🛡️ Sécurité & Conformité',
+        secBullets:['Transport HTTPS · APK signé · Pas de traqueurs tiers','Principe du moindre privilège · Pas de PII en démo','Contexte Testnet/Mainnet clair; avertissements explicites'],
+        privTitle:'📜 Confidentialité',
+        privBullets:['Aucun mot de passe ni phrase secrète collecté','Télémétrie minimale optionnelle (perf & erreurs)'],
+        roadTitle:'🗺️ Feuille de route',
+        roadBullets:['V1 : Échange + Tableau de bord des récompenses (Mainnet)','V2 : Paiements planifiés, coffres, relevés (PDF)','V3 : Partenaires de liquidité multi-régions · SDK commerçant'],
+        faqTitle:'❓ FAQ',
+        faqQAs:[['Quand Mainnet sera-t-il actif ?','Immédiatement après l’approbation du Core Team.'],['La démo stocke-t-elle des données ?','Non. Lecture seule/sandbox.'],['APK requis sur iOS ?','Non. Utilisez la démo web et le deep link Pi.']],
+        ctaOpen:'Ouvrir PiWorldBank',ctaDocs:'Docs'}},
+      de:{tab:'Deutsch',dir:'ltr',sections:{
+        swapTitle:'🔄 Tausch · Pi ↔ Lokale Digitalwährung',
+        swapDesc:'Tausche Pi über die sichere Web3-Oberfläche von PiWorldBank — <span class="nowrap">Echtzeit</span>-Ausführung mit klarer UX.',
+        swapBullets:['Echtzeit-GCV-Referenzkurs','Ausführung mit einem Klick','Transparente Transaktionshistorie & Belege'],
+        featTitle:'🚀 Funktionen',
+        featBullets:['Guthaben, Senden, Rewards, Grundeinkommen','Deeplink: <span class="mono">pi://piworldbank</span>','Automatische Sprache (EN +10) · Keine Worttrennungen'],
+        secTitle:'🛡️ Sicherheit & Compliance',
+        secBullets:['HTTPS-Transport · Signierte APK · Keine Tracker','Prinzip der minimalen Rechte · Keine PII in der Demo','Klarer Testnet/Mainnet-Kontext; deutliche Hinweise'],
+        privTitle:'📜 Datenschutz',
+        privBullets:['Keine Passwörter oder Seed-Phrasen erhoben','Optionale minimale Telemetrie (Performance & Fehler)'],
+        roadTitle:'🗺️ Roadmap',
+        roadBullets:['V1: Tausch + Rewards-Dashboard (Mainnet)','V2: Geplante Auszahlungen, Tresore, Abrechnungen (PDF)','V3: Multi-Region-Liquiditätspartner · Händler-SDK'],
+        faqTitle:'❓ FAQ',
+        faqQAs:[['Wann wird Mainnet aktiv?','Unmittelbar nach Freigabe durch das Core Team.'],['Speichert die Demo Daten?','Nein. Nur Lesezugriff/Sandbox.'],['APK auf iOS erforderlich?','Nein. Web-Demo und Pi-Deeplink nutzen.']],
+        ctaOpen:'PiWorldBank öffnen',ctaDocs:'Dokumente'}},
+      ja:{tab:'日本語',dir:'ltr',sections:{
+        swapTitle:'🔄 スワップ · Pi ↔ 現地デジタル通貨',
+        swapDesc:'PiWorldBank の安全な Web3 インターフェースで、<span class="nowrap">リアルタイム</span>にワンクリック交換。',
+        swapBullets:['GCV 参照レート（リアルタイム）','ワンクリック実行','透明な取引履歴とレシート'],
+        featTitle:'🚀 機能',
+        featBullets:['残高・送金・報酬・ベーシックインカム','ディープリンク：<span class="mono">pi://piworldbank</span>','自動言語（EN +10）・不自然な改行なし'],
+        secTitle:'🛡️ セキュリティ & コンプライアンス',
+        secBullets:['HTTPS 送信・署名済み APK・トラッカーなし','最小権限・デモで PII 不保存','Testnet/Mainnet を明示'],
+        privTitle:'📜 プライバシー',
+        privBullets:['パスワード/シード句は収集しない','最小限のテレメトリ（任意）'],
+        roadTitle:'🗺️ ロードマップ',
+        roadBullets:['V1：スワップ + 報酬ダッシュボード（メインネット）','V2：定期支払い、ボールト、明細（PDF）','V3：多地域の流動性パートナー・加盟店 SDK'],
+        faqTitle:'❓ よくある質問',
+        faqQAs:[['メインネットはいつ稼働？','Core Team の承認後すぐ。'],['デモはデータを保存する？','いいえ。読み取り専用/サンドボックスです。'],['iOS で APK は必要？','不要です。Web デモと Pi ブラウザのディープリンクを使用。']],
+        ctaOpen:'PiWorldBank を開く',ctaDocs:'ドキュメント'}},
+      ru:{tab:'Русский',dir:'ltr',sections:{
+        swapTitle:'🔄 Обмен · Pi ↔ Местная цифровая валюта',
+        swapDesc:'Обменивайте Pi через безопасный Web3-интерфейс PiWorldBank — <span class="nowrap">в реальном времени</span> и с удобным UX.',
+        swapBullets:['Референтный курс GCV в реальном времени','Исполнение в один клик','Прозрачная история транзакций и квитанции'],
+        featTitle:'🚀 Возможности',
+        featBullets:['Баланс, Переводы, Награды, Базовый доход','Глубокая ссылка: <span class="mono">pi://piworldbank</span>','Автоязык (EN +10) · Без некрасивых переносов'],
+        secTitle:'🛡️ Безопасность и соответствие',
+        secBullets:['HTTPS-транспорт · Подписанный APK · Без трекеров','Минимально необходимые привилегии · Без PII в демо','Ясный контекст Testnet/Mainnet; явные дисклеймеры'],
+        privTitle:'📜 Конфиденциальность',
+        privBullets:['Пароли/seed-фразы не собираются','Опциональная минимальная телеметрия (производительность/ошибки)'],
+        roadTitle:'🗺️ Дорожная карта',
+        roadBullets:['V1: Обмен + Панель наград (Mainnet)','V2: Плановые выплаты, хранилища, отчеты (PDF)','V3: Партнеры ликвидности по регионам · SDK для мерчантов'],
+        faqTitle:'❓ Вопросы и ответы',
+        faqQAs:[['Когда запустится Mainnet?','Сразу после одобрения Core Team.'],['Демо хранит данные?','Нет. Только чтение/песочница.'],['Нужен APK на iOS?','Нет. Используйте веб-демо и deep-link Pi.']],
+        ctaOpen:'Открыть PiWorldBank',ctaDocs:'Документы'}},
+      ar:{tab:'العربية',dir:'rtl',sections:{
+        swapTitle:'🔄 مبادلة · Pi ↔ العملة الرقمية المحلية',
+        swapDesc:'قم بمبادلة Pi عبر واجهة Web3 الآمنة من PiWorldBank — تنفيذ <span class="nowrap">فوري</span> وتجربة استخدام سلسة.',
+        swapBullets:['سعر GCV المرجعي في الوقت الفعلي','تنفيذ بنقرة واحدة','سجل معاملات وإيصالات شفافة'],
+        featTitle:'🚀 المزايا',
+        featBullets:['الأرصدة · الإرسال · المكافآت · الدخل الأساسي','رابط عميق: <span class="mono">pi://piworldbank</span>','لغة تلقائية (EN +10) · دون تقطيعات كلمات'],
+        secTitle:'🛡️ الأمان والامتثال',
+        secBullets:['نقل عبر HTTPS · ملف APK موقّع · بدون متتبعات','مبدأ أقل الصلاحيات · لا تخزين لبيانات شخصية في العرض','توضيح واضح لحالة Testnet/Mainnet'],
+        privTitle:'📜 الخصوصية',
+        privBullets:['لا يتم جمع كلمات المرور أو عبارات الاسترجاع','قياسات اختيارية وخفيفة للأداء/الأخطاء'],
+        roadTitle:'🗺️ خارطة الطريق',
+        roadBullets:['V1: مبادلة + لوحة مكافآت (Mainnet)','V2: دفعات مجدولة، خزائن، كشوف (PDF)','V3: شركاء سيولة متعدد المناطق · SDK للتجار'],
+        faqTitle:'❓ الأسئلة الشائعة',
+        faqQAs:[['متى يتم تفعيل Mainnet؟','فور موافقة فريق Core.'],['هل يحتفظ العرض ببيانات؟','لا. وضع قراءة فقط/صندوق رمل.'],['هل نحتاج APK على iOS؟','لا. استخدم العرض على الويب والرابط العميق لـ Pi.']],
+        ctaOpen:'افتح PiWorldBank',ctaDocs:'الوثائق'}},
+      pt:{tab:'Português (BR)',dir:'ltr',sections:{
+        swapTitle:'🔄 Troca · Pi ↔ Moeda digital local',
+        swapDesc:'Troque seu Pi pela interface Web3 segura do PiWorldBank — execução em <span class="nowrap">tempo real</span> com UX limpa.',
+        swapBullets:['Taxa de referência GCV em tempo real','Execução com um clique','Histórico e recibos transparentes'],
+        featTitle:'🚀 Recursos',
+        featBullets:['Saldos, Enviar, Recompensas, Renda&nbsp;Básica','Deep link: <span class="mono">pi://piworldbank</span>','Idioma automático (EN +10) · Sem quebras estranhas'],
+        secTitle:'🛡️ Segurança & Conformidade',
+        secBullets:['Transporte HTTPS · APK assinado · Sem rastreadores','Princípio do menor privilégio · Sem PII na demo','Contexto claro de Testnet/Mainnet; avisos explícitos'],
+        privTitle:'📜 Privacidade',
+        privBullets:['Sem coletar senhas ou frases-semente','Telemetria mínima opcional (desempenho & erros)'],
+        roadTitle:'🗺️ Roteiro',
+        roadBullets:['V1: Troca + Painel de Recompensas (Mainnet)','V2: Pagamentos agendados, cofres, extratos (PDF)','V3: Parceiros de liquidez multi-região · SDK para lojistas'],
+        faqTitle:'❓ FAQ',
+        faqQAs:[['Quando o Mainnet entra no ar?','Imediatamente após aprovação do Core Team.'],['A demo armazena dados?','Não. Somente leitura/sandbox.'],['APK é necessário no iOS?','Não. Use a demo web e o deep link do Pi.']],
+        ctaOpen:'Abrir PiWorldBank',ctaDocs:'Docs'}},
+      hi:{tab:'हिन्दी',dir:'ltr',sections:{
+        swapTitle:'🔄 स्वैप · Pi ↔ स्थानीय डिजिटल मुद्रा',
+        swapDesc:'PiWorldBank के सुरक्षित Web3 इंटरफ़ेस से <span class="nowrap">रीयल-टाइम</span> में एक-क्लिक स्वैप करें।',
+        swapBullets:['रीयल-टाइम GCV संदर्भ दर','वन-क्लिक स्वैप निष्पादन','पारदर्शी लेनदेन इतिहास और रसीदें'],
+        featTitle:'🚀 विशेषताएँ',
+        featBullets:['बैलेंस, भेजें, रिवॉर्ड्स, बेसिक&nbsp;इनकम','डीप लिंक: <span class="mono">pi://piworldbank</span>','स्वचालित भाषा (EN +10) · अटपटी लाइन-ब्रेक नहीं'],
+        secTitle:'🛡️ सुरक्षा एवं अनुपालन',
+        secBullets:['HTTPS ट्रांसपोर्ट · साइन किया हुआ APK · कोई थर्ड-पार्टी ट्रैकर नहीं','न्यूनतम विशेषाधिकार · डेमो में PII नहीं','Testnet/Mainnet स्थिति स्पष्ट'],
+        privTitle:'📜 गोपनीयता',
+        privBullets:['पासवर्ड/सीड वाक्यांश इकट्ठे नहीं किए जाते','वैकल्पिक न्यूनतम टेलीमेट्री (परफॉर्मेंस/एरर्स)'],
+        roadTitle:'🗺️ रोडमैप',
+        roadBullets:['V1: स्वैप + रिवॉर्ड्स डैशबोर्ड (Mainnet)','V2: शेड्यूल्ड पेमेन्ट, वॉल्ट्स, स्टेटमेंट्स (PDF)','V3: मल्टी-रीजन लिक्विडिटी पार्टनर · मर्चेंट SDK'],
+        faqTitle:'❓ सामान्य प्रश्न',
+        faqQAs:[['Mainnet कब लाइव होगा?','Core Team की मंजूरी के तुरंत बाद।'],['क्या डेमो डेटा सहेजता है?','नहीं। केवल रीड-ओनली/सैंडबॉक्स।'],['iOS में APK आवश्यक है?','नहीं। वेब डेमो और Pi डीप-लिंक का उपयोग करें।']],
+        ctaOpen:'PiWorldBank खोलें',ctaDocs:'दस्तावेज़'}}
+    };
 
-      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
-        <label style="font-size:12px;color:#6b7280;">To</label>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <select id="toToken" style="flex:0 0 130px;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
-            <option value="USDT">tUSDT</option>
-            <option value="TPI">TPI (Test Pi)</option>
-            <option value="WBPI">wTPI</option>
-          </select>
-          <input id="toAmount" type="text" placeholder="0.0" disabled style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#f3f4f6;color:#374151;">
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:12px;padding:12px;border:1px dashed #d1d5db;border-radius:12px;background:#fafafa;">
-      <div style="display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:#374151;">
-        <span id="priceLine">예상 환율: —</span>
-        <span>·</span>
-        <span id="slipLine">슬리피지(가정): 0.5%</span>
-        <span>·</span>
-        <span id="feeLine">수수료(가정): 0.30%</span>
-      </div>
-    </div>
-
-    <div style="display:flex;gap:8px;margin-top:14px;">
-      <button id="btnPreview" style="flex:1;padding:12px 14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:800;">Preview Swap (Demo)</button>
-      <button id="btnWallet" style="padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;font-weight:700;">Open Pi Wallet (Testnet)</button>
-    </div>
-
-    <div id="confirmBox" style="display:none;margin-top:12px;padding:14px;border:1px solid #fde68a;background:#fffbeb;border-radius:12px;color:#92400e;">
-      ⚠️ 데모 전송입니다. 실제 체결/전송은 일어나지 않습니다. Testnet 환경에서 UI·흐름만 시연합니다.
-    </div>
-  </div>
-
-  <!-- Liquidity Panel -->
-  <div id="panel-liq" style="display:none;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
-        <h3 style="margin:0 0 8px;font-size:16px;">Add Liquidity (Demo)</h3>
-        <div style="display:flex;gap:8px;margin-bottom:8px;">
-          <select id="liqA" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
-            <option value="TPI">TPI</option><option value="USDT">tUSDT</option><option value="WBPI">wTPI</option>
-          </select>
-          <input id="liqAmtA" type="number" placeholder="0.0" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
-        </div>
-        <div style="display:flex;gap:8px;">
-          <select id="liqB" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
-            <option value="USDT">tUSDT</option><option value="TPI">TPI</option><option value="WBPI">wTPI</option>
-          </select>
-          <input id="liqAmtB" type="number" placeholder="0.0" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;">
-        </div>
-        <button id="btnAddLiq" style="margin-top:10px;width:100%;padding:12px 14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:800;">Add Liquidity (Demo)</button>
-      </div>
-
-      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;">
-        <h3 style="margin:0 0 8px;font-size:16px;">Your LP (Mock)</h3>
-        <p id="lpInfo" style="margin:0;color:#374151;font-size:14px;">아직 예치 없음. (This is a mock display)</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Guide Panel -->
-  <div id="panel-guide" style="display:none;">
-    <ol style="margin:0 0 8px 20px;color:#374151;line-height:1.6;">
-      <li>Pi Browser에서 Testnet 로그인 상태인지 확인합니다.</li>
-      <li>Swap 또는 Liquidity를 선택하고, 수치 입력 후 <b>Preview</b>를 눌러 시연합니다.</li>
-      <li><b>Open Pi Wallet (Testnet)</b> 버튼은 지갑 열기 안내용입니다(실제 송금 미발생).</li>
-      <li>심사용 스크린샷/짧은 영상(15–30초)을 확보해 코어팀에 실사용성을 어필하세요.</li>
-    </ol>
-    <p style="margin:0;color:#6b7280;font-size:13px;">※ 본 모듈은 데모이며, Mainnet에서는 토큰 발행·체결이 제한될 수 있습니다.</p>
-  </div>
-</section>
-
-<script>
-  // Simple fake rates for demo
-  const rate = { "TPI:USDT": 3.14, "USDT:TPI": 1/3.14, "TPI:WBPI": 1.0, "WBPI:TPI": 1.0, "USDT:WBPI": 0.318, "WBPI:USDT": 1/0.318 };
-
-  const $ = (id)=>document.getElementById(id);
-  const show = (el, on)=> el.style.display = on? 'block':'none';
-
-  // Tabs
-  const tabs = { swap:$('tab-swap'), liq:$('tab-liq'), guide:$('tab-guide') };
-  const panels = { swap:$('panel-swap'), liq:$('panel-liq'), guide:$('panel-guide') };
-  Object.entries(tabs).forEach(([k,btn])=>{
-    btn.addEventListener('click', ()=>{
-      Object.values(panels).forEach(p=>show(p,false));
-      show(panels[k], true);
-      Object.values(tabs).forEach(b=>b.style.background='#fff');
-      btn.style.background='#f9fafb';
+    // Build language tabs
+    const languages = ['en','ko','zh','es','fr','de','ja','ru','ar','pt','hi'];
+    const langTabs = $('#langTabs');
+    languages.forEach(code => {
+      const b = document.createElement('button');
+      b.className = 'btn pill';
+      b.setAttribute('data-lang', code);
+      b.setAttribute('role','tab');
+      b.setAttribute('aria-selected','false');
+      b.textContent = i18n[code].tab;
+      langTabs.appendChild(b);
     });
-  });
 
-  function refreshQuote(){
-    const a = $('fromToken').value, b = $('toToken').value;
-    const key = a+':'+b;
-    const r = rate[key] || 0;
-    $('priceLine').textContent = r? `예상 환율: 1 ${a} ≈ ${r.toFixed(6)} ${b}` : '예상 환율: —';
-    const amt = parseFloat($('fromAmount').value||'0');
-    $('toAmount').value = r? (amt*r).toFixed(6) : '';
-  }
+    // Render i18n content
+    const renderLang = (code) => {
+      const data = i18n[code]; if (!data) return;
+      document.documentElement.setAttribute('lang', code === 'zh' ? 'zh-Hans' : code);
+      document.documentElement.setAttribute('dir', data.dir || 'ltr');
+      $$('#langTabs [data-lang]').forEach(btn => btn.setAttribute('aria-selected', String(btn.getAttribute('data-lang')===code)));
+      const s = data.sections;
+      const qaHTML = s.faqQAs.map(([q,a]) => `<li><strong>${q}</strong> — ${a}</li>`).join('');
+      const bullet = arr => arr.map(x=>`<li>${x}</li>`).join('');
+      $('#i18n-content').innerHTML = `
+        <h2>${s.swapTitle}</h2>
+        <p>${s.swapDesc}</p>
+        <ul class="check">${bullet(s.swapBullets)}</ul>
+        <h2>${s.featTitle}</h2>
+        <ul class="check">${bullet(s.featBullets)}</ul>
+        <h2>${s.secTitle}</h2>
+        <ul class="check">${bullet(s.secBullets)}</ul>
+        <h2>${s.privTitle}</h2>
+        <ul class="check">${bullet(s.privBullets)}</ul>
+        <h2>${s.roadTitle}</h2>
+        <ul class="check">${bullet(s.roadBullets)}</ul>
+        <h2>${s.faqTitle}</h2>
+        <ul class="check">${qaHTML}</ul>
+        <div class="cta">
+          <button class="btn primary" id="cta-open">${s.ctaOpen}</button>
+          <button class="btn" id="cta-docs">${s.ctaDocs}</button>
+        </div>`;
+      $('#cta-open').addEventListener('click', () => { window.location.href = 'pi://piworldbank'; });
+      $('#cta-docs').addEventListener('click', () => { if (DOCS_URL) window.open(DOCS_URL, '_blank', 'noopener'); else notify('Docs are coming soon.'); });
+    };
 
-  ['fromToken','toToken','fromAmount'].forEach(id=>$(id).addEventListener('input', refreshQuote));
-  $('btnPreview').addEventListener('click', ()=> { $('confirmBox').style.display='block'; });
-  $('btnWallet').addEventListener('click', ()=>{
-    alert('Pi Wallet(Testnet)을 열어 테스트 기능을 확인하세요. (이 데모는 실제 전송을 수행하지 않습니다)');
-    // 안내용: 필요 시 지갑 딥링크/앱 라우트 연결
-  });
-  $('btnAddLiq').addEventListener('click', ()=>{
-    const a=$('liqA').value,b=$('liqB').value, x=$('liqAmtA').value, y=$('liqAmtB').value;
-    $('lpInfo').textContent = `예치(모의): ${x} ${a} + ${y} ${b} → 가상 LP 토큰 발급됨`;
-    alert('Liquidity (Demo) 완료: 심사용 화면 캡처를 진행하세요.');
-  });
+    const saved = sessionStorage.getItem('pwb-lang') || (navigator.language||'en').slice(0,2);
+    const initial = languages.includes(saved) ? saved : 'en';
+    sessionStorage.setItem('pwb-lang', initial);
+    renderLang(initial);
+    $$('#langTabs [data-lang]').forEach(btn => btn.addEventListener('click', () => {
+      const code = btn.getAttribute('data-lang'); sessionStorage.setItem('pwb-lang', code); renderLang(code);
+    }));
 
-  refreshQuote();
+    // APK HEAD check
+    const APK_HEAD_CHECK = async () => { try { const r = await fetch(APK_URL,{method:'HEAD'}); return r.ok; } catch { return false; } };
+
+    // CTAs top
+    $('#btnOpenPi').addEventListener('click', () => {
+      const timer = setTimeout(() => notify('If Pi Browser did not open, open Pi Browser and type: pi://piworldbank'), 1200);
+      window.location.href = 'pi://piworldbank'; window.addEventListener('blur', () => clearTimeout(timer), { once:true });
+    });
+    $('#btnInstall').addEventListener('click', async () => {
+      if (!/Android/i.test(ua)) return notify('APK install is Android-only. Use Live Demo / Video.');
+      if (await APK_HEAD_CHECK()) window.location.href = APK_URL;
+      else notify('APK not found yet. Please try the Live Demo.');
+    });
+    $('#btnDemo').addEventListener('click', () => {
+      if (DEMO_URL && DEMO_URL !== './demo/') window.open(DEMO_URL, '_blank', 'noopener');
+      show($('#demoBox'));
+      if (YT_VIDEO_ID) { $('#yt').src = `https://www.youtube.com/embed/${YT_VIDEO_ID}`; show($('#videoBox')); }
+      else { $('#videoBox').innerHTML = '<div style="padding:14px">Video preview coming soon. Use Live Demo meanwhile.</div>'; show($('#videoBox')); }
+    });
+
+    // Progressive enhancements
+    window.addEventListener('load', () => {
+      if (isIOS || !/Android/i.test(ua)) {
+        show($('#demoBox'));
+        if (YT_VIDEO_ID) { $('#yt').src = `https://www.youtube.com/embed/${YT_VIDEO_ID}`; show($('#videoBox')); }
+      }
+      window.addEventListener('error', ()=>{ (window._pwbErrs=(window._pwbErrs||0))+1; }, true);
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    });
+  </script>
 </body>
 </html>
