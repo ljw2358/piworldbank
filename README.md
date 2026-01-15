@@ -1,4 +1,62 @@
-# PiWorldBank 🌍
+# PiWorldBank — Rule-Based Revenue System
+
+PiWorldBank is NOT just a digital bank.
+
+It is a **rule-based economic system**.
+
+Individuals, startups, and enterprises are allowed to use
+PiWorldBank’s rules, flows, and standards —
+**and they pay for using those rules.**
+
+---
+
+## What We Actually Sell
+
+We do NOT sell a website.
+We do NOT sell an app.
+
+We sell:
+
+- Economic rules
+- Transaction standards
+- Digital banking flows
+- Web3 + Pi Network usage rules
+- Compliance-friendly system design
+
+Anyone who uses these rules pays fees, licenses, or revenue shares.
+
+---
+
+## Simple Example
+
+If a company wants to:
+- build a Pi-based wallet
+- run Pi payments
+- provide UBI / rewards
+- operate a Pi-based service
+
+They must follow PiWorldBank rules.
+
+Using the rules = paying the system.
+
+---
+
+## Why This Is Powerful
+
+Rules scale infinitely.
+
+- One rule → thousands of users
+- Thousands of users → continuous fees
+- Continuous usage → predictable revenue
+
+PiWorldBank earns **without owning every service**.
+
+---
+
+## Core Idea (One Line)
+
+**“We don’t compete with users.  
+We charge for the rules they use.”**# PiWorldBank 🌍
 
 **The Web3 Digital Bank for All Humanity**
 
