@@ -1,310 +1,152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PiWorldBank</title>
+  <meta charset="UTF-8" />
+  <title>WorldPiBank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Pi SDK -->
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 
   <style>
-    :root{
-      --bg:#0b0f19; --card:#111827; --line:#243043;
-      --text:#e5e7eb; --muted:#9ca3af; --brand:#a855f7;
-      --ok:#22c55e; --warn:#f59e0b;
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0b0f1a;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background:linear-gradient(180deg,#0b0f19,#0a0d16);
-      color:var(--text);
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 24px;
     }
-    .wrap{max-width:980px; margin:0 auto; padding:18px}
-    .top{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:14px 16px; border:1px solid var(--line); background:rgba(17,24,39,.75);
-      border-radius:16px; backdrop-filter: blur(8px);
+    h1 {
+      font-size: 24px;
+      margin-bottom: 4px;
     }
-    .brand{display:flex; align-items:center; gap:10px}
-    .logo{
-      width:38px; height:38px; border-radius:12px; background:var(--brand);
-      display:grid; place-items:center; font-weight:800; color:#1b0b2a;
+    .subtitle {
+      color: #9aa4bf;
+      font-size: 14px;
+      margin-bottom: 24px;
     }
-    .title{display:flex; flex-direction:column; line-height:1.1}
-    .title b{font-size:16px}
-    .title span{font-size:12px; color:var(--muted)}
-    .pill{
-      font-size:12px; padding:6px 10px; border-radius:999px;
-      border:1px solid var(--line); color:var(--muted);
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
     }
-    .grid{
-      margin-top:14px;
-      display:grid; grid-template-columns: 1.1fr .9fr; gap:14px;
+    .btn-primary {
+      background: #8b5cf6;
+      color: #fff;
     }
-    @media (max-width:860px){ .grid{grid-template-columns:1fr} }
-    .card{
-      border:1px solid var(--line);
-      background:rgba(17,24,39,.75);
-      border-radius:16px; padding:14px;
+    .btn-secondary {
+      background: #1f2937;
+      color: #9aa4bf;
     }
-    .h{font-weight:800; margin:0 0 8px 0}
-    .sub{margin:0 0 12px 0; color:var(--muted); font-size:13px}
-    .row{display:flex; gap:10px; flex-wrap:wrap}
-    button{
-      border:1px solid var(--line);
-      background:#0f172a;
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:12px;
-      font-weight:700;
-      cursor:pointer;
+    .card {
+      background: #111827;
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 24px;
     }
-    button.primary{background:var(--brand); border-color:transparent; color:#14051f}
-    button:disabled{opacity:.5; cursor:not-allowed}
-    .stat{
-      display:grid; grid-template-columns: 1fr 1fr; gap:10px;
-      margin-top:10px;
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: none;
+      background: #1f2937;
+      color: #fff;
+      font-size: 14px;
     }
-    .box{
-      border:1px solid var(--line);
-      background:#0b1220;
-      border-radius:14px;
-      padding:12px;
-    }
-    .box .k{font-size:12px; color:var(--muted)}
-    .box .v{font-size:18px; font-weight:900; margin-top:2px}
-    .list{display:flex; flex-direction:column; gap:10px; margin-top:10px}
-    .tx{
-      border:1px solid var(--line);
-      background:#0b1220;
-      border-radius:14px;
-      padding:12px;
-      display:flex; justify-content:space-between; align-items:center; gap:10px;
-    }
-    .tx .left{display:flex; flex-direction:column; gap:2px}
-    .tx .name{font-weight:800}
-    .tx .time{font-size:12px; color:var(--muted)}
-    .amt{font-weight:900}
-    .ok{color:var(--ok)}
-    .warn{color:var(--warn)}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .note{font-size:12px; color:var(--muted); margin-top:10px; line-height:1.4}
-    .sep{height:1px; background:var(--line); margin:12px 0}
-    input{
-      width:100%;
-      border:1px solid var(--line);
-      background:#0b1220; color:var(--text);
-      border-radius:12px; padding:10px 12px;
-      outline:none;
-    }
-    label{font-size:12px; color:var(--muted)}
-    .msg{
-      margin-top:10px; font-size:13px; color:var(--muted);
-      border:1px dashed var(--line); border-radius:12px; padding:10px 12px;
+    .status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #9aa4bf;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="logo">π</div>
-        <div class="title">
-          <b>PiWorldBank</b>
-          <span>Pi Ecosystem Web App (Starter)</span>
-        </div>
-      </div>
-      <div class="pill" id="netPill">Network: Detecting…</div>
+  <div class="container">
+    <h1>WorldPiBank</h1>
+    <div class="subtitle">
+      Pi Ecosystem Web App (Sandbox/Test)
     </div>
 
-    <div class="grid">
-      <!-- LEFT -->
-      <div class="card">
-        <p class="h">Quick Actions</p>
-        <p class="sub">
-          This is a working starter. First login with Pi, then you can extend features.
-        </p>
+    <button class="btn-primary" onclick="loginWithPi()">
+      Login with Pi
+    </button>
 
-        <div class="row">
-          <button class="primary" id="btnLogin">Login with Pi</button>
-          <button id="btnLogout" disabled>Logout</button>
-          <button id="btnOpenWallet" disabled>Open Wallet</button>
-        </div>
+    <button class="btn-secondary" onclick="logoutPi()">
+      Logout
+    </button>
 
-        <div class="sep"></div>
-
-        <p class="h">Send (Demo UI)</p>
-        <p class="sub">This is UI-only for now. We will connect payments after hosting is stable.</p>
-
-        <div style="display:grid; gap:10px;">
-          <div>
-            <label>Recipient (Pi username or address)</label>
-            <input id="to" placeholder="e.g. pioneer123 or G...address" />
-          </div>
-          <div>
-            <label>Amount (Pi)</label>
-            <input id="amount" type="number" step="0.01" placeholder="e.g. 1.00" />
-          </div>
-          <button id="btnSend" disabled>Send (Next Step)</button>
-        </div>
-
-        <div class="msg" id="msgBox">Status: waiting for login.</div>
-
-        <p class="note">
-          ✅ Goal now: make the app load perfectly in Pi Browser via your GitHub Pages URL.
-          Once Pi sees a stable HTTPS app, the “Configure Hosting” loop often resolves by itself.
-        </p>
-      </div>
-
-      <!-- RIGHT -->
-      <div class="card">
-        <p class="h">Account</p>
-        <p class="sub">After login, you will see your Pi username here.</p>
-
-        <div class="stat">
-          <div class="box">
-            <div class="k">User</div>
-            <div class="v mono" id="userName">—</div>
-          </div>
-          <div class="box">
-            <div class="k">Auth</div>
-            <div class="v" id="authState">OFF</div>
-          </div>
-        </div>
-
-        <div class="sep"></div>
-
-        <p class="h">Recent Activity (Mock)</p>
-        <div class="list" id="txList">
-          <div class="tx">
-            <div class="left">
-              <div class="name">Reward</div>
-              <div class="time">Demo • Today</div>
-            </div>
-            <div class="amt ok">+0.10 Pi</div>
-          </div>
-          <div class="tx">
-            <div class="left">
-              <div class="name">Payment</div>
-              <div class="time">Demo • Yesterday</div>
-            </div>
-            <div class="amt warn">-1.00 Pi</div>
-          </div>
-          <div class="tx">
-            <div class="left">
-              <div class="name">Deposit</div>
-              <div class="time">Demo • 2 days ago</div>
-            </div>
-            <div class="amt ok">+5.00 Pi</div>
-          </div>
-        </div>
-
-        <p class="note">
-          ⚠️ This starter does not move real Pi yet.  
-          Next we will add payments using Pi SDK once your hosting step stops looping.
-        </p>
+    <div class="card">
+      <h3>Send (Demo UI)</h3>
+      <input id="recipient" placeholder="Recipient (Pi username or address)" />
+      <input id="amount" placeholder="Amount (Pi)" />
+      <button class="btn-secondary" onclick="sendDemo()">
+        Send (Next Step)
+      </button>
+      <div class="status" id="status">
+        Status: Pi SDK ready. Please login.
       </div>
     </div>
   </div>
 
-<script>
-  // -------- Pi SDK init ----------
-  // NOTE: sandbox=true is good for development.
-  // When your app is listed / approved, you'll set sandbox=false.
-  const isSandbox = true;
+  <script>
+    /* 🔑 반드시 교체하세요 */
+    const PI_API_KEY = "YOUR_API_KEY_HERE";
 
-  // Safe init (SDK exists only in Pi Browser)
-  const hasPi = typeof window.Pi !== "undefined";
+    /* Pi SDK 초기화 */
+    Pi.init({
+      version: "2.0",
+      sandbox: true
+    });
 
-  const netPill = document.getElementById("netPill");
-  const msgBox = document.getElementById("msgBox");
-  const userName = document.getElementById("userName");
-  const authState = document.getElementById("authState");
+    let currentUser = null;
 
-  const btnLogin = document.getElementById("btnLogin");
-  const btnLogout = document.getElementById("btnLogout");
-  const btnOpenWallet = document.getElementById("btnOpenWallet");
-  const btnSend = document.getElementById("btnSend");
+    async function loginWithPi() {
+      try {
+        const scopes = ["username", "payments"];
+        const authResult = await Pi.authenticate(scopes, function (payment) {
+          console.log("Payment callback:", payment);
+        });
 
-  function setMsg(t){ msgBox.textContent = "Status: " + t; }
-
-  function setAuthed(name){
-    userName.textContent = name || "unknown";
-    authState.textContent = "ON";
-    btnLogout.disabled = false;
-    btnOpenWallet.disabled = false;
-    btnSend.disabled = false;
-  }
-
-  function setLoggedOut(){
-    userName.textContent = "—";
-    authState.textContent = "OFF";
-    btnLogout.disabled = true;
-    btnOpenWallet.disabled = true;
-    btnSend.disabled = true;
-  }
-
-  if (!hasPi) {
-    netPill.textContent = "Network: Open in Pi Browser";
-    setMsg("Pi SDK not detected. Please open this page inside Pi Browser.");
-  } else {
-    // Initialize Pi SDK
-    window.Pi.init({ version: "2.0", sandbox: isSandbox });
-
-    netPill.textContent = "Network: " + (isSandbox ? "Sandbox/Test" : "Mainnet");
-    setMsg("Pi SDK ready. Please login.");
-  }
-
-  // -------- Actions ----------
-  btnLogin.addEventListener("click", async () => {
-    if (!hasPi) return;
-
-    try {
-      setMsg("Logging in…");
-      // You can request scopes. "username" is common.
-      const scopes = ["username"];
-      const auth = await window.Pi.authenticate(scopes, (payment) => {
-        // In future: handle incomplete payments callback.
-        console.log("incomplete payment", payment);
-      });
-
-      const uname = auth?.user?.username || "pioneer";
-      setAuthed(uname);
-      setMsg("Logged in as " + uname);
-    } catch (e) {
-      console.error(e);
-      setMsg("Login failed. Try again.");
+        currentUser = authResult.user;
+        document.getElementById("status").innerText =
+          "Logged in as: " + currentUser.username;
+      } catch (err) {
+        console.error(err);
+        alert("Pi login failed");
+      }
     }
-  });
 
-  btnLogout.addEventListener("click", () => {
-    setLoggedOut();
-    setMsg("Logged out.");
-  });
-
-  btnOpenWallet.addEventListener("click", () => {
-    if (!hasPi) return;
-    // Pi Browser wallet open is handled by the app environment.
-    // We simply show the intent for now.
-    setMsg("Wallet action queued (demo). Next step: connect Pi payments.");
-  });
-
-  btnSend.addEventListener("click", () => {
-    const to = document.getElementById("to").value.trim();
-    const amount = document.getElementById("amount").value.trim();
-
-    if (!to || !amount) {
-      setMsg("Please fill recipient and amount.");
-      return;
+    function logoutPi() {
+      currentUser = null;
+      document.getElementById("status").innerText =
+        "Logged out. Please login again.";
     }
-    setMsg(`Send requested (demo): ${amount} Pi → ${to}. Next we connect real payments.`);
-  });
 
-  // start state
-  setLoggedOut();
-</script>
+    function sendDemo() {
+      if (!currentUser) {
+        alert("Please login first");
+        return;
+      }
+      const to = document.getElementById("recipient").value;
+      const amount = document.getElementById("amount").value;
 
+      alert(
+        "Demo only\nRecipient: " + to + "\nAmount: " + amount + " Pi"
+      );
+    }
+  </script>
 </body>
 </html>
