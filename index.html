@@ -2,529 +2,631 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#120b24" />
   <title>PiWorldBank</title>
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#101a33;
-      --muted:#a7b0c6;
-      --text:#e9eefc;
-      --accent:#8b5cf6;
-      --accent2:#6d28d9;
-      --line:rgba(255,255,255,.10);
-      --btn:#1a2550;
-      --shadow:0 12px 30px rgba(0,0,0,.35);
-      --radius:18px;
-      --font: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg0:#070510;
+      --bg1:#0b0a1a;
+      --card:#121227;
+      --card2:#0f1022;
+      --stroke:rgba(255,255,255,.10);
+      --stroke2:rgba(255,255,255,.14);
+      --text:#f3f2ff;
+      --muted:rgba(243,242,255,.68);
+      --muted2:rgba(243,242,255,.52);
+      --gold:#f2c14f;
+      --purple:#a88cff;
+      --shadow: 0 18px 45px rgba(0,0,0,.45);
+      --r24:24px;
+      --r18:18px;
+      --r16:16px;
+      --r14:14px;
+      --pad:18px;
+      --max: 420px;
+      --safeTop: env(safe-area-inset-top);
+      --safeBot: env(safe-area-inset-bottom);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:var(--font);
-      background: radial-gradient(1200px 700px at 25% 0%, rgba(139,92,246,.35), transparent 55%),
-                  radial-gradient(900px 600px at 80% 20%, rgba(109,40,217,.25), transparent 60%),
-                  var(--bg);
       color:var(--text);
-      min-height:100vh;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      padding:28px 14px 50px;
-    }
-    .wrap{width:100%; max-width:520px;}
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-    }
-    .logo{
-      width:42px; height:42px; border-radius:14px;
-      display:grid; place-items:center;
-      background: linear-gradient(145deg, rgba(139,92,246,.95), rgba(109,40,217,.95));
-      box-shadow: var(--shadow);
-      font-weight:800;
-    }
-    .brand h1{margin:0; font-size:20px; letter-spacing:.2px;}
-    .brand p{margin:3px 0 0; font-size:12px; color:var(--muted)}
-    .lang{
-      position:relative;
-    }
-    .lang button{
-      border:1px solid var(--line);
-      background:rgba(16,26,51,.65);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:14px;
-      cursor:pointer;
-      display:flex; align-items:center; gap:8px;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);
-    }
-    .lang button:active{transform:translateY(1px)}
-    .menu{
-      position:absolute;
-      right:0;
-      top:48px;
-      min-width:190px;
-      background:rgba(16,26,51,.95);
-      border:1px solid var(--line);
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow: var(--shadow);
-      display:none;
-      z-index:10;
-      backdrop-filter: blur(8px);
-    }
-    .menu.open{display:block}
-    .menu .item{
-      padding:12px 14px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      cursor:pointer;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      font-size:14px;
-    }
-    .menu .item:last-child{border-bottom:none}
-    .menu .item:hover{background:rgba(255,255,255,.06)}
-    .chip{
-      font-size:12px;
-      color:var(--muted);
+      background:
+        radial-gradient(1200px 900px at 30% -10%, rgba(168,140,255,.25), transparent 55%),
+        radial-gradient(900px 700px at 90% 30%, rgba(242,193,79,.18), transparent 55%),
+        radial-gradient(700px 700px at 20% 95%, rgba(168,140,255,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      -webkit-font-smoothing:antialiased;
+      padding: calc(var(--safeTop) + 14px) 14px calc(var(--safeBot) + 14px);
     }
 
-    .card{
-      margin-top:14px;
-      background:rgba(16,26,51,.72);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
+    .wrap{max-width:var(--max); margin:0 auto}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:6px 6px 14px;
+    }
+    .brandline{display:flex; align-items:center; gap:10px; min-width:0}
+    .dot{width:10px; height:10px; border-radius:99px; background:var(--gold); box-shadow:0 0 18px rgba(242,193,79,.55)}
+    .brand{font-weight:700; letter-spacing:.2px; font-size:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+    .lang{
+      display:flex; align-items:center; gap:10px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      border-radius:999px;
+      padding:10px 12px;
+      min-width: 150px;
+    }
+    .lang label{font-size:12px; color:var(--muted); white-space:nowrap}
+    select{
+      appearance:none; -webkit-appearance:none;
+      background:transparent; border:none; outline:none;
+      color:var(--text);
+      font-weight:650;
+      font-size:14px;
+      width:100%;
+      padding-right:18px;
+    }
+    .chev{
+      width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid rgba(243,242,255,.65);
+      margin-left:-6px;
+    }
+
+    .hero{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+      border-radius:var(--r24);
+      padding:22px 18px 18px;
       box-shadow: var(--shadow);
-      padding:18px;
-      backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(180px 180px at 60% 18%, rgba(242,193,79,.25), transparent 65%),
+        radial-gradient(220px 220px at 25% 65%, rgba(168,140,255,.22), transparent 65%);
+      pointer-events:none;
+    }
+    .hero > *{position:relative}
+    .appicon{
+      width:64px; height:64px; border-radius:18px;
+      display:grid; place-items:center;
+      background: linear-gradient(145deg, rgba(242,193,79,.35), rgba(168,140,255,.55));
+      border:1px solid rgba(255,255,255,.18);
+      margin: 2px auto 10px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      font-weight:900;
+      letter-spacing:.5px;
+    }
+    .appicon span{
+      font-size:28px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
     }
     .title{
-      font-size:26px;
-      margin:4px 0 2px;
+      text-align:center;
+      font-size:40px;
+      font-weight:900;
+      margin: 6px 0 4px;
       letter-spacing:.2px;
-      font-weight:850;
     }
-    .sub{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.4;
+    .tagline{
+      text-align:center;
+      font-size:12px;
+      letter-spacing:3px;
+      color: rgba(243,242,255,.55);
+      margin: 0 0 10px;
     }
-    .grid{
+    .slogan{
+      text-align:center;
+      font-size:18px;
+      font-weight:800;
+      color: var(--gold);
+      margin: 0 0 6px;
+    }
+
+    .menu{
+      margin-top:14px;
       display:grid;
       gap:12px;
     }
-    .row{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .btn{
-      flex:1;
-      min-width:170px;
-      padding:14px 14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background: linear-gradient(145deg, rgba(139,92,246,.92), rgba(109,40,217,.92));
-      color:white;
-      font-weight:800;
+    .card{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+      border-radius: var(--r18);
+      padding:16px 16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.25);
       cursor:pointer;
-      box-shadow:0 10px 22px rgba(0,0,0,.22);
-      transition:.15s;
+      transition: transform .08s ease, border-color .12s ease;
     }
-    .btn.secondary{
-      background: rgba(26,37,80,.65);
-      color: var(--text);
-      font-weight:700;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-      transform:none;
-    }
-
-    .sectionTitle{
-      margin:10px 0 6px;
-      font-size:18px;
+    .card:active{transform: scale(.992)}
+    .card:hover{border-color: var(--stroke2)}
+    .card h3{
+      margin:0;
+      font-size:20px;
       font-weight:900;
     }
-    .sectionHint{
-      margin:0 0 10px;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.5;
+    .card p{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-weight:650;
     }
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
+
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none; align-items:flex-end; justify-content:center;
+      padding: 16px 14px calc(var(--safeBot) + 14px);
     }
-    .label{
-      font-size:12px;
-      color:var(--muted);
+    .sheet{
+      width:100%; max-width:var(--max);
+      background: rgba(15,16,34,.96);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
     }
-    input{
-      width:100%;
-      padding:14px 14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(10,16,34,.55);
+    .sheethead{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .sheet h2{margin:0; font-size:18px; font-weight:900}
+    .close{
+      width:36px; height:36px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
       color: var(--text);
-      outline:none;
-      font-size:14px;
+      font-size:20px;
+      display:grid; place-items:center;
+      cursor:pointer;
     }
-    input::placeholder{color:rgba(167,176,198,.65)}
-    .footer{
+    .sheet p{margin:8px 0 0; color:var(--muted); line-height:1.5; font-weight:650}
+    .hr{height:1px; background: rgba(255,255,255,.10); margin:14px 0}
+
+    .installBox{
       margin-top:14px;
-      color:rgba(167,176,198,.85);
-      font-size:12px;
-      line-height:1.5;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+    }
+    .installTitle{
+      font-weight:900;
+      margin:0 0 8px;
+      font-size:15px;
+      color: rgba(243,242,255,.92);
+    }
+    .installDesc{
+      margin:0 0 10px;
+      color: var(--muted);
+      font-weight:650;
+      line-height:1.45;
+      font-size:13px;
+    }
+    .url{
+      font-weight:800;
+      color: rgba(243,242,255,.90);
+      word-break:break-all;
+    }
+    .actions{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .btn{
+      border:none; cursor:pointer;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color: var(--text);
+    }
+    .btn.gold{
+      background: var(--gold);
+      color: #1a1229;
+      box-shadow: 0 14px 28px rgba(242,193,79,.22);
     }
     .status{
-      margin-top:10px;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(139,92,246,.25);
-      background: rgba(139,92,246,.08);
-      color: rgba(233,238,252,.95);
-      font-size:12px;
-      min-height:44px;
-      display:flex; align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:8px;
+      color: rgba(243,242,255,.74);
+      font-weight:800;
+      font-size:13px;
     }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: var(--accent);
-      box-shadow:0 0 0 5px rgba(139,92,246,.14);
+    .led{
+      width:10px; height:10px; border-radius:99px;
+      background:#3be47a;
+      box-shadow: 0 0 16px rgba(59,228,122,.45);
     }
 
-    /* RTL (Arabic) */
-    body[dir="rtl"] .topbar{flex-direction:row-reverse}
-    body[dir="rtl"] .brand{flex-direction:row-reverse}
-    body[dir="rtl"] .lang .menu{right:auto; left:0}
-    body[dir="rtl"] .row{flex-direction:row-reverse}
-    body[dir="rtl"] input{text-align:right}
+    .chips{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .chip{
+      padding:10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      font-weight:900;
+      color: rgba(243,242,255,.9);
+      cursor:pointer;
+    }
+    .chip:active{transform:scale(.99)}
   </style>
-
-  <!-- Pi SDK (필수) -->
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 </head>
 
 <body>
   <div class="wrap">
-    <!-- Top -->
+
     <div class="topbar">
-      <div class="brand">
-        <div class="logo">π</div>
-        <div>
-          <h1 id="appTitleTop">PiWorldBank</h1>
-          <p id="appSubtitleTop">Pi Ecosystem Web App (Sandbox/Test)</p>
-        </div>
+      <div class="brandline">
+        <div class="dot"></div>
+        <div class="brand" id="brandTop">PiWorldBank</div>
       </div>
 
-      <!-- Language (PWB2025 방식: 자동감지 + 수동변경) -->
       <div class="lang">
-        <button id="langBtn" type="button" aria-label="Language">
-          🌐 <span id="langLabel">English</span> <span style="opacity:.7">▾</span>
-        </button>
-        <div id="langMenu" class="menu" role="menu" aria-hidden="true">
-          <div class="item" data-lang="en"><span>English</span><span class="chip">EN</span></div>
-          <div class="item" data-lang="ko"><span>한국어</span><span class="chip">KR</span></div>
-          <div class="item" data-lang="zh"><span>中文（简体）</span><span class="chip">ZH</span></div>
-          <div class="item" data-lang="ar"><span>العربية</span><span class="chip">AR</span></div>
-        </div>
+        <label id="langLabel">Language</label>
+        <select id="langSelect">
+          <option value="auto">Auto</option>
+          <option value="en">English</option>
+          <option value="ko">한국어</option>
+          <option value="zh">中文</option>
+          <option value="ar">العربية</option>
+        </select>
+        <div class="chev"></div>
       </div>
     </div>
 
-    <!-- Main card -->
-    <div class="card">
-      <div class="title" data-i18n="title">PiWorldBank</div>
-      <div class="sub" data-i18n="subtitle">Pi Ecosystem Web App (Sandbox/Test)</div>
+    <div class="hero">
+      <div class="appicon" aria-hidden="true"><span>π</span></div>
+      <div class="title" id="titleMain">PiWorldBank</div>
+      <div class="tagline" id="tagline">ONE WORLD · ONE PI · ONE FUTURE</div>
+      <div class="slogan" id="slogan">People First, Profit Next</div>
 
-      <div class="row">
-        <button class="btn" id="btnLogin" data-i18n="login">Login with Pi</button>
-        <button class="btn secondary" id="btnLogout" data-i18n="logout" disabled>Logout</button>
-      </div>
-
-      <div class="sectionTitle" data-i18n="sendTitle">Send (Demo UI)</div>
-      <div class="sectionHint" data-i18n="sendHint">
-        This is UI-only for now. We will connect payments after hosting is stable.
-      </div>
-
-      <div class="grid">
-        <div class="field">
-          <div class="label" data-i18n="recipientLabel">Recipient (Pi username or address)</div>
-          <input id="recipient" placeholder="e.g. pioneer123 or G...address" />
+      <div class="menu">
+        <div class="card" data-open="ubi">
+          <h3 id="m1t">UBI</h3>
+          <p id="m1d">UBI Rewards</p>
         </div>
 
-        <div class="field">
-          <div class="label" data-i18n="amountLabel">Amount (Pi)</div>
-          <input id="amount" placeholder="e.g. 1.00" />
+        <div class="card" data-open="pay">
+          <h3 id="m2t">Payments</h3>
+          <p id="m2d">Pay · Send</p>
         </div>
 
-        <button class="btn secondary" id="btnSend" data-i18n="sendNext" disabled>
-          Send (Next Step)
-        </button>
+        <div class="card" data-open="apy">
+          <h3 id="m3t">Yield</h3>
+          <p id="m3d">31.4% APY (Demo)</p>
+        </div>
+
+        <div class="card" data-open="reward">
+          <h3 id="m4t">Rewards</h3>
+          <p id="m4d">Participation Rewards</p>
+        </div>
+
+        <div class="card" data-open="support">
+          <h3 id="m5t">Customer Center</h3>
+          <p id="m5d">Get Help</p>
+        </div>
+
+        <div class="card" data-open="faq">
+          <h3 id="m6t">FAQ</h3>
+          <p id="m6d">Terms · Policy · Contact</p>
+        </div>
       </div>
 
-      <div class="status" id="statusBox">
-        <span class="dot"></span>
-        <span id="statusText" data-i18n="statusReady">Status: Pi SDK ready. Please login.</span>
+      <div class="installBox">
+        <div class="installTitle" id="instTitle">One-Click Install / Run</div>
+        <p class="installDesc" id="instDesc">
+          If your browser supports “Add to Home Screen (Install)”, it will be enabled.
+          <br><span id="urlLabel">URL:</span> <span class="url" id="appUrl"></span>
+        </p>
+
+        <div class="actions">
+          <button class="btn secondary" id="btnPiBrowser">Open in Pi Browser</button>
+          <button class="btn gold" id="btnInstall">Install</button>
+          <div class="status"><span class="led" id="led"></span><span id="statusText">Status: OK</span></div>
+        </div>
+
+        <div class="chips">
+          <div class="chip" id="chipYT">YouTube</div>
+          <div class="chip" id="chipTT">TikTok</div>
+          <div class="chip" id="chipContact">Contact</div>
+        </div>
       </div>
 
-      <div class="footer" id="footerText" data-i18n="footer">
-        Tip: If language does not switch automatically, tap 🌐 and select your language.
+    </div>
+
+  </div>
+
+  <!-- Bottom Sheet -->
+  <div class="modal" id="modal">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheethead">
+        <div>
+          <h2 id="sheetTitle">Title</h2>
+          <p id="sheetBody">Body</p>
+        </div>
+        <button class="close" id="closeBtn" aria-label="close">×</button>
       </div>
+      <div class="hr"></div>
+      <p id="sheetFoot"></p>
     </div>
   </div>
 
   <script>
-    /***********************
-     * 1) I18N (PWB2025 방식)
-     ***********************/
-    const translations = {
+    // ===== i18n text (PWB2025 style: auto + manual switch) =====
+    const I18N = {
       en: {
-        langName: "English",
+        langLabel: "Language",
+        auto: "Auto",
         title: "PiWorldBank",
-        subtitle: "Pi Ecosystem Web App (Sandbox/Test)",
-        login: "Login with Pi",
-        logout: "Logout",
-        sendTitle: "Send (Demo UI)",
-        sendHint: "This is UI-only for now. We will connect payments after hosting is stable.",
-        recipientLabel: "Recipient (Pi username or address)",
-        amountLabel: "Amount (Pi)",
-        sendNext: "Send (Next Step)",
-        statusReady: "Status: Pi SDK ready. Please login.",
-        statusLoggedIn: "Status: Logged in. You can test UI fields now.",
-        statusLoggedOut: "Status: Logged out.",
-        statusNotInPi: "Status: Please open this page inside Pi Browser to use Pi login.",
-        footer: "Tip: If language does not switch automatically, tap 🌐 and select your language.",
-        alertLoggedIn: "Logged in (Sandbox/Test).",
-        alertLoggedOut: "Logged out.",
-        alertSendDemo: "Demo UI only. We'll connect real payments later."
+        tagline: "ONE WORLD · ONE PI · ONE FUTURE",
+        slogan: "People First, Profit Next",
+        m1t:"UBI", m1d:"UBI Rewards",
+        m2t:"Payments", m2d:"Pay · Send",
+        m3t:"Yield", m3d:"31.4% APY (Demo)",
+        m4t:"Rewards", m4d:"Participation Rewards",
+        m5t:"Customer Center", m5d:"Get Help",
+        m6t:"FAQ", m6d:"Terms · Policy · Contact",
+        instTitle:"One-Click Install / Run",
+        instDesc:"If your browser supports “Add to Home Screen (Install)”, it will be enabled.",
+        urlLabel:"URL:",
+        btnPi:"Open in Pi Browser",
+        btnInstall:"Install",
+        status:"Status: OK",
+        chips:{yt:"YouTube", tt:"TikTok", contact:"Contact"},
+        sheets:{
+          ubi:{t:"UBI", b:"Demo screen. We will connect UBI rewards after hosting & compliance are stable."},
+          pay:{t:"Payments", b:"Demo UI. Connect Pi wallet / payments in the next step."},
+          apy:{t:"Yield", b:"Demo APY display. Yield model & rules will be disclosed in policy documents."},
+          reward:{t:"Rewards", b:"Participation rewards (survey / tasks) will be added progressively."},
+          support:{t:"Customer Center", b:"Helpdesk and reporting channels will be added."},
+          faq:{t:"FAQ", b:"Terms · Policy · Contact information will be provided here."}
+        },
+        foot:"This is a UI prototype. No financial promise. Demo values only."
       },
+
       ko: {
-        langName: "한국어",
-        title: "파이월드뱅크",
-        subtitle: "파이 생태계 웹 앱 (샌드박스/테스트)",
-        login: "파이로 로그인",
-        logout: "로그아웃",
-        sendTitle: "송금 (데모 UI)",
-        sendHint: "현재는 UI 데모입니다. 호스팅이 안정되면 결제를 연결하겠습니다.",
-        recipientLabel: "받는 사람 (파이 사용자명 또는 주소)",
-        amountLabel: "금액 (파이)",
-        sendNext: "송금 (다음 단계)",
-        statusReady: "상태: Pi SDK 준비 완료. 로그인해 주세요.",
-        statusLoggedIn: "상태: 로그인 완료. 이제 UI 입력을 테스트할 수 있습니다.",
-        statusLoggedOut: "상태: 로그아웃되었습니다.",
-        statusNotInPi: "상태: Pi 로그인을 사용하려면 Pi Browser에서 열어주세요.",
-        footer: "팁: 자동 전환이 안 되면 🌐 버튼을 눌러 언어를 선택해 주세요.",
-        alertLoggedIn: "로그인되었습니다(샌드박스/테스트).",
-        alertLoggedOut: "로그아웃되었습니다.",
-        alertSendDemo: "현재는 데모 UI입니다. 실제 결제는 이후 연결됩니다."
+        langLabel: "언어",
+        auto: "자동",
+        title: "PiWorldBank",
+        tagline: "ONE WORLD · ONE PI · ONE FUTURE",
+        slogan: "사람이 먼저, 이윤은 그 다음",
+        m1t:"기본소득", m1d:"기본소득 리워드",
+        m2t:"결제", m2d:"결제 · 송금",
+        m3t:"예치율", m3d:"31.4% APY (데모)",
+        m4t:"보상", m4d:"참여 보상",
+        m5t:"고객센터", m5d:"도움받기",
+        m6t:"FAQ", m6d:"약관 · 정책 · 문의",
+        instTitle:"원클릭 설치 / 실행",
+        instDesc:"브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.",
+        urlLabel:"URL:",
+        btnPi:"Pi Browser로 열기",
+        btnInstall:"설치",
+        status:"상태: OK",
+        chips:{yt:"YouTube", tt:"TikTok", contact:"문의"},
+        sheets:{
+          ubi:{t:"기본소득", b:"현재는 데모 화면입니다. 호스팅/정책 안정화 후 기본소득 리워드 연동이 진행됩니다."},
+          pay:{t:"결제", b:"현재는 데모 UI입니다. 다음 단계에서 Pi 지갑/결제 연동을 붙입니다."},
+          apy:{t:"예치율", b:"데모 예치율 표시입니다. 실제 룰/정책은 약관 문서로 공개합니다."},
+          reward:{t:"보상", b:"설문/미션 등 참여 보상 기능을 순차적으로 추가합니다."},
+          support:{t:"고객센터", b:"신고/문의 채널을 단계적으로 연결합니다."},
+          faq:{t:"FAQ", b:"약관 · 정책 · 문의 정보를 여기에 정리합니다."}
+        },
+        foot:"본 화면은 UI 프로토타입이며, 데모 수치입니다. 금융 약속이 아닙니다."
       },
+
       zh: {
-        langName: "中文",
-        title: "派世界银行",
-        subtitle: "Pi 生态系统 Web 应用（测试版）",
-        login: "使用 Pi 登录",
-        logout: "退出登录",
-        sendTitle: "发送（演示界面）",
-        sendHint: "目前仅为界面演示。托管稳定后将连接真实支付。",
-        recipientLabel: "收款人（Pi 用户名或地址）",
-        amountLabel: "金额（Pi）",
-        sendNext: "发送（下一步）",
-        statusReady: "状态：Pi SDK 已就绪，请登录。",
-        statusLoggedIn: "状态：已登录。现在可以测试界面输入。",
-        statusLoggedOut: "状态：已退出登录。",
-        statusNotInPi: "状态：请在 Pi 浏览器中打开以使用 Pi 登录。",
-        footer: "提示：若未自动切换语言，请点击 🌐 并选择语言。",
-        alertLoggedIn: "已登录（测试版）。",
-        alertLoggedOut: "已退出登录。",
-        alertSendDemo: "仅演示界面。稍后会连接真实支付。"
+        langLabel: "语言",
+        auto: "自动",
+        title: "PiWorldBank",
+        tagline: "ONE WORLD · ONE PI · ONE FUTURE",
+        slogan: "以人为本，利润其次",
+        m1t:"基本收入", m1d:"基本收入奖励",
+        m2t:"支付", m2d:"支付 · 转账",
+        m3t:"收益率", m3d:"31.4% APY（演示）",
+        m4t:"奖励", m4d:"参与奖励",
+        m5t:"客服中心", m5d:"获取帮助",
+        m6t:"常见问题", m6d:"条款 · 政策 · 联系",
+        instTitle:"一键安装 / 运行",
+        instDesc:"若浏览器支持“添加到主屏幕（安装）”，将可启用。",
+        urlLabel:"URL：",
+        btnPi:"在 Pi Browser 中打开",
+        btnInstall:"安装",
+        status:"状态：OK",
+        chips:{yt:"YouTube", tt:"TikTok", contact:"联系"},
+        sheets:{
+          ubi:{t:"基本收入", b:"当前为演示界面。待托管与合规稳定后，将连接奖励功能。"},
+          pay:{t:"支付", b:"当前为演示 UI。下一步将接入 Pi 钱包/支付。"},
+          apy:{t:"收益率", b:"演示收益率展示。具体规则将通过政策文件公开。"},
+          reward:{t:"奖励", b:"将逐步加入问卷/任务等参与奖励。"},
+          support:{t:"客服中心", b:"将逐步添加帮助与反馈渠道。"},
+          faq:{t:"常见问题", b:"条款、政策与联系方式将在此提供。"}
+        },
+        foot:"此为 UI 原型，演示数值不构成任何金融承诺。"
       },
+
       ar: {
-        langName: "العربية",
-        title: "باي وورلد بنك",
-        subtitle: "تطبيق ويب لنظام Pi (وضع الاختبار)",
-        login: "تسجيل الدخول باستخدام Pi",
-        logout: "تسجيل الخروج",
-        sendTitle: "إرسال (واجهة تجريبية)",
-        sendHint: "هذه واجهة فقط الآن. سنربط المدفوعات لاحقاً بعد استقرار الاستضافة.",
-        recipientLabel: "المستلم (اسم مستخدم Pi أو العنوان)",
-        amountLabel: "المبلغ (Pi)",
-        sendNext: "إرسال (الخطوة التالية)",
-        statusReady: "الحالة: Pi SDK جاهز. يرجى تسجيل الدخول.",
-        statusLoggedIn: "الحالة: تم تسجيل الدخول. يمكنك اختبار الحقول الآن.",
-        statusLoggedOut: "الحالة: تم تسجيل الخروج.",
-        statusNotInPi: "الحالة: الرجاء فتح الصفحة داخل متصفح Pi لاستخدام تسجيل الدخول.",
-        footer: "ملاحظة: إذا لم تتغير اللغة تلقائياً، اضغط 🌐 واختر اللغة.",
-        alertLoggedIn: "تم تسجيل الدخول (وضع الاختبار).",
-        alertLoggedOut: "تم تسجيل الخروج.",
-        alertSendDemo: "واجهة تجريبية فقط. سنربط المدفوعات لاحقاً."
+        langLabel: "اللغة",
+        auto: "تلقائي",
+        title: "PiWorldBank",
+        tagline: "عالم واحد · باي واحد · مستقبل واحد",
+        slogan: "الإنسان أولاً، ثم الربح",
+        m1t:"الدخل الأساسي", m1d:"مكافآت الدخل الأساسي",
+        m2t:"المدفوعات", m2d:"دفع · تحويل",
+        m3t:"العائد", m3d:"%31.4 APY (عرض تجريبي)",
+        m4t:"المكافآت", m4d:"مكافآت المشاركة",
+        m5t:"مركز العملاء", m5d:"احصل على المساعدة",
+        m6t:"الأسئلة الشائعة", m6d:"الشروط · السياسة · تواصل",
+        instTitle:"تثبيت / تشغيل بنقرة واحدة",
+        instDesc:"إذا كان المتصفح يدعم “إضافة إلى الشاشة الرئيسية (تثبيت)”، فسيتم تفعيله.",
+        urlLabel:"الرابط:",
+        btnPi:"افتح في Pi Browser",
+        btnInstall:"تثبيت",
+        status:"الحالة: OK",
+        chips:{yt:"YouTube", tt:"TikTok", contact:"تواصل"},
+        sheets:{
+          ubi:{t:"الدخل الأساسي", b:"هذه شاشة تجريبية. سنربط مكافآت الدخل الأساسي بعد استقرار الاستضافة والامتثال."},
+          pay:{t:"المدفوعات", b:"واجهة تجريبية الآن. سنربط محفظة باي/المدفوعات في الخطوة التالية."},
+          apy:{t:"العائد", b:"عرض تجريبي للعائد. سيتم توضيح النموذج والقواعد في وثائق السياسة."},
+          reward:{t:"المكافآت", b:"سيتم إضافة مكافآت المشاركة (استبيانات/مهام) تدريجياً."},
+          support:{t:"مركز العملاء", b:"سيتم إضافة قنوات المساعدة والإبلاغ لاحقاً."},
+          faq:{t:"الأسئلة الشائعة", b:"سيتم توفير الشروط والسياسة ووسائل التواصل هنا."}
+        },
+        foot:"هذا نموذج واجهة فقط. الأرقام تجريبية ولا تمثل أي وعد مالي."
       }
     };
 
-    // PWB2025 방식: (1) 저장된 언어 우선 (2) 브라우저 언어 자동 감지 (3) 기본 en
-    function detectLang() {
+    const $ = (id)=>document.getElementById(id);
+
+    function detectLang(){
       const saved = localStorage.getItem("pwb_lang");
-      if (saved && translations[saved]) return saved;
+      if(saved && saved !== "auto") return saved;
 
       const nav = (navigator.language || "en").toLowerCase();
-      // 중국어(간체/번체 포함) -> zh
-      if (nav.startsWith("zh")) return "zh";
-      // 한국어 -> ko
-      if (nav.startsWith("ko")) return "ko";
-      // 아랍어 -> ar
-      if (nav.startsWith("ar")) return "ar";
+      const langs = (navigator.languages || []).join(",").toLowerCase();
+
+      // China / Chinese
+      if(nav.startsWith("zh") || langs.includes("zh")) return "zh";
+      // Arabic
+      if(nav.startsWith("ar") || langs.includes("ar")) return "ar";
+      // Korean
+      if(nav.startsWith("ko") || langs.includes("ko")) return "ko";
       return "en";
     }
 
-    let currentLang = detectLang();
+    function applyLang(lang){
+      const t = I18N[lang] || I18N.en;
 
-    function applyLang(lang) {
-      if (!translations[lang]) lang = "en";
-      currentLang = lang;
-      localStorage.setItem("pwb_lang", lang);
+      $("langLabel").textContent = t.langLabel;
+      $("titleMain").textContent = t.title;
+      $("brandTop").textContent = t.title;
+      $("tagline").textContent = t.tagline;
+      $("slogan").textContent = t.slogan;
 
-      // RTL 처리
-      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
-      document.documentElement.lang = (lang === "ar") ? "ar" : (lang === "zh" ? "zh" : (lang === "ko" ? "ko" : "en"));
+      $("m1t").textContent = t.m1t; $("m1d").textContent = t.m1d;
+      $("m2t").textContent = t.m2t; $("m2d").textContent = t.m2d;
+      $("m3t").textContent = t.m3t; $("m3d").textContent = t.m3d;
+      $("m4t").textContent = t.m4t; $("m4d").textContent = t.m4d;
+      $("m5t").textContent = t.m5t; $("m5d").textContent = t.m5d;
+      $("m6t").textContent = t.m6t; $("m6d").textContent = t.m6d;
 
-      // UI 텍스트 적용
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (translations[lang][key]) el.textContent = translations[lang][key];
-      });
+      $("instTitle").textContent = t.instTitle;
+      $("instDesc").childNodes[0].textContent = t.instDesc + " ";
+      $("urlLabel").textContent = t.urlLabel;
+      $("btnPiBrowser").textContent = t.btnPi;
+      $("btnInstall").textContent = t.btnInstall;
+      $("statusText").textContent = t.status;
 
-      // 상단 브랜드 텍스트도 같이 맞추기
-      document.getElementById("appTitleTop").textContent = translations[lang].title;
-      document.getElementById("appSubtitleTop").textContent = translations[lang].subtitle;
+      $("chipYT").textContent = t.chips.yt;
+      $("chipTT").textContent = t.chips.tt;
+      $("chipContact").textContent = t.chips.contact;
 
-      // lang label
-      document.getElementById("langLabel").textContent = translations[lang].langName;
+      // RTL for Arabic
+      document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
     }
 
-    // 언어 메뉴 UI
-    const langBtn = document.getElementById("langBtn");
-    const langMenu = document.getElementById("langMenu");
-
-    langBtn.addEventListener("click", () => {
-      langMenu.classList.toggle("open");
-      langMenu.setAttribute("aria-hidden", langMenu.classList.contains("open") ? "false" : "true");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
-        langMenu.classList.remove("open");
-        langMenu.setAttribute("aria-hidden", "true");
-      }
-    });
-
-    langMenu.querySelectorAll(".item").forEach(item => {
-      item.addEventListener("click", () => {
-        applyLang(item.dataset.lang);
-        langMenu.classList.remove("open");
-        langMenu.setAttribute("aria-hidden", "true");
-        // 상태 문구도 현재 언어로 유지
-        refreshStatus();
-      });
-    });
-
-    // 처음 적용
-    applyLang(currentLang);
-
-    /***********************
-     * 2) Pi SDK (최소 안정)
-     ***********************/
-    const statusText = document.getElementById("statusText");
-    const btnLogin = document.getElementById("btnLogin");
-    const btnLogout = document.getElementById("btnLogout");
-    const btnSend = document.getElementById("btnSend");
-
-    let isLoggedIn = false;
-
-    function inPiBrowser() {
-      // Pi Browser는 window.Pi 존재
-      return typeof window.Pi !== "undefined";
+    // ===== Bottom sheet =====
+    function openSheet(key){
+      const lang = detectLang();
+      const t = I18N[lang] || I18N.en;
+      const item = (t.sheets && t.sheets[key]) || (I18N.en.sheets[key]);
+      $("sheetTitle").textContent = item.t;
+      $("sheetBody").textContent = item.b;
+      $("sheetFoot").textContent = t.foot;
+      $("modal").style.display = "flex";
     }
+    function closeSheet(){ $("modal").style.display = "none"; }
 
-    function setStatus(key) {
-      statusText.textContent = translations[currentLang][key] || translations.en[key] || "";
-    }
+    // ===== Install / Pi Browser =====
+    let deferredPrompt = null;
 
-    function refreshStatus() {
-      if (!inPiBrowser()) {
-        setStatus("statusNotInPi");
-        btnLogin.disabled = true;
-        btnLogout.disabled = true;
-        btnSend.disabled = true;
+    window.addEventListener("beforeinstallprompt", (e)=>{
+      e.preventDefault();
+      deferredPrompt = e;
+      $("btnInstall").disabled = false;
+    });
+
+    async function doInstall(){
+      if(!deferredPrompt){
+        // Not supported
+        $("statusText").textContent = (detectLang()==="ko")
+          ? "상태: 설치 기능 없음 (브라우저 제한)"
+          : "Status: Install not available (browser limitation)";
+        $("led").style.background = "#ffcc00";
+        $("led").style.boxShadow = "0 0 16px rgba(255,204,0,.45)";
         return;
       }
-      // Pi SDK 준비
-      if (!isLoggedIn) {
-        setStatus("statusReady");
-        btnLogin.disabled = false;
-        btnLogout.disabled = true;
-        btnSend.disabled = true;
-      } else {
-        setStatus("statusLoggedIn");
-        btnLogin.disabled = true;
-        btnLogout.disabled = false;
-        btnSend.disabled = false; // 데모 버튼만 활성
+      deferredPrompt.prompt();
+      const res = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      $("statusText").textContent = (res && res.outcome === "accepted")
+        ? ((detectLang()==="ko") ? "상태: 설치됨" : "Status: Installed")
+        : ((detectLang()==="ko") ? "상태: 취소됨" : "Status: Cancelled");
+    }
+
+    function openInPiBrowser(){
+      // If user has Pi Browser, pi:// should open in mobile Pi Browser.
+      // Fallback: open current URL.
+      const url = location.href;
+      // Try pi:// scheme to encourage Pi Browser open (may vary by device).
+      // If blocked, user can copy URL.
+      try{
+        location.href = "pi://piworldbank";
+        setTimeout(()=>{ window.open(url, "_blank"); }, 500);
+      }catch(e){
+        window.open(url, "_blank");
       }
     }
 
-    // Pi SDK init
-    if (inPiBrowser()) {
-      // sandbox / test 환경 기본
-      Pi.init({ version: "2.0", sandbox: true });
-    }
+    // ===== Social chips (placeholders) =====
+    function openUrl(u){ window.open(u, "_blank", "noopener,noreferrer"); }
 
-    btnLogin.addEventListener("click", async () => {
-      try {
-        if (!inPiBrowser()) {
-          alert(translations[currentLang].statusNotInPi);
-          return;
-        }
-        // 개발 단계: Pi.authenticate로 최소 로그인만
-        const scopes = ["username"]; // 최소
-        const authResult = await Pi.authenticate(scopes, (payment) => {
-          // 결제 훅 (현재 미사용)
-        });
+    // ===== Init =====
+    (function init(){
+      // show current URL
+      $("appUrl").textContent = location.origin + location.pathname;
 
-        // 로그인 성공
-        isLoggedIn = true;
-        alert(translations[currentLang].alertLoggedIn);
-        refreshStatus();
+      // set select
+      const saved = localStorage.getItem("pwb_lang") || "auto";
+      $("langSelect").value = saved;
 
-      } catch (err) {
-        // 실패해도 앱은 죽지 않게
-        console.log(err);
-        setStatus("statusReady");
-      }
-    });
+      // apply language
+      applyLang(detectLang());
 
-    btnLogout.addEventListener("click", () => {
-      // SDK에 "logout"이 별도 없어서 UI 상태만 초기화
-      isLoggedIn = false;
-      alert(translations[currentLang].alertLoggedOut);
-      refreshStatus();
-    });
+      // menu click
+      document.querySelectorAll(".card").forEach(el=>{
+        el.addEventListener("click", ()=> openSheet(el.dataset.open));
+      });
 
-    btnSend.addEventListener("click", () => {
-      alert(translations[currentLang].alertSendDemo);
-    });
+      $("closeBtn").addEventListener("click", closeSheet);
+      $("modal").addEventListener("click", (e)=>{ if(e.target.id==="modal") closeSheet(); });
 
-    // 초기 상태 반영
-    refreshStatus();
+      $("btnInstall").addEventListener("click", doInstall);
+      $("btnPiBrowser").addEventListener("click", openInPiBrowser);
+
+      $("langSelect").addEventListener("change", (e)=>{
+        const v = e.target.value;
+        localStorage.setItem("pwb_lang", v);
+        applyLang(detectLang());
+      });
+
+      // social placeholders: 바꾸실 링크만 나중에 넣으시면 됩니다.
+      $("chipYT").addEventListener("click", ()=> openUrl("https://www.youtube.com/"));
+      $("chipTT").addEventListener("click", ()=> openUrl("https://www.tiktok.com/"));
+      $("chipContact").addEventListener("click", ()=> openUrl("https://linktr.ee/"));
+
+      // disable install button by default until supported
+      $("btnInstall").disabled = true;
+    })();
   </script>
 </body>
 </html>
