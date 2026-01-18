@@ -1,857 +1,504 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>PHK Bank</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHKBank</title>
 
-  <!-- PWA (있으면 유지) -->
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#1f1f2e" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="application-name" content="PHKBank">
+<meta name="apple-mobile-web-app-title" content="PHKBank">
+<meta property="og:title" content="PHKBank">
+<meta property="og:type" content="website">
 
-  <style>
-    :root{
-      --bg1:#2b2b3d;
-      --bg2:#0f0f1a;
-      --card: rgba(255,255,255,0.07);
-      --card2: rgba(255,255,255,0.06);
-      --line: rgba(255,255,255,0.06);
-      --text: #ffffff;
-      --sub: rgba(255,255,255,0.72);
-      --sub2: rgba(255,255,255,0.62);
-      --pill: rgba(255,255,255,0.12);
-      --yellow:#f4c75a;
-      --green:#2dff7a;
-    }
-
-    *{ box-sizing: border-box; }
-    body{
-      margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(900px 500px at 20% 0%, rgba(244,199,90,0.10), rgba(0,0,0,0) 55%),
-        radial-gradient(700px 420px at 80% 30%, rgba(120,120,255,0.12), rgba(0,0,0,0) 60%),
-        radial-gradient(circle at top, var(--bg1), var(--bg2));
-      min-height: 100vh;
-      padding-bottom: 36px;
-    }
-
-    .container{
-      max-width: 460px;
-      margin: 0 auto;
-      padding: 18px 14px 28px;
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom: 10px;
-      padding: 10px 6px;
-    }
-
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .brand .name{
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-    }
-    .brand .tag{
-      font-size: 12px;
-      color: var(--sub);
-    }
-
-    .langbox{
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
-    select{
-      background: rgba(255,255,255,0.10);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 10px 12px;
-      border-radius: 14px;
-      outline: none;
-      font-weight: 600;
-      font-size: 13px;
-    }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 18px 18px;
-      margin: 12px 0;
-      box-shadow:
-        0 18px 40px rgba(0,0,0,0.18),
-        inset 0 0 0 1px rgba(255,255,255,0.02);
-      backdrop-filter: blur(6px);
-    }
-
-    .card .title{
-      font-size: 22px;
-      font-weight: 900;
-      margin-bottom: 8px;
-    }
-    .card .subtitle{
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--sub);
-    }
-
-    .card .small{
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.55;
-      color: var(--sub2);
-      word-break: break-all;
-    }
-
-    .actions{
-      display:flex;
-      gap:12px;
-      margin-top: 14px;
-    }
-
-    .btn{
-      flex:1;
-      border: 0;
-      padding: 13px 0;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 15px;
-      cursor:pointer;
-    }
-    .btn.gray{
-      background: var(--pill);
-      color: var(--text);
-    }
-    .btn.yellow{
-      background: var(--yellow);
-      color: #111;
-    }
-
-    .status{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--sub);
-      font-weight: 700;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: var(--green);
-      box-shadow: 0 0 12px rgba(45,255,122,0.35);
-    }
-
-    .footer{
-      display:flex;
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .pill{
-      flex:1;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 12px 0;
-      border-radius: 999px;
-      text-align:center;
-      font-weight: 900;
-      cursor:pointer;
-    }
-
-    .divider{
-      height: 10px;
-    }
-
-    .ghost-note{
-      font-size: 12px;
-      color: rgba(255,255,255,0.55);
-      padding: 0 6px;
-      margin-top: 6px;
-    }
-  </style>
+<style>
+:root{
+  --bg1:#151a2e;
+  --bg2:#0b0f1e;
+  --card1:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.02);
+  --border:rgba(255,255,255,.14);
+  --text:rgba(255,255,255,.92);
+  --muted:rgba(255,255,255,.65);
+  --accent:#f2c94c;
+  --shadow:0 18px 60px rgba(0,0,0,.45);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 50% -10%,#222a55 0%,transparent 60%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+}
+.wrap{
+  width:100%;
+  max-width:430px;
+  padding:18px 16px 48px;
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  font-size:18px;
+}
+.lang-select{
+  padding:6px 12px;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
+  font-size:13px;
+  color:#fff;
+  border:none;
+}
+.logo{
+  width:68px;
+  height:68px;
+  border-radius:20px;
+  margin:0 auto 14px;
+  background:linear-gradient(135deg,#f2c94c,#9b51e0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:800;
+  box-shadow:var(--shadow);
+}
+h1{
+  margin:0;
+  text-align:center;
+  font-size:30px;
+  font-weight:800;
+}
+.tag{
+  text-align:center;
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:2px;
+  color:#c9cde3;
+}
+.slogan{
+  text-align:center;
+  margin-top:10px;
+  font-weight:700;
+  color:var(--accent);
+}
+.card{
+  margin-top:14px;
+  padding:20px;
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--card1),var(--card2));
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+}
+.card h3{
+  margin:0;
+  font-size:18px;
+}
+.card p{
+  margin:6px 0 0;
+  font-size:14px;
+  color:var(--muted);
+}
+.install{
+  margin-top:18px;
+  padding:20px;
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--card1),var(--card2));
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+}
+.install p{
+  margin:0;
+  font-size:14px;
+  line-height:1.55;
+  color:var(--muted);
+}
+.btns{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+.btn{
+  flex:1;
+  padding:12px 0;
+  text-align:center;
+  border-radius:30px;
+  font-weight:700;
+  font-size:15px;
+}
+.btn.dark{background:rgba(255,255,255,.12)}
+.btn.gold{background:var(--accent);color:#000}
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  font-size:14px;
+  color:#9be89b;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#2ecc71;
+}
+.bottom{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+.bottom div{
+  flex:1;
+  padding:10px 0;
+  text-align:center;
+  border-radius:22px;
+  background:rgba(255,255,255,.12);
+  font-size:14px;
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
+<div class="wrap">
 
-    <!-- TOP -->
-    <div class="topbar">
-      <div class="brand">
-        <!-- ✅ PiWorldBank -> PHK Bank (이 이름만 변경) -->
-        <div class="name" data-i18n="app_name">PHK Bank</div>
-        <div class="tag" data-i18n="app_tag">Web3 · UBI · Digital Bank</div>
-      </div>
-
-      <div class="langbox">
-        <select id="langSelect" aria-label="language">
-          <option value="auto">Auto</option>
-          <option value="ko">한국어</option>
-          <option value="en">English</option>
-          <option value="ar">العربية</option>
-          <option value="zh">中文</option>
-          <option value="ja">日本語</option>
-          <option value="ru">Русский</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="pt">Português</option>
-          <option value="it">Italiano</option>
-          <option value="hi">हिन्दी</option>
-          <option value="id">Bahasa Indonesia</option>
-          <option value="vi">Tiếng Việt</option>
-          <option value="th">ไทย</option>
-          <option value="tr">Türkçe</option>
-          <option value="fa">فارسی</option>
-          <option value="ur">اردو</option>
-          <option value="bn">বাংলা</option>
-          <option value="tl">Tagalog</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- 예치율 -->
-    <div class="card">
-      <div class="title" data-i18n="deposit_rate_title">예치율</div>
-      <div class="subtitle" data-i18n="deposit_rate_value">31.4% APY (데모)</div>
-    </div>
-
-    <!-- 보상 -->
-    <div class="card">
-      <div class="title" data-i18n="reward_title">보상</div>
-      <div class="subtitle" data-i18n="reward_value">참여 보상</div>
-    </div>
-
-    <!-- 고객센터 -->
-    <div class="card">
-      <div class="title" data-i18n="cs_title">고객센터</div>
-      <div class="subtitle" data-i18n="cs_value">도움받기</div>
-    </div>
-
-    <!-- FAQ -->
-    <div class="card">
-      <div class="title" data-i18n="faq_title">FAQ</div>
-      <div class="subtitle" data-i18n="faq_value">약관 · 정책 · 문의</div>
-    </div>
-
-    <!-- 원클릭 설치 / 실행 -->
-    <div class="card">
-      <div class="title" data-i18n="install_title">원클릭 설치 / 실행</div>
-
-      <div class="small" data-i18n="install_desc">
-        브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.
-        <br/>URL: https://ljw2358.github.io/piworldbank/
-      </div>
-
-      <div class="actions">
-        <!-- ✅ 버튼/URL은 그대로 유지 -->
-        <button class="btn gray" data-i18n="open_pi_browser"
-          onclick="window.location.href='pi://ljw2358.github.io/piworldbank/'">
-          Pi Browser로 열기
-        </button>
-
-        <button class="btn yellow" data-i18n="install_btn" onclick="installPWA()">
-          설치
-        </button>
-      </div>
-
-      <div class="status">
-        <span class="dot"></span>
-        <span data-i18n="status_ok">상태: OK</span>
-      </div>
-
-      <div class="ghost-note" data-i18n="auto_lang_note">
-        * 국가/기기 언어에 따라 자동으로 언어가 바뀝니다. (상단에서 수동 변경 가능)
-      </div>
-    </div>
-
-    <!-- 하단 버튼 -->
-    <div class="footer">
-      <div class="pill" data-i18n="youtube" onclick="window.open('https://youtube.com', '_blank')">YouTube</div>
-      <div class="pill" data-i18n="tiktok" onclick="window.open('https://tiktok.com', '_blank')">TikTok</div>
-      <div class="pill" data-i18n="contact" onclick="alert(i18nText('contact_ready'))">문의</div>
-    </div>
-
+  <div class="top">
+    <div class="brand">● PHKBank</div>
+    <select class="lang-select" id="langSelect">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="ja">日本語</option>
+      <option value="ar">العربية</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">Русский</option>
+      <option value="pt">Português</option>
+      <option value="it">Italiano</option>
+      <option value="tr">Türkçe</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="th">ไทย</option>
+      <option value="id">Bahasa Indonesia</option>
+      <option value="hi">हिन्दी</option>
+      <option value="fa">فارسی</option>
+      <option value="ur">اردو</option>
+    </select>
   </div>
 
-  <script>
-    // -----------------------------
-    // PWA install
-    // -----------------------------
-    let deferredPrompt = null;
+  <div class="logo">π</div>
 
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
+  <h1 data-i18n="title">PHKBank</h1>
+  <div class="tag" data-i18n="tagline">ONE WORLD · ONE PI · ONE FUTURE</div>
+  <div class="slogan" data-i18n="slogan">사람이 먼저, 이윤은 그 다음</div>
 
-    function installPWA(){
-      if(deferredPrompt){
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.finally(() => deferredPrompt = null);
-      } else {
-        alert(i18nText("install_not_supported"));
-      }
+  <div class="card">
+    <h3 data-i18n="basic_title">기본소득</h3>
+    <p data-i18n="basic_desc">기본소득 리워드</p>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="pay_title">결제</h3>
+    <p data-i18n="pay_desc">결제 · 송금</p>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="apy_title">예치율</h3>
+    <p data-i18n="apy_desc">31.4% APY (데모)</p>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="reward_title">보상</h3>
+    <p data-i18n="reward_desc">참여 보상</p>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="support_title">고객센터</h3>
+    <p data-i18n="support_desc">도움받기</p>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="faq_title">FAQ</h3>
+    <p data-i18n="faq_desc">약관 · 정책 · 문의</p>
+  </div>
+<div class="install">
+    <p data-i18n="install_text">
+      원클릭 설치 / 실행<br><br>
+      브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.<br>
+      URL:<br>
+      https://ljw2358.github.io/piworldbank_2025/
+    </p>
+
+    <div class="btns">
+      <div class="btn dark" data-i18n="open_pi">Pi Browser로 열기</div>
+      <div class="btn gold" data-i18n="install_btn">설치</div>
+    </div>
+
+    <div class="status">
+      <div class="dot"></div>
+      <span data-i18n="status_ok">상태: OK</span>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div data-i18n="youtube">YouTube</div>
+    <div data-i18n="tiktok">TikTok</div>
+    <div data-i18n="contact">문의</div>
+  </div>
+
+</div>
+
+<script>
+const LANG = {
+  ko:{
+    title:"PHKBank",
+    tagline:"ONE WORLD · ONE PI · ONE FUTURE",
+    slogan:"사람이 먼저, 이윤은 그 다음",
+    basic_title:"기본소득",
+    basic_desc:"기본소득 리워드",
+    pay_title:"결제",
+    pay_desc:"결제 · 송금",
+    apy_title:"예치율",
+    apy_desc:"31.4% APY (데모)",
+    reward_title:"보상",
+    reward_desc:"참여 보상",
+    support_title:"고객센터",
+    support_desc:"도움받기",
+    faq_title:"FAQ",
+    faq_desc:"약관 · 정책 · 문의",
+    install_text:"원클릭 설치 / 실행<br><br>브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Pi Browser로 열기",
+    install_btn:"설치",
+    status_ok:"상태: OK",
+    youtube:"YouTube",
+    tiktok:"TikTok",
+    contact:"문의"
+  },
+  en:{
+    title:"PHKBank",
+    tagline:"ONE WORLD · ONE PI · ONE FUTURE",
+    slogan:"People First, Profit Later",
+    basic_title:"Basic Income",
+    basic_desc:"Basic income rewards",
+    pay_title:"Payments",
+    pay_desc:"Payments · Transfers",
+    apy_title:"Yield",
+    apy_desc:"31.4% APY (Demo)",
+    reward_title:"Rewards",
+    reward_desc:"Participation rewards",
+    support_title:"Support",
+    support_desc:"Get help",
+    faq_title:"FAQ",
+    faq_desc:"Terms · Policy · Contact",
+    install_text:"One-click install / launch<br><br>Available when “Add to Home Screen” is supported.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Open in Pi Browser",
+    install_btn:"Install",
+    status_ok:"Status: OK",
+    youtube:"YouTube",
+    tiktok:"TikTok",
+    contact:"Contact"
+  },
+  zh:{ title:"PHKBank", tagline:"一个世界 · 一个PI · 一个未来", slogan:"以人为本，其次是利润",
+    basic_title:"基本收入", basic_desc:"基本收入奖励",
+    pay_title:"支付", pay_desc:"支付 · 转账",
+    apy_title:"收益率", apy_desc:"31.4% APY（演示）",
+    reward_title:"奖励", reward_desc:"参与奖励",
+    support_title:"客服", support_desc:"获取帮助",
+    faq_title:"常见问题", faq_desc:"条款 · 政策 · 联系",
+    install_text:"一键安装 / 启动<br><br>支持“添加到主屏幕”时可用。<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"在 Pi 浏览器中打开", install_btn:"安装", status_ok:"状态：正常",
+    youtube:"YouTube", tiktok:"TikTok", contact:"联系"
+  },
+  ja:{ title:"PHKBank", tagline:"一つの世界 · 一つのPI · 一つの未来", slogan:"人が先、利益は後",
+    basic_title:"ベーシックインカム", basic_desc:"ベーシックインカム報酬",
+    pay_title:"決済", pay_desc:"決済・送金",
+    apy_title:"利回り", apy_desc:"31.4% APY（デモ）",
+    reward_title:"報酬", reward_desc:"参加報酬",
+    support_title:"サポート", support_desc:"ヘルプ",
+    faq_title:"FAQ", faq_desc:"規約・ポリシー・お問い合わせ",
+    install_text:"ワンクリックインストール / 起動<br><br>「ホーム画面に追加」が可能な場合に有効。<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Pi Browserで開く", install_btn:"インストール", status_ok:"状態：OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"お問い合わせ"
+  },
+  ar:{ title:"PHKBank", tagline:"عالم واحد · PI واحد · مستقبل واحد", slogan:"الإنسان أولاً ثم الربح",
+    basic_title:"الدخل الأساسي", basic_desc:"مكافآت الدخل الأساسي",
+    pay_title:"الدفع", pay_desc:"الدفع · التحويل",
+    apy_title:"العائد", apy_desc:"%31.4 عائد سنوي (تجريبي)",
+    reward_title:"المكافآت", reward_desc:"مكافآت المشاركة",
+    support_title:"الدعم", support_desc:"الحصول على المساعدة",
+    faq_title:"الأسئلة الشائعة", faq_desc:"الشروط · السياسة · الاتصال",
+    install_text:"تثبيت / تشغيل بنقرة واحدة<br><br>متاح عند دعم الإضافة إلى الشاشة الرئيسية.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"افتح في Pi Browser", install_btn:"تثبيت", status_ok:"الحالة: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"اتصال"
+  },
+  es:{ title:"PHKBank", tagline:"UN MUNDO · UN PI · UN FUTURO", slogan:"Las personas primero, luego las ganancias",
+    basic_title:"Ingreso básico", basic_desc:"Recompensas de ingreso básico",
+    pay_title:"Pagos", pay_desc:"Pagos · Transferencias",
+    apy_title:"Rendimiento", apy_desc:"31.4% APY (Demo)",
+    reward_title:"Recompensas", reward_desc:"Recompensas por participación",
+    support_title:"Soporte", support_desc:"Obtener ayuda",
+    faq_title:"FAQ", faq_desc:"Términos · Política · Contacto",
+    install_text:"Instalación / ejecución con un clic<br><br>Disponible cuando se admite “Agregar a la pantalla de inicio”.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Abrir en Pi Browser", install_btn:"Instalar", status_ok:"Estado: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Contacto"
+  },
+  fr:{ title:"PHKBank", tagline:"UN MONDE · UN PI · UN AVENIR", slogan:"Les personnes d’abord, le profit ensuite",
+    basic_title:"Revenu de base", basic_desc:"Récompenses de revenu de base",
+    pay_title:"Paiements", pay_desc:"Paiements · Transferts",
+    apy_title:"Rendement", apy_desc:"31,4% APY (Démo)",
+    reward_title:"Récompenses", reward_desc:"Récompenses de participation",
+    support_title:"Support", support_desc:"Obtenir de l’aide",
+    faq_title:"FAQ", faq_desc:"Conditions · Politique · Contact",
+    install_text:"Installation / lancement en un clic<br><br>Disponible lorsque “Ajouter à l’écran d’accueil” est pris en charge.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Ouvrir dans Pi Browser", install_btn:"Installer", status_ok:"Statut : OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Contact"
+  },
+  de:{ title:"PHKBank", tagline:"EINE WELT · EIN PI · EINE ZUKUNFT", slogan:"Menschen zuerst, Gewinn danach",
+    basic_title:"Grundeinkommen", basic_desc:"Grundeinkommensprämien",
+    pay_title:"Zahlungen", pay_desc:"Zahlungen · Überweisungen",
+    apy_title:"Rendite", apy_desc:"31,4% APY (Demo)",
+    reward_title:"Belohnungen", reward_desc:"Teilnahmebelohnungen",
+    support_title:"Support", support_desc:"Hilfe erhalten",
+    faq_title:"FAQ", faq_desc:"Bedingungen · Richtlinie · Kontakt",
+    install_text:"Ein-Klick-Installation / Start<br><br>Verfügbar bei Unterstützung von „Zum Startbildschirm hinzufügen“.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"In Pi Browser öffnen", install_btn:"Installieren", status_ok:"Status: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Kontakt"
+  },
+  ru:{ title:"PHKBank", tagline:"ОДИН МИР · ОДИН PI · ОДНО БУДУЩЕЕ", slogan:"Сначала люди, потом прибыль",
+    basic_title:"Базовый доход", basic_desc:"Вознаграждения базового дохода",
+    pay_title:"Платежи", pay_desc:"Платежи · Переводы",
+    apy_title:"Доходность", apy_desc:"31,4% APY (Демо)",
+    reward_title:"Награды", reward_desc:"Награды за участие",
+    support_title:"Поддержка", support_desc:"Получить помощь",
+    faq_title:"FAQ", faq_desc:"Условия · Политика · Контакты",
+    install_text:"Установка / запуск в один клик<br><br>Доступно при поддержке «Добавить на главный экран».<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Открыть в Pi Browser", install_btn:"Установить", status_ok:"Статус: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Контакты"
+  },
+  pt:{ title:"PHKBank", tagline:"UM MUNDO · UM PI · UM FUTURO", slogan:"Pessoas primeiro, lucro depois",
+    basic_title:"Renda básica", basic_desc:"Recompensas de renda básica",
+    pay_title:"Pagamentos", pay_desc:"Pagamentos · Transferências",
+    apy_title:"Rendimento", apy_desc:"31,4% APY (Demo)",
+    reward_title:"Recompensas", reward_desc:"Recompensas de participação",
+    support_title:"Suporte", support_desc:"Obter ajuda",
+    faq_title:"FAQ", faq_desc:"Termos · Política · Contato",
+    install_text:"Instalação / execução com um clique<br><br>Disponível quando “Adicionar à tela inicial” é suportado.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Abrir no Pi Browser", install_btn:"Instalar", status_ok:"Status: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Contato"
+  },
+  it:{ title:"PHKBank", tagline:"UN MONDO · UN PI · UN FUTURO", slogan:"Le persone prima, il profitto dopo",
+    basic_title:"Reddito di base", basic_desc:"Ricompense del reddito di base",
+    pay_title:"Pagamenti", pay_desc:"Pagamenti · Trasferimenti",
+    apy_title:"Rendimento", apy_desc:"31,4% APY (Demo)",
+    reward_title:"Ricompense", reward_desc:"Ricompense di partecipazione",
+    support_title:"Supporto", support_desc:"Ottenere aiuto",
+    faq_title:"FAQ", faq_desc:"Termini · Politica · Contatto",
+    install_text:"Installazione / avvio con un clic<br><br>Disponibile quando “Aggiungi alla schermata Home” è supportato.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Apri in Pi Browser", install_btn:"Installa", status_ok:"Stato: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Contatto"
+  },
+  tr:{ title:"PHKBank", tagline:"TEK DÜNYA · TEK PI · TEK GELECEK", slogan:"Önce insanlar, sonra kâr",
+    basic_title:"Temel gelir", basic_desc:"Temel gelir ödülleri",
+    pay_title:"Ödemeler", pay_desc:"Ödemeler · Transferler",
+    apy_title:"Getiri", apy_desc:"%31,4 APY (Demo)",
+    reward_title:"Ödüller", reward_desc:"Katılım ödülleri",
+    support_title:"Destek", support_desc:"Yardım al",
+    faq_title:"SSS", faq_desc:"Şartlar · Politika · İletişim",
+    install_text:"Tek tıkla kurulum / çalıştırma<br><br>“Ana ekrana ekle” desteklendiğinde kullanılabilir.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Pi Browser’da aç", install_btn:"Yükle", status_ok:"Durum: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"İletişim"
+  },
+  vi:{ title:"PHKBank", tagline:"MỘT THẾ GIỚI · MỘT PI · MỘT TƯƠNG LAI", slogan:"Con người trước, lợi nhuận sau",
+    basic_title:"Thu nhập cơ bản", basic_desc:"Phần thưởng thu nhập cơ bản",
+    pay_title:"Thanh toán", pay_desc:"Thanh toán · Chuyển khoản",
+    apy_title:"Lợi suất", apy_desc:"31,4% APY (Demo)",
+    reward_title:"Phần thưởng", reward_desc:"Phần thưởng tham gia",
+    support_title:"Hỗ trợ", support_desc:"Nhận trợ giúp",
+    faq_title:"FAQ", faq_desc:"Điều khoản · Chính sách · Liên hệ",
+    install_text:"Cài đặt / chạy một chạm<br><br>Khả dụng khi hỗ trợ “Thêm vào màn hình chính”.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Mở trong Pi Browser", install_btn:"Cài đặt", status_ok:"Trạng thái: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Liên hệ"
+  },
+  th:{ title:"PHKBank", tagline:"หนึ่งโลก · หนึ่ง PI · หนึ่งอนาคต", slogan:"คนมาก่อน กำไรตามมา",
+    basic_title:"รายได้พื้นฐาน", basic_desc:"รางวัลรายได้พื้นฐาน",
+    pay_title:"การชำระเงิน", pay_desc:"การชำระเงิน · โอน",
+    apy_title:"อัตราผลตอบแทน", apy_desc:"31.4% APY (เดโม)",
+    reward_title:"รางวัล", reward_desc:"รางวัลการมีส่วนร่วม",
+    support_title:"การสนับสนุน", support_desc:"รับความช่วยเหลือ",
+    faq_title:"FAQ", faq_desc:"เงื่อนไข · นโยบาย · ติดต่อ",
+    install_text:"ติดตั้ง / เปิดใช้ในคลิกเดียว<br><br>ใช้ได้เมื่อรองรับ “เพิ่มไปยังหน้าจอหลัก”.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"เปิดใน Pi Browser", install_btn:"ติดตั้ง", status_ok:"สถานะ: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"ติดต่อ"
+  },
+  id:{ title:"PHKBank", tagline:"SATU DUNIA · SATU PI · SATU MASA DEPAN", slogan:"Manusia dulu, keuntungan kemudian",
+    basic_title:"Pendapatan dasar", basic_desc:"Hadiah pendapatan dasar",
+    pay_title:"Pembayaran", pay_desc:"Pembayaran · Transfer",
+    apy_title:"Imbal hasil", apy_desc:"31,4% APY (Demo)",
+    reward_title:"Hadiah", reward_desc:"Hadiah partisipasi",
+    support_title:"Dukungan", support_desc:"Dapatkan bantuan",
+    faq_title:"FAQ", faq_desc:"Syarat · Kebijakan · Kontak",
+    install_text:"Instal / jalankan satu klik<br><br>Tersedia saat “Tambahkan ke layar utama” didukung.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Buka di Pi Browser", install_btn:"Instal", status_ok:"Status: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"Kontak"
+  },
+  hi:{ title:"PHKBank", tagline:"एक दुनिया · एक PI · एक भविष्य", slogan:"पहले लोग, फिर मुनाफ़ा",
+    basic_title:"मूल आय", basic_desc:"मूल आय पुरस्कार",
+    pay_title:"भुगतान", pay_desc:"भुगतान · स्थानांतरण",
+    apy_title:"उपज", apy_desc:"31.4% APY (डेमो)",
+    reward_title:"पुरस्कार", reward_desc:"भागीदारी पुरस्कार",
+    support_title:"सहायता", support_desc:"मदद प्राप्त करें",
+    faq_title:"FAQ", faq_desc:"शर्तें · नीति · संपर्क",
+    install_text:"एक-क्लिक इंस्टॉल / लॉन्च<br><br>“होम स्क्रीन पर जोड़ें” समर्थित होने पर उपलब्ध।<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Pi Browser में खोलें", install_btn:"इंस्टॉल", status_ok:"स्थिति: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"संपर्क"
+  },
+  fa:{ title:"PHKBank", tagline:"یک جهان · یک PI · یک آینده", slogan:"انسان ها اول، سود بعد",
+    basic_title:"درآمد پایه", basic_desc:"پاداش های درآمد پایه",
+    pay_title:"پرداخت ها", pay_desc:"پرداخت · انتقال",
+    apy_title:"بازده", apy_desc:"٪31.4 APY (نمایشی)",
+    reward_title:"پاداش ها", reward_desc:"پاداش مشارکت",
+    support_title:"پشتیبانی", support_desc:"دریافت کمک",
+    faq_title:"سؤالات متداول", faq_desc:"شرایط · سیاست · تماس",
+    install_text:"نصب / اجرا با یک کلیک<br><br>در صورت پشتیبانی از «افزودن به صفحه اصلی».<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"باز کردن در Pi Browser", install_btn:"نصب", status_ok:"وضعیت: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"تماس"
+  },
+  ur:{ title:"PHKBank", tagline:"ایک دنیا · ایک PI · ایک مستقبل", slogan:"انسان پہلے، منافع بعد میں",
+    basic_title:"بنیادی آمدنی", basic_desc:"بنیادی آمدنی انعامات",
+    pay_title:"ادائیگیاں", pay_desc:"ادائیگیاں · منتقلی",
+    apy_title:"پیداوار", apy_desc:"31.4% APY (ڈیمو)",
+    reward_title:"انعامات", reward_desc:"شرکت کے انعامات",
+    support_title:"سپورٹ", support_desc:"مدد حاصل کریں",
+    faq_title:"FAQ", faq_desc:"شرائط · پالیسی · رابطہ",
+    install_text:"ایک کلک انسٹال / لانچ<br><br>جب “ہوم اسکرین میں شامل کریں” دستیاب ہو۔<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
+    open_pi:"Pi Browser میں کھولیں", install_btn:"انسٹال", status_ok:"حالت: OK",
+    youtube:"YouTube", tiktok:"TikTok", contact:"رابطہ"
+  }
+};
+
+function setLang(lang){
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(LANG[lang] && LANG[lang][key]){
+      el.innerHTML = LANG[lang][key];
     }
+  });
+}
 
-    // -----------------------------
-    // i18n (20 languages)
-    // Auto: device language -> match
-    // -----------------------------
-    const LANGS = ["ko","en","ar","zh","ja","ru","es","fr","de","pt","it","hi","id","vi","th","tr","fa","ur","bn","tl"];
+document.getElementById("langSelect").addEventListener("change",e=>{
+  setLang(e.target.value);
+});
 
-    const I18N = {
-      // ✅ 핵심: PiWorldBank라는 이름만 PHK Bank로 확정
-      // (번역도 전부 PHK Bank로)
-      ko: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "예치율",
-        deposit_rate_value: "31.4% APY (데모)",
-        reward_title: "보상",
-        reward_value: "참여 보상",
-        cs_title: "고객센터",
-        cs_value: "도움받기",
-        faq_title: "FAQ",
-        faq_value: "약관 · 정책 · 문의",
-        install_title: "원클릭 설치 / 실행",
-        install_desc: "브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Pi Browser로 열기",
-        install_btn: "설치",
-        status_ok: "상태: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "문의",
-        contact_ready: "문의 준비 중입니다.",
-        install_not_supported: "이 브라우저에서는 설치가 지원되지 않습니다.",
-        auto_lang_note: "* 국가/기기 언어에 따라 자동으로 언어가 바뀝니다. (상단에서 수동 변경 가능)"
-      },
+setLang("ko");
+</script>
 
-      en: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Deposit Rate",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Rewards",
-        reward_value: "Participation Rewards",
-        cs_title: "Customer Center",
-        cs_value: "Get Help",
-        faq_title: "FAQ",
-        faq_value: "Terms · Policy · Contact",
-        install_title: "One-Click Install / Launch",
-        install_desc: "Enabled when your browser supports “Add to Home Screen (Install)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Open in Pi Browser",
-        install_btn: "Install",
-        status_ok: "Status: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Contact",
-        contact_ready: "Contact is being prepared.",
-        install_not_supported: "Install is not supported on this browser.",
-        auto_lang_note: "* Language switches automatically by device/region. (You can change it above.)"
-      },
-
-      ar: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "معدل الإيداع",
-        deposit_rate_value: "31.4% APY (تجريبي)",
-        reward_title: "المكافآت",
-        reward_value: "مكافآت المشاركة",
-        cs_title: "مركز العملاء",
-        cs_value: "الحصول على المساعدة",
-        faq_title: "FAQ",
-        faq_value: "الشروط · السياسة · التواصل",
-        install_title: "تثبيت / تشغيل بنقرة واحدة",
-        install_desc: "يتوفر عندما يدعم المتصفح “الإضافة إلى الشاشة الرئيسية (تثبيت)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "فتح في Pi Browser",
-        install_btn: "تثبيت",
-        status_ok: "الحالة: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "تواصل",
-        contact_ready: "يتم إعداد التواصل.",
-        install_not_supported: "التثبيت غير مدعوم في هذا المتصفح.",
-        auto_lang_note: "* تتغير اللغة تلقائيًا حسب الجهاز/المنطقة. (يمكنك تغييرها من الأعلى.)"
-      },
-
-      zh: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "存款利率",
-        deposit_rate_value: "31.4% APY（演示）",
-        reward_title: "奖励",
-        reward_value: "参与奖励",
-        cs_title: "客服中心",
-        cs_value: "获取帮助",
-        faq_title: "FAQ",
-        faq_value: "条款 · 政策 · 咨询",
-        install_title: "一键安装 / 运行",
-        install_desc: "当浏览器支持“添加到主屏幕（安装）”时启用。<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "用 Pi Browser 打开",
-        install_btn: "安装",
-        status_ok: "状态：OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "咨询",
-        contact_ready: "咨询功能准备中。",
-        install_not_supported: "此浏览器不支持安装。",
-        auto_lang_note: "* 语言会根据设备/地区自动切换。（也可在上方手动选择）"
-      },
-
-      ja: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "預入利率",
-        deposit_rate_value: "31.4% APY（デモ）",
-        reward_title: "報酬",
-        reward_value: "参加報酬",
-        cs_title: "カスタマーセンター",
-        cs_value: "ヘルプ",
-        faq_title: "FAQ",
-        faq_value: "規約 · ポリシー · お問い合わせ",
-        install_title: "ワンクリック 설치 / 실행",
-        install_desc: "ブラウザが「ホーム画面に追加（インストール）」に対応している場合に有効になります。<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Pi Browserで開く",
-        install_btn: "インストール",
-        status_ok: "状態: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "問い合わせ",
-        contact_ready: "準備中です。",
-        install_not_supported: "このブラウザではインストールできません。",
-        auto_lang_note: "* 端末/地域により自動で言語が切り替わります。（上で変更可能）"
-      },
-
-      ru: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Ставка депозита",
-        deposit_rate_value: "31.4% APY (Демо)",
-        reward_title: "Награды",
-        reward_value: "Награды за участие",
-        cs_title: "Служба поддержки",
-        cs_value: "Получить помощь",
-        faq_title: "FAQ",
-        faq_value: "Условия · Политика · Контакт",
-        install_title: "Установка / Запуск в один клик",
-        install_desc: "Доступно, если браузер поддерживает «Добавить на главный экран (Установить)».<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Открыть в Pi Browser",
-        install_btn: "Установить",
-        status_ok: "Статус: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Контакт",
-        contact_ready: "Раздел контактов готовится.",
-        install_not_supported: "Установка не поддерживается в этом браузере.",
-        auto_lang_note: "* Язык переключается автоматически по устройству/региону. (Можно изменить выше.)"
-      },
-
-      es: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Tasa de Depósito",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Recompensas",
-        reward_value: "Recompensa por participación",
-        cs_title: "Centro de Atención",
-        cs_value: "Obtener ayuda",
-        faq_title: "FAQ",
-        faq_value: "Términos · Política · Contacto",
-        install_title: "Instalar / Ejecutar con un clic",
-        install_desc: "Se activa si el navegador permite “Añadir a la pantalla de inicio (Instalar)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Abrir en Pi Browser",
-        install_btn: "Instalar",
-        status_ok: "Estado: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Contacto",
-        contact_ready: "Contacto en preparación.",
-        install_not_supported: "La instalación no es compatible con este navegador.",
-        auto_lang_note: "* El idioma cambia automáticamente por dispositivo/región. (Puede cambiarlo arriba.)"
-      },
-
-      fr: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Taux de dépôt",
-        deposit_rate_value: "31.4% APY (Démo)",
-        reward_title: "Récompenses",
-        reward_value: "Récompenses de participation",
-        cs_title: "Centre d’aide",
-        cs_value: "Obtenir de l’aide",
-        faq_title: "FAQ",
-        faq_value: "Conditions · Politique · Contact",
-        install_title: "Installation / Lancement en un clic",
-        install_desc: "Actif si le navigateur prend en charge « Ajouter à l’écran d’accueil (Installer) ».<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Ouvrir dans Pi Browser",
-        install_btn: "Installer",
-        status_ok: "Statut : OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Contact",
-        contact_ready: "Contact en préparation.",
-        install_not_supported: "L’installation n’est pas prise en charge sur ce navigateur.",
-        auto_lang_note: "* La langue change automatiquement selon l’appareil/la région. (Modifiable ci-dessus.)"
-      },
-
-      de: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Einzahlungsrate",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Belohnungen",
-        reward_value: "Teilnahme-Belohnung",
-        cs_title: "Kundencenter",
-        cs_value: "Hilfe erhalten",
-        faq_title: "FAQ",
-        faq_value: "AGB · Richtlinie · Kontakt",
-        install_title: "Ein-Klick Installieren / Starten",
-        install_desc: "Aktiv, wenn der Browser „Zum Startbildschirm hinzufügen (Installieren)“ unterstützt.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "In Pi Browser öffnen",
-        install_btn: "Installieren",
-        status_ok: "Status: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Kontakt",
-        contact_ready: "Kontakt wird vorbereitet.",
-        install_not_supported: "Installation wird in diesem Browser nicht unterstützt.",
-        auto_lang_note: "* Sprache wechselt automatisch je nach Gerät/Region. (Oben änderbar.)"
-      },
-
-      pt: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Taxa de Depósito",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Recompensas",
-        reward_value: "Recompensa de participação",
-        cs_title: "Central do Cliente",
-        cs_value: "Obter ajuda",
-        faq_title: "FAQ",
-        faq_value: "Termos · Política · Contato",
-        install_title: "Instalar / Abrir com 1 clique",
-        install_desc: "Ativo quando o navegador suporta “Adicionar à tela inicial (Instalar)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Abrir no Pi Browser",
-        install_btn: "Instalar",
-        status_ok: "Status: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Contato",
-        contact_ready: "Contato em preparação.",
-        install_not_supported: "Instalação não suportada neste navegador.",
-        auto_lang_note: "* O idioma muda automaticamente por dispositivo/região. (Pode alterar acima.)"
-      },
-
-      it: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Tasso di deposito",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Ricompense",
-        reward_value: "Ricompense di partecipazione",
-        cs_title: "Centro clienti",
-        cs_value: "Ricevi aiuto",
-        faq_title: "FAQ",
-        faq_value: "Termini · Policy · Contatto",
-        install_title: "Installa / Avvia con un click",
-        install_desc: "Attivo se il browser supporta “Aggiungi alla schermata Home (Installa)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Apri in Pi Browser",
-        install_btn: "Installa",
-        status_ok: "Stato: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Contatto",
-        contact_ready: "Contatto in preparazione.",
-        install_not_supported: "Installazione non supportata su questo browser.",
-        auto_lang_note: "* La lingua cambia automaticamente in base a dispositivo/regione. (Modificabile sopra.)"
-      },
-
-      hi: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "जमा दर",
-        deposit_rate_value: "31.4% APY (डेमो)",
-        reward_title: "रिवार्ड",
-        reward_value: "भागीदारी रिवार्ड",
-        cs_title: "कस्टमर सेंटर",
-        cs_value: "मदद लें",
-        faq_title: "FAQ",
-        faq_value: "नियम · नीति · संपर्क",
-        install_title: "वन-क्लिक इंस्टॉल / चलाएं",
-        install_desc: "जब ब्राउज़र “होम स्क्रीन पर जोड़ें (इंस्टॉल)” सपोर्ट करता है तब सक्रिय।<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Pi Browser में खोलें",
-        install_btn: "इंस्टॉल",
-        status_ok: "स्थिति: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "संपर्क",
-        contact_ready: "संपर्क तैयार किया जा रहा है।",
-        install_not_supported: "इस ब्राउज़र में इंस्टॉल समर्थित नहीं है।",
-        auto_lang_note: "* भाषा डिवाइस/क्षेत्र के अनुसार अपने-आप बदलती है। (ऊपर बदल सकते हैं।)"
-      },
-
-      id: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Suku Bunga Simpanan",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Hadiah",
-        reward_value: "Hadiah Partisipasi",
-        cs_title: "Pusat Pelanggan",
-        cs_value: "Dapatkan bantuan",
-        faq_title: "FAQ",
-        faq_value: "Syarat · Kebijakan · Kontak",
-        install_title: "Instal / Jalankan Sekali Klik",
-        install_desc: "Aktif jika browser mendukung “Tambahkan ke Layar Utama (Instal)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Buka di Pi Browser",
-        install_btn: "Instal",
-        status_ok: "Status: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Kontak",
-        contact_ready: "Kontak sedang disiapkan.",
-        install_not_supported: "Instal tidak didukung di browser ini.",
-        auto_lang_note: "* Bahasa berubah otomatis sesuai perangkat/region. (Bisa diubah di atas.)"
-      },
-
-      vi: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Lãi suất gửi",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Phần thưởng",
-        reward_value: "Thưởng tham gia",
-        cs_title: "Trung tâm hỗ trợ",
-        cs_value: "Nhận trợ giúp",
-        faq_title: "FAQ",
-        faq_value: "Điều khoản · Chính sách · Liên hệ",
-        install_title: "Cài đặt / Chạy 1 chạm",
-        install_desc: "Kích hoạt khi trình duyệt hỗ trợ “Thêm vào Màn hình chính (Cài đặt)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Mở bằng Pi Browser",
-        install_btn: "Cài đặt",
-        status_ok: "Trạng thái: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Liên hệ",
-        contact_ready: "Đang chuẩn bị liên hệ.",
-        install_not_supported: "Trình duyệt này không hỗ trợ cài đặt.",
-        auto_lang_note: "* Ngôn ngữ tự động theo thiết bị/khu vực. (Có thể đổi phía trên.)"
-      },
-
-      th: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "อัตราฝาก",
-        deposit_rate_value: "31.4% APY (เดโม)",
-        reward_title: "รางวัล",
-        reward_value: "รางวัลการเข้าร่วม",
-        cs_title: "ศูนย์ช่วยเหลือ",
-        cs_value: "ขอความช่วยเหลือ",
-        faq_title: "FAQ",
-        faq_value: "ข้อกำหนด · นโยบาย · ติดต่อ",
-        install_title: "ติดตั้ง / เปิดใช้งานในคลิกเดียว",
-        install_desc: "ใช้งานได้เมื่อเบราว์เซอร์รองรับ “เพิ่มไปยังหน้าจอหลัก (ติดตั้ง)”.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "เปิดใน Pi Browser",
-        install_btn: "ติดตั้ง",
-        status_ok: "สถานะ: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "ติดต่อ",
-        contact_ready: "กำลังเตรียมการติดต่อ",
-        install_not_supported: "เบราว์เซอร์นี้ไม่รองรับการติดตั้ง",
-        auto_lang_note: "* ภาษาเปลี่ยนอัตโนมัติตามอุปกรณ์/ภูมิภาค (เปลี่ยนได้ด้านบน)"
-      },
-
-      tr: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Mevduat Oranı",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Ödüller",
-        reward_value: "Katılım Ödülü",
-        cs_title: "Müşteri Merkezi",
-        cs_value: "Yardım Al",
-        faq_title: "FAQ",
-        faq_value: "Şartlar · Politika · İletişim",
-        install_title: "Tek Tık Kur / Çalıştır",
-        install_desc: "Tarayıcı “Ana ekrana ekle (Kur)” destekliyorsa aktif olur.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Pi Browser’da Aç",
-        install_btn: "Kur",
-        status_ok: "Durum: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "İletişim",
-        contact_ready: "İletişim hazırlanıyor.",
-        install_not_supported: "Bu tarayıcıda kurulum desteklenmiyor.",
-        auto_lang_note: "* Dil cihaz/bölgeye göre otomatik değişir. (Üstten değiştirilebilir.)"
-      },
-
-      fa: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "نرخ سپرده",
-        deposit_rate_value: "31.4% APY (دمو)",
-        reward_title: "پاداش",
-        reward_value: "پاداش مشارکت",
-        cs_title: "مرکز پشتیبانی",
-        cs_value: "دریافت کمک",
-        faq_title: "FAQ",
-        faq_value: "شرایط · سیاست · تماس",
-        install_title: "نصب / اجرا با یک کلیک",
-        install_desc: "در صورت پشتیبانی مرورگر از «افزودن به صفحه اصلی (نصب)» فعال می شود.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "باز کردن در Pi Browser",
-        install_btn: "نصب",
-        status_ok: "وضعیت: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "تماس",
-        contact_ready: "بخش تماس در حال آماده سازی است.",
-        install_not_supported: "این مرورگر از نصب پشتیبانی نمی کند.",
-        auto_lang_note: "* زبان بر اساس دستگاه/منطقه به صورت خودکار تغییر می کند. (از بالا قابل تغییر است.)"
-      },
-
-      ur: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "جمع شدہ شرح",
-        deposit_rate_value: "31.4% APY (ڈیمو)",
-        reward_title: "انعامات",
-        reward_value: "شرکت کے انعامات",
-        cs_title: "کسٹمر سینٹر",
-        cs_value: "مدد حاصل کریں",
-        faq_title: "FAQ",
-        faq_value: "شرائط · پالیسی · رابطہ",
-        install_title: "ایک کلک انسٹال / چلائیں",
-        install_desc: "جب براؤزر “ہوم اسکرین میں شامل کریں (انسٹال)” سپورٹ کرے تو فعال۔<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Pi Browser میں کھولیں",
-        install_btn: "انسٹال",
-        status_ok: "حالت: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "رابطہ",
-        contact_ready: "رابطہ تیار کیا جا رہا ہے۔",
-        install_not_supported: "اس براؤزر میں انسٹال سپورٹ نہیں ہے۔",
-        auto_lang_note: "* زبان ڈیوائس/ریجن کے مطابق خودکار بدلتی ہے۔ (اوپر سے بدل سکتے ہیں۔)"
-      },
-
-      bn: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "জমার হার",
-        deposit_rate_value: "31.4% APY (ডেমো)",
-        reward_title: "পুরস্কার",
-        reward_value: "অংশগ্রহণ পুরস্কার",
-        cs_title: "কাস্টমার সেন্টার",
-        cs_value: "সহায়তা নিন",
-        faq_title: "FAQ",
-        faq_value: "শর্ত · নীতি · যোগাযোগ",
-        install_title: "এক ক্লিকে ইনস্টল / চালু",
-        install_desc: "ব্রাউজার “হোম স্ক্রিনে যোগ (ইনস্টল)” সমর্থন করলে সক্রিয় হবে।<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Pi Browser এ খুলুন",
-        install_btn: "ইনস্টল",
-        status_ok: "স্ট্যাটাস: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "যোগাযোগ",
-        contact_ready: "যোগাযোগ প্রস্তুত করা হচ্ছে।",
-        install_not_supported: "এই ব্রাউজারে ইনস্টল সমর্থিত নয়।",
-        auto_lang_note: "* ডিভাইস/অঞ্চল অনুযায়ী ভাষা স্বয়ংক্রিয়ভাবে বদলায়। (উপরে বদলানো যায়।)"
-      },
-
-      tl: {
-        app_name: "PHK Bank",
-        app_tag: "Web3 · UBI · Digital Bank",
-        deposit_rate_title: "Deposit Rate",
-        deposit_rate_value: "31.4% APY (Demo)",
-        reward_title: "Gantimpala",
-        reward_value: "Gantimpala sa Paglahok",
-        cs_title: "Customer Center",
-        cs_value: "Kumuha ng Tulong",
-        faq_title: "FAQ",
-        faq_value: "Terms · Policy · Contact",
-        install_title: "One-Click Install / Launch",
-        install_desc: "Gagana kung may “Add to Home Screen (Install)” ang browser.<br/>URL: https://ljw2358.github.io/piworldbank/",
-        open_pi_browser: "Buksan sa Pi Browser",
-        install_btn: "Install",
-        status_ok: "Status: OK",
-        youtube: "YouTube",
-        tiktok: "TikTok",
-        contact: "Makipag-ugnayan",
-        contact_ready: "Inihahanda pa ang contact.",
-        install_not_supported: "Hindi suportado ang install sa browser na ito.",
-        auto_lang_note: "* Awtomatikong nagbabago ang wika ayon sa device/rehiyon. (Maaaring baguhin sa itaas.)"
-      }
-    };
-
-    function normalizeLang(input){
-      if(!input) return "en";
-      const lower = input.toLowerCase();
-      // match primary language
-      const primary = lower.split("-")[0];
-      if(LANGS.includes(primary)) return primary;
-      // common chinese variants
-      if(lower.startsWith("zh")) return "zh";
-      return "en";
-    }
-
-    function getDeviceLang(){
-      const nav = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language;
-      return normalizeLang(nav);
-    }
-
-    function i18nText(key){
-      const lang = window.__lang || getDeviceLang();
-      const pack = I18N[lang] || I18N.en;
-      return pack[key] ?? (I18N.en[key] ?? key);
-    }
-
-    function applyLang(lang){
-      window.__lang = lang;
-      // RTL for Arabic / Persian / Urdu
-      const rtl = (lang === "ar" || lang === "fa" || lang === "ur");
-      document.documentElement.dir = rtl ? "rtl" : "ltr";
-
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const k = el.getAttribute("data-i18n");
-        const pack = I18N[lang] || I18N.en;
-        const val = pack[k] ?? I18N.en[k] ?? "";
-        // allow <br/> inside
-        el.innerHTML = val;
-      });
-    }
-
-    // init
-    (function initLang(){
-      const saved = localStorage.getItem("phk_lang") || "auto";
-      const select = document.getElementById("langSelect");
-      if(select) select.value = saved;
-
-      const lang = (saved === "auto") ? getDeviceLang() : saved;
-      applyLang(lang);
-
-      if(select){
-        select.addEventListener("change", (e) => {
-          const v = e.target.value;
-          localStorage.setItem("phk_lang", v);
-          const target = (v === "auto") ? getDeviceLang() : v;
-          applyLang(target);
-        });
-      }
-    })();
-  </script>
 </body>
 </html>
