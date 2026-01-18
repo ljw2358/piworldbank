@@ -1,504 +1,965 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html lang="ko" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PHKBank</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PHKBank</title>
 
-<meta name="application-name" content="PHKBank">
-<meta name="apple-mobile-web-app-title" content="PHKBank">
-<meta property="og:title" content="PHKBank">
-<meta property="og:type" content="website">
+  <meta name="description" content="PHKBank는 결제·기본소득·보상·예치를 실행하는 차세대 금융 운영체계입니다."/>
 
-<style>
-:root{
-  --bg1:#151a2e;
-  --bg2:#0b0f1e;
-  --card1:rgba(255,255,255,.06);
-  --card2:rgba(255,255,255,.02);
-  --border:rgba(255,255,255,.14);
-  --text:rgba(255,255,255,.92);
-  --muted:rgba(255,255,255,.65);
-  --accent:#f2c94c;
-  --shadow:0 18px 60px rgba(0,0,0,.45);
-  --radius:22px;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
-  background:
-    radial-gradient(1200px 600px at 50% -10%,#222a55 0%,transparent 60%),
-    linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-}
-.wrap{
-  width:100%;
-  max-width:430px;
-  padding:18px 16px 48px;
-}
-.top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-weight:700;
-  font-size:18px;
-}
-.lang-select{
-  padding:6px 12px;
-  border-radius:18px;
-  background:rgba(255,255,255,.08);
-  font-size:13px;
-  color:#fff;
-  border:none;
-}
-.logo{
-  width:68px;
-  height:68px;
-  border-radius:20px;
-  margin:0 auto 14px;
-  background:linear-gradient(135deg,#f2c94c,#9b51e0);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  font-weight:800;
-  box-shadow:var(--shadow);
-}
-h1{
-  margin:0;
-  text-align:center;
-  font-size:30px;
-  font-weight:800;
-}
-.tag{
-  text-align:center;
-  margin-top:6px;
-  font-size:12px;
-  letter-spacing:2px;
-  color:#c9cde3;
-}
-.slogan{
-  text-align:center;
-  margin-top:10px;
-  font-weight:700;
-  color:var(--accent);
-}
-.card{
-  margin-top:14px;
-  padding:20px;
-  border-radius:var(--radius);
-  background:linear-gradient(180deg,var(--card1),var(--card2));
-  box-shadow:var(--shadow);
-  border:1px solid var(--border);
-}
-.card h3{
-  margin:0;
-  font-size:18px;
-}
-.card p{
-  margin:6px 0 0;
-  font-size:14px;
-  color:var(--muted);
-}
-.install{
-  margin-top:18px;
-  padding:20px;
-  border-radius:var(--radius);
-  background:linear-gradient(180deg,var(--card1),var(--card2));
-  box-shadow:var(--shadow);
-  border:1px solid var(--border);
-}
-.install p{
-  margin:0;
-  font-size:14px;
-  line-height:1.55;
-  color:var(--muted);
-}
-.btns{
-  display:flex;
-  gap:10px;
-  margin-top:14px;
-}
-.btn{
-  flex:1;
-  padding:12px 0;
-  text-align:center;
-  border-radius:30px;
-  font-weight:700;
-  font-size:15px;
-}
-.btn.dark{background:rgba(255,255,255,.12)}
-.btn.gold{background:var(--accent);color:#000}
-.status{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-top:12px;
-  font-size:14px;
-  color:#9be89b;
-}
-.dot{
-  width:8px;height:8px;border-radius:50%;
-  background:#2ecc71;
-}
-.bottom{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
-}
-.bottom div{
-  flex:1;
-  padding:10px 0;
-  text-align:center;
-  border-radius:22px;
-  background:rgba(255,255,255,.12);
-  font-size:14px;
-}
-</style>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#111827;
+      --panel2:#0b1220;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#38bdf8;
+      --radius:18px;
+      --shadow:0 16px 40px rgba(0,0,0,.45);
+      --max:460px;
+      --line:rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#0b0f17,#020617);
+      color:var(--text);
+      font-family:system-ui,-apple-system,"Noto Sans KR","Noto Sans Arabic",sans-serif;
+      line-height:1.7;
+    }
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:22px 18px 50px;
+    }
+
+    /* TOP BAR */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:6px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:140px;
+    }
+    .dot{
+      width:14px;height:14px;border-radius:999px;
+      background:rgba(255,255,255,.85);
+      box-shadow:0 0 0 6px rgba(255,255,255,.06);
+    }
+    .brand-name{
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size:18px;
+    }
+    .lang-select{
+      flex:1;
+      display:flex;
+      justify-content:flex-end;
+    }
+    select{
+      width:170px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      outline:none;
+      font-weight:700;
+    }
+    option{color:#111}
+
+    /* HEADER */
+    .header{
+      text-align:center;
+      margin:22px 0 26px;
+    }
+    .app-icon{
+      width:84px;height:84px;border-radius:22px;
+      margin:0 auto 18px;
+      background:linear-gradient(135deg,#f5c542,#7c3aed);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 18px 50px rgba(0,0,0,.55);
+      font-weight:900;
+      font-size:34px;
+      color:white;
+      user-select:none;
+    }
+    .header h1{
+      margin:0;
+      font-size:40px;
+      font-weight:900;
+      letter-spacing:.3px;
+    }
+    .header .tagline{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+      letter-spacing:3px;
+    }
+    .header .slogan{
+      margin-top:12px;
+      font-weight:900;
+      color:#fbbf24;
+      font-size:20px;
+    }
+
+    .section-title{
+      margin:34px 0 10px;
+      font-size:13px;
+      font-weight:900;
+      color:#c7d2fe;
+      letter-spacing:.4px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border-radius:var(--radius);
+      padding:22px;
+      margin:16px 0;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.03);
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:22px;
+      font-weight:900;
+    }
+    .card p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .card small{
+      display:block;
+      margin-top:10px;
+      font-size:12px;
+      color:#6b7280;
+    }
+    a.card{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .divider{
+      margin:24px 0;
+      text-align:center;
+      font-size:12px;
+      color:#6b7280;
+      letter-spacing:.3px;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:40px;
+      font-size:12px;
+      color:#6b7280;
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
+  <main class="wrap">
 
-  <div class="top">
-    <div class="brand">● PHKBank</div>
-    <select class="lang-select" id="langSelect">
-      <option value="ko">한국어</option>
-      <option value="en">English</option>
-      <option value="zh">中文</option>
-      <option value="ja">日本語</option>
-      <option value="ar">العربية</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="pt">Português</option>
-      <option value="it">Italiano</option>
-      <option value="tr">Türkçe</option>
-      <option value="vi">Tiếng Việt</option>
-      <option value="th">ไทย</option>
-      <option value="id">Bahasa Indonesia</option>
-      <option value="hi">हिन्दी</option>
-      <option value="fa">فارسی</option>
-      <option value="ur">اردو</option>
-    </select>
-  </div>
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="brand-name" data-i18n="brand_name">PHKBank</div>
+      </div>
 
-  <div class="logo">π</div>
-
-  <h1 data-i18n="title">PHKBank</h1>
-  <div class="tag" data-i18n="tagline">ONE WORLD · ONE PI · ONE FUTURE</div>
-  <div class="slogan" data-i18n="slogan">사람이 먼저, 이윤은 그 다음</div>
-
-  <div class="card">
-    <h3 data-i18n="basic_title">기본소득</h3>
-    <p data-i18n="basic_desc">기본소득 리워드</p>
-  </div>
-
-  <div class="card">
-    <h3 data-i18n="pay_title">결제</h3>
-    <p data-i18n="pay_desc">결제 · 송금</p>
-  </div>
-
-  <div class="card">
-    <h3 data-i18n="apy_title">예치율</h3>
-    <p data-i18n="apy_desc">31.4% APY (데모)</p>
-  </div>
-
-  <div class="card">
-    <h3 data-i18n="reward_title">보상</h3>
-    <p data-i18n="reward_desc">참여 보상</p>
-  </div>
-
-  <div class="card">
-    <h3 data-i18n="support_title">고객센터</h3>
-    <p data-i18n="support_desc">도움받기</p>
-  </div>
-
-  <div class="card">
-    <h3 data-i18n="faq_title">FAQ</h3>
-    <p data-i18n="faq_desc">약관 · 정책 · 문의</p>
-  </div>
-<div class="install">
-    <p data-i18n="install_text">
-      원클릭 설치 / 실행<br><br>
-      브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.<br>
-      URL:<br>
-      https://ljw2358.github.io/piworldbank_2025/
-    </p>
-
-    <div class="btns">
-      <div class="btn dark" data-i18n="open_pi">Pi Browser로 열기</div>
-      <div class="btn gold" data-i18n="install_btn">설치</div>
+      <div class="lang-select">
+        <select id="langSelect" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="zh_cn">中文(简体)</option>
+          <option value="zh_tw">中文(繁體)</option>
+          <option value="ja">日本語</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="ru">Русский</option>
+          <option value="ar">العربية</option>
+          <option value="hi">हिन्दी</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="th">ไทย</option>
+          <option value="tr">Türkçe</option>
+          <option value="fa">فارسی</option>
+          <option value="ms">Bahasa Melayu</option>
+          <option value="tl">Filipino</option>
+        </select>
+      </div>
     </div>
 
-    <div class="status">
-      <div class="dot"></div>
-      <span data-i18n="status_ok">상태: OK</span>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="app-icon">π</div>
+
+      <h1 data-i18n="app_title">PHKBank</h1>
+      <div class="tagline" data-i18n="tagline">ONE WORLD · ONE PI · ONE FUTURE</div>
+      <div class="slogan" data-i18n="slogan">사람이 먼저, 이유는 그 다음</div>
     </div>
-  </div>
 
-  <div class="bottom">
-    <div data-i18n="youtube">YouTube</div>
-    <div data-i18n="tiktok">TikTok</div>
-    <div data-i18n="contact">문의</div>
-  </div>
+    <!-- SECTION 1 -->
+    <div class="section-title" data-i18n="sec1_title">PHKBank Core · 실행 영역</div>
 
-</div>
+    <div class="card" onclick="showInfo('ubi')">
+      <h2 data-i18n="ubi_title">기본소득</h2>
+      <p data-i18n="ubi_desc">기본소득 리워드</p>
+      <small data-i18n="ubi_hint">정기 지급 · 참여 기반 · 생태계 환원</small>
+    </div>
 
-<script>
-const LANG = {
-  ko:{
-    title:"PHKBank",
-    tagline:"ONE WORLD · ONE PI · ONE FUTURE",
-    slogan:"사람이 먼저, 이윤은 그 다음",
-    basic_title:"기본소득",
-    basic_desc:"기본소득 리워드",
-    pay_title:"결제",
-    pay_desc:"결제 · 송금",
-    apy_title:"예치율",
-    apy_desc:"31.4% APY (데모)",
-    reward_title:"보상",
-    reward_desc:"참여 보상",
-    support_title:"고객센터",
-    support_desc:"도움받기",
-    faq_title:"FAQ",
-    faq_desc:"약관 · 정책 · 문의",
-    install_text:"원클릭 설치 / 실행<br><br>브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Pi Browser로 열기",
-    install_btn:"설치",
-    status_ok:"상태: OK",
-    youtube:"YouTube",
-    tiktok:"TikTok",
-    contact:"문의"
-  },
-  en:{
-    title:"PHKBank",
-    tagline:"ONE WORLD · ONE PI · ONE FUTURE",
-    slogan:"People First, Profit Later",
-    basic_title:"Basic Income",
-    basic_desc:"Basic income rewards",
-    pay_title:"Payments",
-    pay_desc:"Payments · Transfers",
-    apy_title:"Yield",
-    apy_desc:"31.4% APY (Demo)",
-    reward_title:"Rewards",
-    reward_desc:"Participation rewards",
-    support_title:"Support",
-    support_desc:"Get help",
-    faq_title:"FAQ",
-    faq_desc:"Terms · Policy · Contact",
-    install_text:"One-click install / launch<br><br>Available when “Add to Home Screen” is supported.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Open in Pi Browser",
-    install_btn:"Install",
-    status_ok:"Status: OK",
-    youtube:"YouTube",
-    tiktok:"TikTok",
-    contact:"Contact"
-  },
-  zh:{ title:"PHKBank", tagline:"一个世界 · 一个PI · 一个未来", slogan:"以人为本，其次是利润",
-    basic_title:"基本收入", basic_desc:"基本收入奖励",
-    pay_title:"支付", pay_desc:"支付 · 转账",
-    apy_title:"收益率", apy_desc:"31.4% APY（演示）",
-    reward_title:"奖励", reward_desc:"参与奖励",
-    support_title:"客服", support_desc:"获取帮助",
-    faq_title:"常见问题", faq_desc:"条款 · 政策 · 联系",
-    install_text:"一键安装 / 启动<br><br>支持“添加到主屏幕”时可用。<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"在 Pi 浏览器中打开", install_btn:"安装", status_ok:"状态：正常",
-    youtube:"YouTube", tiktok:"TikTok", contact:"联系"
-  },
-  ja:{ title:"PHKBank", tagline:"一つの世界 · 一つのPI · 一つの未来", slogan:"人が先、利益は後",
-    basic_title:"ベーシックインカム", basic_desc:"ベーシックインカム報酬",
-    pay_title:"決済", pay_desc:"決済・送金",
-    apy_title:"利回り", apy_desc:"31.4% APY（デモ）",
-    reward_title:"報酬", reward_desc:"参加報酬",
-    support_title:"サポート", support_desc:"ヘルプ",
-    faq_title:"FAQ", faq_desc:"規約・ポリシー・お問い合わせ",
-    install_text:"ワンクリックインストール / 起動<br><br>「ホーム画面に追加」が可能な場合に有効。<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Pi Browserで開く", install_btn:"インストール", status_ok:"状態：OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"お問い合わせ"
-  },
-  ar:{ title:"PHKBank", tagline:"عالم واحد · PI واحد · مستقبل واحد", slogan:"الإنسان أولاً ثم الربح",
-    basic_title:"الدخل الأساسي", basic_desc:"مكافآت الدخل الأساسي",
-    pay_title:"الدفع", pay_desc:"الدفع · التحويل",
-    apy_title:"العائد", apy_desc:"%31.4 عائد سنوي (تجريبي)",
-    reward_title:"المكافآت", reward_desc:"مكافآت المشاركة",
-    support_title:"الدعم", support_desc:"الحصول على المساعدة",
-    faq_title:"الأسئلة الشائعة", faq_desc:"الشروط · السياسة · الاتصال",
-    install_text:"تثبيت / تشغيل بنقرة واحدة<br><br>متاح عند دعم الإضافة إلى الشاشة الرئيسية.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"افتح في Pi Browser", install_btn:"تثبيت", status_ok:"الحالة: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"اتصال"
-  },
-  es:{ title:"PHKBank", tagline:"UN MUNDO · UN PI · UN FUTURO", slogan:"Las personas primero, luego las ganancias",
-    basic_title:"Ingreso básico", basic_desc:"Recompensas de ingreso básico",
-    pay_title:"Pagos", pay_desc:"Pagos · Transferencias",
-    apy_title:"Rendimiento", apy_desc:"31.4% APY (Demo)",
-    reward_title:"Recompensas", reward_desc:"Recompensas por participación",
-    support_title:"Soporte", support_desc:"Obtener ayuda",
-    faq_title:"FAQ", faq_desc:"Términos · Política · Contacto",
-    install_text:"Instalación / ejecución con un clic<br><br>Disponible cuando se admite “Agregar a la pantalla de inicio”.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Abrir en Pi Browser", install_btn:"Instalar", status_ok:"Estado: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Contacto"
-  },
-  fr:{ title:"PHKBank", tagline:"UN MONDE · UN PI · UN AVENIR", slogan:"Les personnes d’abord, le profit ensuite",
-    basic_title:"Revenu de base", basic_desc:"Récompenses de revenu de base",
-    pay_title:"Paiements", pay_desc:"Paiements · Transferts",
-    apy_title:"Rendement", apy_desc:"31,4% APY (Démo)",
-    reward_title:"Récompenses", reward_desc:"Récompenses de participation",
-    support_title:"Support", support_desc:"Obtenir de l’aide",
-    faq_title:"FAQ", faq_desc:"Conditions · Politique · Contact",
-    install_text:"Installation / lancement en un clic<br><br>Disponible lorsque “Ajouter à l’écran d’accueil” est pris en charge.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Ouvrir dans Pi Browser", install_btn:"Installer", status_ok:"Statut : OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Contact"
-  },
-  de:{ title:"PHKBank", tagline:"EINE WELT · EIN PI · EINE ZUKUNFT", slogan:"Menschen zuerst, Gewinn danach",
-    basic_title:"Grundeinkommen", basic_desc:"Grundeinkommensprämien",
-    pay_title:"Zahlungen", pay_desc:"Zahlungen · Überweisungen",
-    apy_title:"Rendite", apy_desc:"31,4% APY (Demo)",
-    reward_title:"Belohnungen", reward_desc:"Teilnahmebelohnungen",
-    support_title:"Support", support_desc:"Hilfe erhalten",
-    faq_title:"FAQ", faq_desc:"Bedingungen · Richtlinie · Kontakt",
-    install_text:"Ein-Klick-Installation / Start<br><br>Verfügbar bei Unterstützung von „Zum Startbildschirm hinzufügen“.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"In Pi Browser öffnen", install_btn:"Installieren", status_ok:"Status: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Kontakt"
-  },
-  ru:{ title:"PHKBank", tagline:"ОДИН МИР · ОДИН PI · ОДНО БУДУЩЕЕ", slogan:"Сначала люди, потом прибыль",
-    basic_title:"Базовый доход", basic_desc:"Вознаграждения базового дохода",
-    pay_title:"Платежи", pay_desc:"Платежи · Переводы",
-    apy_title:"Доходность", apy_desc:"31,4% APY (Демо)",
-    reward_title:"Награды", reward_desc:"Награды за участие",
-    support_title:"Поддержка", support_desc:"Получить помощь",
-    faq_title:"FAQ", faq_desc:"Условия · Политика · Контакты",
-    install_text:"Установка / запуск в один клик<br><br>Доступно при поддержке «Добавить на главный экран».<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Открыть в Pi Browser", install_btn:"Установить", status_ok:"Статус: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Контакты"
-  },
-  pt:{ title:"PHKBank", tagline:"UM MUNDO · UM PI · UM FUTURO", slogan:"Pessoas primeiro, lucro depois",
-    basic_title:"Renda básica", basic_desc:"Recompensas de renda básica",
-    pay_title:"Pagamentos", pay_desc:"Pagamentos · Transferências",
-    apy_title:"Rendimento", apy_desc:"31,4% APY (Demo)",
-    reward_title:"Recompensas", reward_desc:"Recompensas de participação",
-    support_title:"Suporte", support_desc:"Obter ajuda",
-    faq_title:"FAQ", faq_desc:"Termos · Política · Contato",
-    install_text:"Instalação / execução com um clique<br><br>Disponível quando “Adicionar à tela inicial” é suportado.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Abrir no Pi Browser", install_btn:"Instalar", status_ok:"Status: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Contato"
-  },
-  it:{ title:"PHKBank", tagline:"UN MONDO · UN PI · UN FUTURO", slogan:"Le persone prima, il profitto dopo",
-    basic_title:"Reddito di base", basic_desc:"Ricompense del reddito di base",
-    pay_title:"Pagamenti", pay_desc:"Pagamenti · Trasferimenti",
-    apy_title:"Rendimento", apy_desc:"31,4% APY (Demo)",
-    reward_title:"Ricompense", reward_desc:"Ricompense di partecipazione",
-    support_title:"Supporto", support_desc:"Ottenere aiuto",
-    faq_title:"FAQ", faq_desc:"Termini · Politica · Contatto",
-    install_text:"Installazione / avvio con un clic<br><br>Disponibile quando “Aggiungi alla schermata Home” è supportato.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Apri in Pi Browser", install_btn:"Installa", status_ok:"Stato: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Contatto"
-  },
-  tr:{ title:"PHKBank", tagline:"TEK DÜNYA · TEK PI · TEK GELECEK", slogan:"Önce insanlar, sonra kâr",
-    basic_title:"Temel gelir", basic_desc:"Temel gelir ödülleri",
-    pay_title:"Ödemeler", pay_desc:"Ödemeler · Transferler",
-    apy_title:"Getiri", apy_desc:"%31,4 APY (Demo)",
-    reward_title:"Ödüller", reward_desc:"Katılım ödülleri",
-    support_title:"Destek", support_desc:"Yardım al",
-    faq_title:"SSS", faq_desc:"Şartlar · Politika · İletişim",
-    install_text:"Tek tıkla kurulum / çalıştırma<br><br>“Ana ekrana ekle” desteklendiğinde kullanılabilir.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Pi Browser’da aç", install_btn:"Yükle", status_ok:"Durum: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"İletişim"
-  },
-  vi:{ title:"PHKBank", tagline:"MỘT THẾ GIỚI · MỘT PI · MỘT TƯƠNG LAI", slogan:"Con người trước, lợi nhuận sau",
-    basic_title:"Thu nhập cơ bản", basic_desc:"Phần thưởng thu nhập cơ bản",
-    pay_title:"Thanh toán", pay_desc:"Thanh toán · Chuyển khoản",
-    apy_title:"Lợi suất", apy_desc:"31,4% APY (Demo)",
-    reward_title:"Phần thưởng", reward_desc:"Phần thưởng tham gia",
-    support_title:"Hỗ trợ", support_desc:"Nhận trợ giúp",
-    faq_title:"FAQ", faq_desc:"Điều khoản · Chính sách · Liên hệ",
-    install_text:"Cài đặt / chạy một chạm<br><br>Khả dụng khi hỗ trợ “Thêm vào màn hình chính”.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Mở trong Pi Browser", install_btn:"Cài đặt", status_ok:"Trạng thái: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Liên hệ"
-  },
-  th:{ title:"PHKBank", tagline:"หนึ่งโลก · หนึ่ง PI · หนึ่งอนาคต", slogan:"คนมาก่อน กำไรตามมา",
-    basic_title:"รายได้พื้นฐาน", basic_desc:"รางวัลรายได้พื้นฐาน",
-    pay_title:"การชำระเงิน", pay_desc:"การชำระเงิน · โอน",
-    apy_title:"อัตราผลตอบแทน", apy_desc:"31.4% APY (เดโม)",
-    reward_title:"รางวัล", reward_desc:"รางวัลการมีส่วนร่วม",
-    support_title:"การสนับสนุน", support_desc:"รับความช่วยเหลือ",
-    faq_title:"FAQ", faq_desc:"เงื่อนไข · นโยบาย · ติดต่อ",
-    install_text:"ติดตั้ง / เปิดใช้ในคลิกเดียว<br><br>ใช้ได้เมื่อรองรับ “เพิ่มไปยังหน้าจอหลัก”.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"เปิดใน Pi Browser", install_btn:"ติดตั้ง", status_ok:"สถานะ: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"ติดต่อ"
-  },
-  id:{ title:"PHKBank", tagline:"SATU DUNIA · SATU PI · SATU MASA DEPAN", slogan:"Manusia dulu, keuntungan kemudian",
-    basic_title:"Pendapatan dasar", basic_desc:"Hadiah pendapatan dasar",
-    pay_title:"Pembayaran", pay_desc:"Pembayaran · Transfer",
-    apy_title:"Imbal hasil", apy_desc:"31,4% APY (Demo)",
-    reward_title:"Hadiah", reward_desc:"Hadiah partisipasi",
-    support_title:"Dukungan", support_desc:"Dapatkan bantuan",
-    faq_title:"FAQ", faq_desc:"Syarat · Kebijakan · Kontak",
-    install_text:"Instal / jalankan satu klik<br><br>Tersedia saat “Tambahkan ke layar utama” didukung.<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Buka di Pi Browser", install_btn:"Instal", status_ok:"Status: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"Kontak"
-  },
-  hi:{ title:"PHKBank", tagline:"एक दुनिया · एक PI · एक भविष्य", slogan:"पहले लोग, फिर मुनाफ़ा",
-    basic_title:"मूल आय", basic_desc:"मूल आय पुरस्कार",
-    pay_title:"भुगतान", pay_desc:"भुगतान · स्थानांतरण",
-    apy_title:"उपज", apy_desc:"31.4% APY (डेमो)",
-    reward_title:"पुरस्कार", reward_desc:"भागीदारी पुरस्कार",
-    support_title:"सहायता", support_desc:"मदद प्राप्त करें",
-    faq_title:"FAQ", faq_desc:"शर्तें · नीति · संपर्क",
-    install_text:"एक-क्लिक इंस्टॉल / लॉन्च<br><br>“होम स्क्रीन पर जोड़ें” समर्थित होने पर उपलब्ध।<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Pi Browser में खोलें", install_btn:"इंस्टॉल", status_ok:"स्थिति: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"संपर्क"
-  },
-  fa:{ title:"PHKBank", tagline:"یک جهان · یک PI · یک آینده", slogan:"انسان ها اول، سود بعد",
-    basic_title:"درآمد پایه", basic_desc:"پاداش های درآمد پایه",
-    pay_title:"پرداخت ها", pay_desc:"پرداخت · انتقال",
-    apy_title:"بازده", apy_desc:"٪31.4 APY (نمایشی)",
-    reward_title:"پاداش ها", reward_desc:"پاداش مشارکت",
-    support_title:"پشتیبانی", support_desc:"دریافت کمک",
-    faq_title:"سؤالات متداول", faq_desc:"شرایط · سیاست · تماس",
-    install_text:"نصب / اجرا با یک کلیک<br><br>در صورت پشتیبانی از «افزودن به صفحه اصلی».<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"باز کردن در Pi Browser", install_btn:"نصب", status_ok:"وضعیت: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"تماس"
-  },
-  ur:{ title:"PHKBank", tagline:"ایک دنیا · ایک PI · ایک مستقبل", slogan:"انسان پہلے، منافع بعد میں",
-    basic_title:"بنیادی آمدنی", basic_desc:"بنیادی آمدنی انعامات",
-    pay_title:"ادائیگیاں", pay_desc:"ادائیگیاں · منتقلی",
-    apy_title:"پیداوار", apy_desc:"31.4% APY (ڈیمو)",
-    reward_title:"انعامات", reward_desc:"شرکت کے انعامات",
-    support_title:"سپورٹ", support_desc:"مدد حاصل کریں",
-    faq_title:"FAQ", faq_desc:"شرائط · پالیسی · رابطہ",
-    install_text:"ایک کلک انسٹال / لانچ<br><br>جب “ہوم اسکرین میں شامل کریں” دستیاب ہو۔<br>URL:<br>https://ljw2358.github.io/piworldbank_2025/",
-    open_pi:"Pi Browser میں کھولیں", install_btn:"انسٹال", status_ok:"حالت: OK",
-    youtube:"YouTube", tiktok:"TikTok", contact:"رابطہ"
-  }
-};
+    <div class="card" onclick="showInfo('pay')">
+      <h2 data-i18n="pay_title">결제</h2>
+      <p data-i18n="pay_desc">결제 · 송금</p>
+      <small data-i18n="pay_hint">결제 · 송금 · 정산 · 가치 이전</small>
+    </div>
 
-function setLang(lang){
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const key = el.getAttribute("data-i18n");
-    if(LANG[lang] && LANG[lang][key]){
-      el.innerHTML = LANG[lang][key];
-    }
-  });
-}
+    <div class="card" onclick="showInfo('apy')">
+      <h2 data-i18n="apy_title">예치율</h2>
+      <p data-i18n="apy_desc">31.4% APY (데모)</p>
+      <small data-i18n="apy_hint">안정성 · 유동성 · 장기 운영</small>
+    </div>
 
-document.getElementById("langSelect").addEventListener("change",e=>{
-  setLang(e.target.value);
-});
+    <div class="card" onclick="showInfo('reward')">
+      <h2 data-i18n="reward_title">보상</h2>
+      <p data-i18n="reward_desc">참여 · 기여 기반</p>
+      <small data-i18n="reward_hint">활동 기록 · 기여 평가 · 보상 분배</small>
+    </div>
 
-setLang("ko");
-</script>
+    <div class="divider" data-i18n="channels_div">External Channels</div>
 
+    <a class="card" id="ytLink" href="https://www.youtube.com/" target="_blank" rel="noopener">
+      <h2 data-i18n="youtube_title">YouTube</h2>
+      <p data-i18n="youtube_desc">PHKBank 공식 영상 채널</p>
+    </a>
+
+    <a class="card" id="ttLink" href="https://www.tiktok.com/" target="_blank" rel="noopener">
+      <h2 data-i18n="tiktok_title">TikTok</h2>
+      <p data-i18n="tiktok_desc">PHKBank 공식 틱톡 채널</p>
+    </a>
+
+    <!-- SECTION 2 -->
+    <div class="section-title" data-i18n="sec2_title">PHKBank Framework · 구조 영역</div>
+
+    <div class="card" onclick="showInfo('framework')">
+      <h2 data-i18n="framework_title">PHKBank Framework</h2>
+      <p data-i18n="framework_desc">
+        PHKBank는 단순 금융 앱이 아니라 결제·산업·기술·UBI를 통합하는 금융 운영체계(OS)입니다.
+      </p>
+      <small data-i18n="framework_hint">금융 OS · 구조 설계 · 장기 확장</small>
+    </div>
+
+    <div class="card" onclick="showInfo('global')">
+      <h2 data-i18n="global_title">Global Expansion</h2>
+      <p data-i18n="global_desc">
+        PHKBank는 국가 단위를 넘어 글로벌 결제·정산·산업 연동 구조로 확장됩니다.
+      </p>
+      <small data-i18n="global_hint">국제 연동 · 파트너십 · 확장 구조</small>
+    </div>
+
+    <div class="card" onclick="showInfo('pwb')">
+      <h2 data-i18n="pwb_title">PWB Global</h2>
+      <p data-i18n="pwb_desc">
+        PHKBank의 하위 글로벌 확장 프레임으로, 국제 금융·산업·UBI 구조를 담당합니다.
+      </p>
+      <small data-i18n="pwb_hint">Sub Framework</small>
+    </div>
+
+    <div class="footer">
+      © 2026 <span data-i18n="footer_brand">PHKBank</span><br/>
+      <span data-i18n="footer_line">Financial Operating System</span>
+    </div>
+    <script>
+      const RTL_LANGS = new Set(["ar","fa"]);
+
+      const LANG = {
+        ko:{
+          brand_name:"PHKBank",
+          app_title:"PHKBank",
+          tagline:"ONE WORLD · ONE PI · ONE FUTURE",
+          slogan:"사람이 먼저, 이유는 그 다음",
+
+          sec1_title:"PHKBank Core · 실행 영역",
+          ubi_title:"기본소득",
+          ubi_desc:"기본소득 리워드",
+          ubi_hint:"정기 지급 · 참여 기반 · 생태계 환원",
+
+          pay_title:"결제",
+          pay_desc:"결제 · 송금",
+          pay_hint:"결제 · 송금 · 정산 · 가치 이전",
+
+          apy_title:"예치율",
+          apy_desc:"31.4% APY (데모)",
+          apy_hint:"안정성 · 유동성 · 장기 운영",
+
+          reward_title:"보상",
+          reward_desc:"참여 · 기여 기반",
+          reward_hint:"활동 기록 · 기여 평가 · 보상 분배",
+
+          channels_div:"External Channels",
+          youtube_title:"YouTube",
+          youtube_desc:"PHKBank 공식 영상 채널",
+          tiktok_title:"TikTok",
+          tiktok_desc:"PHKBank 공식 틱톡 채널",
+
+          sec2_title:"PHKBank Framework · 구조 영역",
+          framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank는 단순 금융 앱이 아니라 결제·산업·기술·UBI를 통합하는 금융 운영체계(OS)입니다.",
+          framework_hint:"금융 OS · 구조 설계 · 장기 확장",
+
+          global_title:"Global Expansion",
+          global_desc:"PHKBank는 국가 단위를 넘어 글로벌 결제·정산·산업 연동 구조로 확장됩니다.",
+          global_hint:"국제 연동 · 파트너십 · 확장 구조",
+
+          pwb_title:"PWB Global",
+          pwb_desc:"PHKBank의 하위 글로벌 확장 프레임으로, 국제 금융·산업·UBI 구조를 담당합니다.",
+          pwb_hint:"Sub Framework",
+
+          footer_brand:"PHKBank",
+          footer_line:"Financial Operating System",
+
+          alert_ubi_title:"기본소득(UBI)",
+          alert_ubi_body:"PHKBank 수익 구조의 일부를 시민에게 정기적으로 환원하는 모델입니다.\n노동 여부와 관계없이 참여 시민에게 지급됩니다.",
+          alert_pay_title:"결제 · 송금",
+          alert_pay_body:"PHK 생태계 내 결제, 송금, 정산을 담당하는 핵심 금융 레이어입니다.",
+          alert_apy_title:"예치율(APY)",
+          alert_apy_body:"현재는 데모 표시입니다.\n향후 예치 구조, 기간, 조건에 따라 APY 정책이 정리됩니다.",
+          alert_reward_title:"보상",
+          alert_reward_body:"플랫폼 참여와 기여에 따라 보상이 분배되는 구조입니다.",
+          alert_framework_title:"PHKBank Framework",
+          alert_framework_body:"PHKBank는 금융 앱이 아닌 금융 운영체계(OS)로 설계되었습니다.",
+          alert_global_title:"Global Expansion",
+          alert_global_body:"PHKBank는 글로벌 결제·정산·산업 연동 구조로 확장됩니다.",
+          alert_pwb_title:"PWB Global",
+          alert_pwb_body:"PHKBank의 하위 글로벌 확장 프레임입니다."
+        },
+
+        en:{
+          brand_name:"PHKBank",
+          app_title:"PHKBank",
+          tagline:"ONE WORLD · ONE PI · ONE FUTURE",
+          slogan:"People first, purpose next",
+
+          sec1_title:"PHKBank Core · Execution",
+          ubi_title:"UBI",
+          ubi_desc:"Basic income rewards",
+          ubi_hint:"Recurring · Participation-based · Ecosystem return",
+
+          pay_title:"Payment",
+          pay_desc:"Pay · Transfer",
+          pay_hint:"Pay · Transfer · Settlement · Value flow",
+
+          apy_title:"Deposit Rate",
+          apy_desc:"31.4% APY (Demo)",
+          apy_hint:"Stability · Liquidity · Long-term ops",
+
+          reward_title:"Rewards",
+          reward_desc:"Contribution-based",
+          reward_hint:"Activity logs · Contribution scoring · Distribution",
+
+          channels_div:"External Channels",
+          youtube_title:"YouTube",
+          youtube_desc:"Official channel",
+          tiktok_title:"TikTok",
+          tiktok_desc:"Official channel",
+
+          sec2_title:"PHKBank Framework · Structure",
+          framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank is not just an app. It is a financial operating system integrating payment, industry, technology, and UBI.",
+          framework_hint:"Financial OS · Architecture · Long-term scale",
+
+          global_title:"Global Expansion",
+          global_desc:"PHKBank expands beyond borders into global payment, settlement, and industry-linked structures.",
+          global_hint:"Interoperability · Partnerships · Scaling",
+
+          pwb_title:"PWB Global",
+          pwb_desc:"A sub global extension framework under PHKBank, responsible for global finance, industry, and UBI structures.",
+          pwb_hint:"Sub Framework",
+
+          footer_brand:"PHKBank",
+          footer_line:"Financial Operating System",
+
+          alert_ubi_title:"UBI",
+          alert_ubi_body:"A model that returns part of PHKBank’s profits to citizens on a recurring basis.\nPaid to participating users regardless of labor status.",
+          alert_pay_title:"Payment & Transfer",
+          alert_pay_body:"The core layer for payment, transfer, and settlement within the PHK ecosystem.",
+          alert_apy_title:"Deposit Rate (APY)",
+          alert_apy_body:"Currently displayed as a demo.\nAPY policy will be defined by terms and conditions later.",
+          alert_reward_title:"Rewards",
+          alert_reward_body:"Rewards are distributed based on participation and contribution.",
+          alert_framework_title:"PHKBank Framework",
+          alert_framework_body:"PHKBank is designed as a financial operating system (OS), not a simple finance app.",
+          alert_global_title:"Global Expansion",
+          alert_global_body:"PHKBank scales into global payment, settlement, and industry-linked structures.",
+          alert_pwb_title:"PWB Global",
+          alert_pwb_body:"A sub global extension framework under PHKBank."
+        },
+
+        zh_cn:{
+          brand_name:"PHKBank",
+          app_title:"PHKBank",
+          tagline:"ONE WORLD · ONE PI · ONE FUTURE",
+          slogan:"以人为先，其次是理由",
+
+          sec1_title:"PHKBank 核心 · 执行",
+          ubi_title:"基本收入",
+          ubi_desc:"基本收入奖励",
+          ubi_hint:"定期 · 参与制 · 生态回馈",
+
+          pay_title:"支付",
+          pay_desc:"支付 · 转账",
+          pay_hint:"支付 · 转账 · 清算 · 价值流转",
+
+          apy_title:"存款利率",
+          apy_desc:"31.4% APY（演示）",
+          apy_hint:"稳定 · 流动性 · 长期运营",
+
+          reward_title:"奖励",
+          reward_desc:"基于参与与贡献",
+          reward_hint:"活动记录 · 贡献评估 · 奖励分配",
+
+          channels_div:"外部频道",
+          youtube_title:"YouTube",
+          youtube_desc:"官方频道",
+          tiktok_title:"TikTok",
+          tiktok_desc:"官方频道",
+
+          sec2_title:"PHKBank 框架 · 结构",
+          framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank 不只是应用，而是整合支付、产业、技术与 UBI 的金融操作系统。",
+          framework_hint:"金融OS · 架构 · 长期扩展",
+
+          global_title:"全球扩展",
+          global_desc:"PHKBank 将支付、清算与产业联动扩展到全球范围。",
+          global_hint:"互联互通 · 合作 · 扩展",
+
+          pwb_title:"PWB Global",
+          pwb_desc:"隶属于 PHKBank 的全球扩展子框架，负责国际金融、产业与 UBI 结构。",
+          pwb_hint:"子框架",
+
+          footer_brand:"PHKBank",
+          footer_line:"金融操作系统",
+
+          alert_ubi_title:"基本收入(UBI)",
+          alert_ubi_body:"将 PHKBank 利润的一部分定期回馈给用户。\n不以劳动与否为前提，面向参与者发放。",
+          alert_pay_title:"支付 · 转账",
+          alert_pay_body:"PHK 生态内的支付、转账与清算核心层。",
+          alert_apy_title:"存款利率(APY)",
+          alert_apy_body:"当前为演示显示。\n未来将根据期限与条件制定 APY 政策。",
+          alert_reward_title:"奖励",
+          alert_reward_body:"根据参与与贡献分配奖励。",
+          alert_framework_title:"PHKBank Framework",
+          alert_framework_body:"PHKBank 被设计为金融操作系统(OS)。",
+          alert_global_title:"全球扩展",
+          alert_global_body:"PHKBank 扩展为全球支付、清算与产业联动结构。",
+          alert_pwb_title:"PWB Global",
+          alert_pwb_body:"PHKBank 旗下的全球扩展子框架。"
+        },
+
+        zh_tw:{
+          brand_name:"PHKBank",
+          app_title:"PHKBank",
+          tagline:"ONE WORLD · ONE PI · ONE FUTURE",
+          slogan:"以人為先，其次是理由",
+
+          sec1_title:"PHKBank 核心 · 執行",
+          ubi_title:"基本收入",
+          ubi_desc:"基本收入獎勵",
+          ubi_hint:"定期 · 參與制 · 生態回饋",
+
+          pay_title:"支付",
+          pay_desc:"支付 · 轉帳",
+          pay_hint:"支付 · 轉帳 · 清算 · 價值流轉",
+
+          apy_title:"存款利率",
+          apy_desc:"31.4% APY（示範）",
+          apy_hint:"穩定 · 流動性 · 長期營運",
+
+          reward_title:"獎勵",
+          reward_desc:"基於參與與貢獻",
+          reward_hint:"活動紀錄 · 貢獻評估 · 獎勵分配",
+
+          channels_div:"外部頻道",
+          youtube_title:"YouTube",
+          youtube_desc:"官方頻道",
+          tiktok_title:"TikTok",
+          tiktok_desc:"官方頻道",
+
+          sec2_title:"PHKBank 架構 · 結構",
+          framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank 不只是應用，而是整合支付、產業、技術與 UBI 的金融作業系統。",
+          framework_hint:"金融OS · 架構 · 長期擴展",
+
+          global_title:"全球擴展",
+          global_desc:"PHKBank 將支付、清算與產業聯動擴展到全球。",
+          global_hint:"互聯互通 · 合作 · 擴展",
+
+          pwb_title:"PWB Global",
+          pwb_desc:"隸屬於 PHKBank 的全球擴展子架構，負責國際金融、產業與 UBI 結構。",
+          pwb_hint:"子架構",
+
+          footer_brand:"PHKBank",
+          footer_line:"金融作業系統",
+
+          alert_ubi_title:"基本收入(UBI)",
+          alert_ubi_body:"將 PHKBank 利潤的一部分定期回饋給用戶。\n不以勞動與否為前提，面向參與者發放。",
+          alert_pay_title:"支付 · 轉帳",
+          alert_pay_body:"PHK 生態內支付、轉帳與清算核心層。",
+          alert_apy_title:"存款利率(APY)",
+          alert_apy_body:"目前為示範顯示。\n未來將依期限與條件制定 APY 政策。",
+          alert_reward_title:"獎勵",
+          alert_reward_body:"依參與與貢獻分配獎勵。",
+          alert_framework_title:"PHKBank Framework",
+          alert_framework_body:"PHKBank 被設計為金融作業系統(OS)。",
+          alert_global_title:"全球擴展",
+          alert_global_body:"PHKBank 擴展為全球支付、清算與產業聯動結構。",
+          alert_pwb_title:"PWB Global",
+          alert_pwb_body:"PHKBank 旗下全球擴展子架構。"
+        },
+
+        ja:{
+          brand_name:"PHKBank",
+          app_title:"PHKBank",
+          tagline:"ONE WORLD · ONE PI · ONE FUTURE",
+          slogan:"人が先、理由はその次",
+
+          sec1_title:"PHKBank Core · 実行",
+          ubi_title:"ベーシックインカム",
+          ubi_desc:"UBIリワード",
+          ubi_hint:"定期 · 参加型 · エコシステム還元",
+
+          pay_title:"決済",
+          pay_desc:"決済 · 送金",
+          pay_hint:"決済 · 送金 · 清算 · 価値移転",
+
+          apy_title:"預入利率",
+          apy_desc:"31.4% APY（デモ）",
+          apy_hint:"安定性 · 流動性 · 長期運用",
+
+          reward_title:"報酬",
+          reward_desc:"参加・貢献ベース",
+          reward_hint:"活動記録 · 貢献評価 · 分配",
+
+          channels_div:"外部チャンネル",
+          youtube_title:"YouTube",
+          youtube_desc:"公式チャンネル",
+          tiktok_title:"TikTok",
+          tiktok_desc:"公式チャンネル",
+
+          sec2_title:"PHKBank Framework · 構造",
+          framework_title:"PHKBank Framework",
+          framework_desc:"PHKBankは単なるアプリではなく、決済・産業・技術・UBIを統合する金融OSです。",
+          framework_hint:"金融OS · 設計 · 長期拡張",
+
+          global_title:"グローバル拡張",
+          global_desc:"PHKBankは国境を越えて決済・清算・産業連動構造へ拡張します。",
+          global_hint:"相互接続 · パートナー · 拡張",
+
+          pwb_title:"PWB Global",
+          pwb_desc:"PHKBank配下のグローバル拡張フレームで、国際金融・産業・UBI構造を担当します。",
+          pwb_hint:"サブフレーム",
+
+          footer_brand:"PHKBank",
+          footer_line:"金融オペレーティングシステム",
+
+          alert_ubi_title:"UBI",
+          alert_ubi_body:"PHKBankの利益の一部を参加者へ定期的に還元します。\n労働の有無に関係なく支給します。",
+          alert_pay_title:"決済・送金",
+          alert_pay_body:"PHKエコシステム内の決済、送金、清算の中核レイヤーです。",
+          alert_apy_title:"預入利率(APY)",
+          alert_apy_body:"現在はデモ表示です。\n条件によりAPY方針を整理します。",
+          alert_reward_title:"報酬",
+          alert_reward_body:"参加と貢献に基づき報酬を分配します。",
+          alert_framework_title:"PHKBank Framework",
+          alert_framework_body:"PHKBankは金融OSとして設計されています。",
+          alert_global_title:"グローバル拡張",
+          alert_global_body:"PHKBankはグローバル決済・清算・産業連動へ拡張します。",
+          alert_pwb_title:"PWB Global",
+          alert_pwb_body:"PHKBank配下のグローバル拡張サブフレームです。"
+        },
+
+        es:{ /* Spanish */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Primero las personas, luego el propósito",
+          sec1_title:"PHKBank Core · Ejecución", ubi_title:"Ingreso básico", ubi_desc:"Recompensas UBI", ubi_hint:"Recurrente · Participación · Retorno",
+          pay_title:"Pago", pay_desc:"Pago · Transferencia", pay_hint:"Pago · Transferencia · Liquidación",
+          apy_title:"Tasa de depósito", apy_desc:"31.4% APY (Demo)", apy_hint:"Estabilidad · Liquidez · Largo plazo",
+          reward_title:"Recompensas", reward_desc:"Basado en contribución", reward_hint:"Registro · Evaluación · Distribución",
+          channels_div:"Canales externos", youtube_title:"YouTube", youtube_desc:"Canal oficial", tiktok_title:"TikTok", tiktok_desc:"Canal oficial",
+          sec2_title:"PHKBank Framework · Estructura", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank no es solo una app: es un sistema operativo financiero que integra pagos, industria, tecnología y UBI.",
+          framework_hint:"OS financiero · Arquitectura · Escala",
+          global_title:"Expansión global", global_desc:"PHKBank se expande a estructuras globales de pago, liquidación e industria.", global_hint:"Interoperabilidad · Alianzas · Escala",
+          pwb_title:"PWB Global", pwb_desc:"Marco global subordinado a PHKBank para finanzas, industria y UBI.", pwb_hint:"Submarco",
+          footer_brand:"PHKBank", footer_line:"Sistema Operativo Financiero",
+          alert_ubi_title:"UBI", alert_ubi_body:"Modelo que devuelve parte de las ganancias a las personas periódicamente.\nSe paga a participantes independientemente del empleo.",
+          alert_pay_title:"Pago y transferencia", alert_pay_body:"Capa central de pagos, transferencias y liquidación del ecosistema PHK.",
+          alert_apy_title:"Tasa (APY)", alert_apy_body:"Mostrado como demo.\nLa política APY se definirá por condiciones.",
+          alert_reward_title:"Recompensas", alert_reward_body:"Recompensas según participación y contribución.",
+          alert_framework_title:"PHKBank Framework", alert_framework_body:"PHKBank está diseñado como un OS financiero.",
+          alert_global_title:"Expansión global", alert_global_body:"PHKBank escala a pagos y liquidación globales.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Submarco global bajo PHKBank."
+        },
+
+        fr:{ /* French */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Les personnes d'abord, le sens ensuite",
+          sec1_title:"PHKBank Core · Exécution", ubi_title:"Revenu de base", ubi_desc:"Récompenses UBI", ubi_hint:"Récurrent · Participation · Retour",
+          pay_title:"Paiement", pay_desc:"Paiement · Transfert", pay_hint:"Paiement · Transfert · Règlement",
+          apy_title:"Taux de dépôt", apy_desc:"31.4% APY (Démo)", apy_hint:"Stabilité · Liquidité · Long terme",
+          reward_title:"Récompenses", reward_desc:"Basées sur la contribution", reward_hint:"Journal · Évaluation · Distribution",
+          channels_div:"Canaux externes", youtube_title:"YouTube", youtube_desc:"Chaîne officielle", tiktok_title:"TikTok", tiktok_desc:"Chaîne officielle",
+          sec2_title:"PHKBank Framework · Structure", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank n’est pas qu’une appli : c’est un OS financier intégrant paiement, industrie, technologie et UBI.",
+          framework_hint:"OS financier · Architecture · Échelle",
+          global_title:"Expansion mondiale", global_desc:"PHKBank s’étend aux structures mondiales de paiement, règlement et industrie.", global_hint:"Interopérabilité · Partenariats · Échelle",
+          pwb_title:"PWB Global", pwb_desc:"Cadre global subordonné à PHKBank pour finance, industrie et UBI.", pwb_hint:"Sous-cadre",
+          footer_brand:"PHKBank", footer_line:"Système d’exploitation financier",
+          alert_ubi_title:"UBI", alert_ubi_body:"Modèle qui redistribue périodiquement une part des profits aux citoyens.\nVersé aux participants quel que soit l’emploi.",
+          alert_pay_title:"Paiement & transfert", alert_pay_body:"Couche centrale pour paiement, transfert et règlement de l’écosystème PHK.",
+          alert_apy_title:"Taux (APY)", alert_apy_body:"Affiché en démo.\nLa politique APY sera définie selon les conditions.",
+          alert_reward_title:"Récompenses", alert_reward_body:"Répartition selon participation et contribution.",
+          alert_framework_title:"PHKBank Framework", alert_framework_body:"PHKBank est conçu comme un OS financier.",
+          alert_global_title:"Expansion mondiale", alert_global_body:"PHKBank passe à des structures mondiales de paiement et règlement.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Sous-cadre global sous PHKBank."
+        },
+
+        de:{ /* German */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Menschen zuerst, dann der Zweck",
+          sec1_title:"PHKBank Core · Ausführung", ubi_title:"Grundeinkommen", ubi_desc:"UBI-Rewards", ubi_hint:"Regelmäßig · Teilnahme · Rückführung",
+          pay_title:"Zahlung", pay_desc:"Zahlung · Transfer", pay_hint:"Zahlung · Transfer · Abrechnung",
+          apy_title:"Einlagezins", apy_desc:"31.4% APY (Demo)", apy_hint:"Stabilität · Liquidität · Langfristig",
+          reward_title:"Belohnungen", reward_desc:"Beitragsbasiert", reward_hint:"Logs · Bewertung · Verteilung",
+          channels_div:"Externe Kanäle", youtube_title:"YouTube", youtube_desc:"Offizieller Kanal", tiktok_title:"TikTok", tiktok_desc:"Offizieller Kanal",
+          sec2_title:"PHKBank Framework · Struktur", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank ist nicht nur eine App, sondern ein Finanz-OS, das Zahlung, Industrie, Technologie und UBI integriert.",
+          framework_hint:"Finanz-OS · Architektur · Skalierung",
+          global_title:"Globale Expansion", global_desc:"PHKBank skaliert zu globalen Zahlungs-, Abrechnungs- und Industrie-Strukturen.", global_hint:"Interoperabilität · Partner · Skalierung",
+          pwb_title:"PWB Global", pwb_desc:"Globales Sub-Framework unter PHKBank für Finanz-, Industrie- und UBI-Strukturen.", pwb_hint:"Sub-Framework",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"Modell zur regelmäßigen Rückführung eines Teils der Gewinne.\nZahlung an Teilnehmende unabhängig von Arbeit.",
+          alert_pay_title:"Zahlung & Transfer", alert_pay_body:"Kernschicht für Zahlung, Transfer und Abrechnung im PHK-Ökosystem.",
+          alert_apy_title:"Einlagezins (APY)", alert_apy_body:"Aktuell als Demo angezeigt.\nAPY wird später definiert.",
+          alert_reward_title:"Belohnungen", alert_reward_body:"Verteilung nach Teilnahme und Beitrag.",
+          alert_framework_title:"PHKBank Framework", alert_framework_body:"PHKBank ist als Finanz-OS konzipiert.",
+          alert_global_title:"Globale Expansion", alert_global_body:"PHKBank skaliert global.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Globales Sub-Framework unter PHKBank."
+        },
+
+        it:{ /* Italian */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Le persone prima, poi lo scopo",
+          sec1_title:"PHKBank Core · Esecuzione", ubi_title:"Reddito di base", ubi_desc:"Reward UBI", ubi_hint:"Ricorrente · Partecipazione · Ritorno",
+          pay_title:"Pagamento", pay_desc:"Pagamento · Trasferimento", pay_hint:"Pagamento · Trasferimento · Regolamento",
+          apy_title:"Tasso deposito", apy_desc:"31.4% APY (Demo)", apy_hint:"Stabilità · Liquidità · Lungo termine",
+          reward_title:"Ricompense", reward_desc:"Basate sul contributo", reward_hint:"Log · Valutazione · Distribuzione",
+          channels_div:"Canali esterni", youtube_title:"YouTube", youtube_desc:"Canale ufficiale", tiktok_title:"TikTok", tiktok_desc:"Canale ufficiale",
+          sec2_title:"PHKBank Framework · Struttura", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank non è solo un’app: è un sistema operativo finanziario che integra pagamenti, industria, tecnologia e UBI.",
+          framework_hint:"OS finanziario · Architettura · Scala",
+          global_title:"Espansione globale", global_desc:"PHKBank si espande in strutture globali di pagamento, regolamento e industria.", global_hint:"Interoperabilità · Partner · Scala",
+          pwb_title:"PWB Global", pwb_desc:"Sotto-framework globale di PHKBank per finanza, industria e UBI.", pwb_hint:"Sotto-framework",
+          footer_brand:"PHKBank", footer_line:"Sistema Operativo Finanziario",
+          alert_ubi_title:"UBI", alert_ubi_body:"Modello che restituisce periodicamente una parte dei profitti ai cittadini.\nPagato ai partecipanti indipendentemente dal lavoro.",
+          alert_pay_title:"Pagamento e trasferimento", alert_pay_body:"Layer centrale per pagamenti, trasferimenti e regolamento nell’ecosistema PHK.",
+          alert_apy_title:"Tasso (APY)", alert_apy_body:"Mostrato come demo.\nLa policy APY sarà definita dalle condizioni.",
+          alert_reward_title:"Ricompense", alert_reward_body:"Distribuzione in base a partecipazione e contributo.",
+          alert_framework_title:"PHKBank Framework", alert_framework_body:"PHKBank è progettato come OS finanziario.",
+          alert_global_title:"Espansione globale", alert_global_body:"PHKBank scala a strutture globali.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Sotto-framework globale sotto PHKBank."
+        },
+
+        pt:{ /* Portuguese */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Pessoas primeiro, propósito depois",
+          sec1_title:"PHKBank Core · Execução", ubi_title:"Renda básica", ubi_desc:"Recompensas UBI", ubi_hint:"Recorrente · Participação · Retorno",
+          pay_title:"Pagamento", pay_desc:"Pagamento · Transferência", pay_hint:"Pagamento · Transferência · Liquidação",
+          apy_title:"Taxa de depósito", apy_desc:"31.4% APY (Demo)", apy_hint:"Estabilidade · Liquidez · Longo prazo",
+          reward_title:"Recompensas", reward_desc:"Baseado em contribuição", reward_hint:"Registros · Avaliação · Distribuição",
+          channels_div:"Canais externos", youtube_title:"YouTube", youtube_desc:"Canal oficial", tiktok_title:"TikTok", tiktok_desc:"Canal oficial",
+          sec2_title:"PHKBank Framework · Estrutura", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank não é apenas um app: é um sistema operacional financeiro integrando pagamentos, indústria, tecnologia e UBI.",
+          framework_hint:"OS financeiro · Arquitetura · Escala",
+          global_title:"Expansão global", global_desc:"PHKBank expande para estruturas globais de pagamento, liquidação e indústria.", global_hint:"Interoperabilidade · Parcerias · Escala",
+          pwb_title:"PWB Global", pwb_desc:"Subframework global sob PHKBank para finanças, indústria e UBI.", pwb_hint:"Subframework",
+          footer_brand:"PHKBank", footer_line:"Sistema Operacional Financeiro",
+          alert_ubi_title:"UBI", alert_ubi_body:"Modelo que devolve periodicamente parte dos lucros às pessoas.\nPago aos participantes independentemente do emprego.",
+          alert_pay_title:"Pagamento e transferência", alert_pay_body:"Camada central de pagamento, transferência e liquidação do ecossistema PHK.",
+          alert_apy_title:"Taxa (APY)", alert_apy_body:"Exibido como demo.\nA política APY será definida por condições.",
+          alert_reward_title:"Recompensas", alert_reward_body:"Distribuição conforme participação e contribuição.",
+          alert_framework_title:"PHKBank Framework", alert_framework_body:"PHKBank é projetado como OS financeiro.",
+          alert_global_title:"Expansão global", alert_global_body:"PHKBank escala globalmente.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Subframework global sob PHKBank."
+        },
+
+        ru:{ /* Russian */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Сначала люди, затем смысл",
+          sec1_title:"PHKBank Core · Исполнение", ubi_title:"Базовый доход", ubi_desc:"Награды UBI", ubi_hint:"Регулярно · Участие · Возврат",
+          pay_title:"Платёж", pay_desc:"Платёж · Перевод", pay_hint:"Платёж · Перевод · Расчёт",
+          apy_title:"Ставка депозита", apy_desc:"31.4% APY (Демо)", apy_hint:"Стабильность · Ликвидность · Долгосрок",
+          reward_title:"Награды", reward_desc:"По участию и вкладу", reward_hint:"Логи · Оценка · Распределение",
+          channels_div:"Внешние каналы", youtube_title:"YouTube", youtube_desc:"Официальный канал", tiktok_title:"TikTok", tiktok_desc:"Официальный канал",
+          sec2_title:"PHKBank Framework · Структура", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank — не просто приложение. Это финансовая ОС, объединяющая платежи, индустрию, технологии и UBI.",
+          framework_hint:"Финансовая ОС · Архитектура · Масштаб",
+          global_title:"Глобальное расширение", global_desc:"PHKBank масштабируется в глобальные структуры платежей, расчётов и индустрии.", global_hint:"Совместимость · Партнёры · Масштаб",
+          pwb_title:"PWB Global", pwb_desc:"Глобальный субфреймворк под PHKBank для финансов, индустрии и UBI.", pwb_hint:"Субфреймворк",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"Модель регулярного возврата части прибыли людям.\nВыплаты участникам вне зависимости от занятости.",
+          alert_pay_title:"Платёж и перевод", alert_pay_body:"Ключевой слой платежей, переводов и расчётов в экосистеме PHK.",
+          alert_apy_title:"Ставка (APY)", alert_apy_body:"Сейчас отображается как демо.\nПолитика APY будет определена условиями.",
+          alert_reward_title:"Награды", alert_reward_body:"Распределение по участию и вкладу.",
+          alert_framework_title:"PHKBank Framework", alert_framework_body:"PHKBank спроектирован как финансовая ОС.",
+          alert_global_title:"Глобальное расширение", alert_global_body:"PHKBank масштабируется глобально.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Глобальный субфреймворк под PHKBank."
+        },
+
+        ar:{ /* Arabic (RTL) */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"عالم واحد · باي واحدة · مستقبل واحد", slogan:"الإنسان أولاً ثم السبب",
+          sec1_title:"نواة PHKBank · التنفيذ", ubi_title:"الدخل الأساسي", ubi_desc:"مكافآت UBI", ubi_hint:"دوري · مشاركة · عائد للنظام",
+          pay_title:"الدفع", pay_desc:"دفع · تحويل", pay_hint:"دفع · تحويل · تسوية",
+          apy_title:"معدل الإيداع", apy_desc:"31.4% APY (تجريبي)", apy_hint:"استقرار · سيولة · طويل الأجل",
+          reward_title:"المكافآت", reward_desc:"حسب المشاركة والمساهمة", reward_hint:"سجل · تقييم · توزيع",
+          channels_div:"قنوات خارجية", youtube_title:"YouTube", youtube_desc:"القناة الرسمية", tiktok_title:"TikTok", tiktok_desc:"القناة الرسمية",
+          sec2_title:"إطار PHKBank · البنية", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank ليس مجرد تطبيق، بل نظام تشغيل مالي يدمج الدفع والصناعة والتقنية وUBI.",
+          framework_hint:"نظام مالي · هندسة · توسّع",
+          global_title:"التوسع العالمي", global_desc:"يتوسع PHKBank إلى هياكل عالمية للدفع والتسوية وربط الصناعة.", global_hint:"تكامل · شراكات · توسع",
+          pwb_title:"PWB Global", pwb_desc:"إطار عالمي فرعي تحت PHKBank للمالية والصناعة وUBI.", pwb_hint:"إطار فرعي",
+          footer_brand:"PHKBank", footer_line:"نظام تشغيل مالي",
+          alert_ubi_title:"UBI", alert_ubi_body:"نموذج يعيد جزءاً من الأرباح إلى الناس بشكل دوري.\nيُدفع للمشاركين بغض النظر عن العمل.",
+          alert_pay_title:"الدفع والتحويل", alert_pay_body:"الطبقة الأساسية للدفع والتحويل والتسوية ضمن نظام PHK.",
+          alert_apy_title:"معدل (APY)", alert_apy_body:"معروض حالياً كتجريبي.\nسيتم تحديد سياسة APY حسب الشروط.",
+          alert_reward_title:"المكافآت", alert_reward_body:"توزيع المكافآت حسب المشاركة والمساهمة.",
+          alert_framework_title:"PHKBank Framework", alert_framework_body:"تم تصميم PHKBank كنظام تشغيل مالي.",
+          alert_global_title:"التوسع العالمي", alert_global_body:"يتوسع PHKBank عالمياً في الدفع والتسوية.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"إطار عالمي فرعي تحت PHKBank."
+        },
+
+        hi:{ /* Hindi */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"पहले लोग, फिर उद्देश्य",
+          sec1_title:"PHKBank Core · निष्पादन", ubi_title:"बेसिक इनकम", ubi_desc:"UBI रिवॉर्ड", ubi_hint:"नियमित · सहभागिता · वापसी",
+          pay_title:"भुगतान", pay_desc:"भुगतान · ट्रांसफर", pay_hint:"भुगतान · ट्रांसफर · सेटलमेंट",
+          apy_title:"जमा दर", apy_desc:"31.4% APY (डेमो)", apy_hint:"स्थिरता · तरलता · दीर्घकाल",
+          reward_title:"रिवॉर्ड", reward_desc:"योगदान आधारित", reward_hint:"लॉग · मूल्यांकन · वितरण",
+          channels_div:"बाहरी चैनल", youtube_title:"YouTube", youtube_desc:"आधिकारिक चैनल", tiktok_title:"TikTok", tiktok_desc:"आधिकारिक चैनल",
+          sec2_title:"PHKBank Framework · संरचना", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank केवल ऐप नहीं, भुगतान, उद्योग, तकनीक और UBI को जोड़ने वाला वित्तीय OS है।",
+          framework_hint:"वित्तीय OS · आर्किटेक्चर · स्केल",
+          global_title:"ग्लोबल विस्तार", global_desc:"PHKBank वैश्विक भुगतान, सेटलमेंट और उद्योग-लिंक संरचना तक फैलता है।", global_hint:"इंटरऑप · पार्टनर · स्केल",
+          pwb_title:"PWB Global", pwb_desc:"PHKBank के अंतर्गत वैश्विक सब-फ्रेमवर्क जो वित्त, उद्योग और UBI संभालता है।", pwb_hint:"सब-फ्रेमवर्क",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"लाभ का एक हिस्सा नियमित रूप से लोगों को लौटाने का मॉडल।\nकाम से स्वतंत्र रूप से सहभागियों को भुगतान।",
+          alert_pay_title:"भुगतान/ट्रांसफर", alert_pay_body:"PHK इकोसिस्टम का भुगतान, ट्रांसफर और सेटलमेंट का कोर लेयर।",
+          alert_apy_title:"APY", alert_apy_body:"वर्तमान में डेमो।\nशर्तों के अनुसार APY नीति तय होगी।",
+          alert_reward_title:"रिवॉर्ड", alert_reward_body:"भागीदारी और योगदान के आधार पर वितरण।",
+          alert_framework_title:"Framework", alert_framework_body:"PHKBank को वित्तीय OS के रूप में डिज़ाइन किया गया है।",
+          alert_global_title:"ग्लोबल विस्तार", alert_global_body:"PHKBank वैश्विक संरचनाओं तक स्केल करता है।",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"PHKBank के अंतर्गत वैश्विक सब-फ्रेमवर्क।"
+        },
+
+        id:{ /* Indonesian */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Manusia dulu, lalu tujuan",
+          sec1_title:"PHKBank Core · Eksekusi", ubi_title:"Pendapatan dasar", ubi_desc:"Reward UBI", ubi_hint:"Berkala · Partisipasi · Pengembalian",
+          pay_title:"Pembayaran", pay_desc:"Bayar · Transfer", pay_hint:"Bayar · Transfer · Settlement",
+          apy_title:"Tingkat deposito", apy_desc:"31.4% APY (Demo)", apy_hint:"Stabil · Likuid · Jangka panjang",
+          reward_title:"Reward", reward_desc:"Berbasis kontribusi", reward_hint:"Log · Penilaian · Distribusi",
+          channels_div:"Kanal eksternal", youtube_title:"YouTube", youtube_desc:"Kanal resmi", tiktok_title:"TikTok", tiktok_desc:"Kanal resmi",
+          sec2_title:"PHKBank Framework · Struktur", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank bukan sekadar aplikasi, melainkan OS keuangan yang mengintegrasikan pembayaran, industri, teknologi, dan UBI.",
+          framework_hint:"OS keuangan · Arsitektur · Skala",
+          global_title:"Ekspansi global", global_desc:"PHKBank berkembang ke struktur pembayaran, settlement, dan industri global.", global_hint:"Interoperabilitas · Mitra · Skala",
+          pwb_title:"PWB Global", pwb_desc:"Sub-framework global di bawah PHKBank untuk keuangan, industri, dan UBI.", pwb_hint:"Sub-framework",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"Model pengembalian sebagian profit secara berkala kepada masyarakat.\nDibayar ke peserta tanpa tergantung status kerja.",
+          alert_pay_title:"Pembayaran & transfer", alert_pay_body:"Lapisan inti pembayaran, transfer, dan settlement dalam ekosistem PHK.",
+          alert_apy_title:"APY", alert_apy_body:"Ditampilkan sebagai demo.\nKebijakan APY akan ditetapkan berdasarkan syarat.",
+          alert_reward_title:"Reward", alert_reward_body:"Distribusi berdasarkan partisipasi dan kontribusi.",
+          alert_framework_title:"Framework", alert_framework_body:"PHKBank dirancang sebagai OS keuangan.",
+          alert_global_title:"Ekspansi global", alert_global_body:"PHKBank menskalakan struktur global.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Sub-framework global di bawah PHKBank."
+        },
+
+        vi:{ /* Vietnamese */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Con người trước, mục tiêu sau",
+          sec1_title:"PHKBank Core · Thực thi", ubi_title:"Thu nhập cơ bản", ubi_desc:"Thưởng UBI", ubi_hint:"Định kỳ · Tham gia · Hoàn trả",
+          pay_title:"Thanh toán", pay_desc:"Thanh toán · Chuyển", pay_hint:"Thanh toán · Chuyển · Đối soát",
+          apy_title:"Lãi suất gửi", apy_desc:"31.4% APY (Demo)", apy_hint:"Ổn định · Thanh khoản · Dài hạn",
+          reward_title:"Phần thưởng", reward_desc:"Theo đóng góp", reward_hint:"Ghi nhận · Đánh giá · Phân phối",
+          channels_div:"Kênh ngoài", youtube_title:"YouTube", youtube_desc:"Kênh chính thức", tiktok_title:"TikTok", tiktok_desc:"Kênh chính thức",
+          sec2_title:"PHKBank Framework · Cấu trúc", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank không chỉ là ứng dụng, mà là hệ điều hành tài chính tích hợp thanh toán, công nghiệp, công nghệ và UBI.",
+          framework_hint:"HĐH tài chính · Kiến trúc · Mở rộng",
+          global_title:"Mở rộng toàn cầu", global_desc:"PHKBank mở rộng sang cấu trúc thanh toán, đối soát và liên kết công nghiệp toàn cầu.", global_hint:"Tương thích · Đối tác · Mở rộng",
+          pwb_title:"PWB Global", pwb_desc:"Khung mở rộng toàn cầu cấp dưới của PHKBank cho tài chính, công nghiệp và UBI.", pwb_hint:"Khung phụ",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"Mô hình hoàn trả định kỳ một phần lợi nhuận cho người tham gia.\nChi trả không phụ thuộc tình trạng lao động.",
+          alert_pay_title:"Thanh toán & chuyển", alert_pay_body:"Lớp cốt lõi cho thanh toán, chuyển và đối soát trong hệ sinh thái PHK.",
+          alert_apy_title:"APY", alert_apy_body:"Hiện hiển thị demo.\nChính sách APY sẽ được xác định theo điều kiện.",
+          alert_reward_title:"Phần thưởng", alert_reward_body:"Phân phối dựa trên tham gia và đóng góp.",
+          alert_framework_title:"Framework", alert_framework_body:"PHKBank được thiết kế như HĐH tài chính.",
+          alert_global_title:"Mở rộng toàn cầu", alert_global_body:"PHKBank mở rộng cấu trúc toàn cầu.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Khung phụ toàn cầu dưới PHKBank."
+        },
+
+        th:{ /* Thai */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"คนมาก่อน แล้วจึงเป้าหมาย",
+          sec1_title:"PHKBank Core · การทำงาน", ubi_title:"รายได้พื้นฐาน", ubi_desc:"รางวัล UBI", ubi_hint:"เป็นงวด · มีส่วนร่วม · คืนสู่ระบบ",
+          pay_title:"ชำระเงิน", pay_desc:"ชำระ · โอน", pay_hint:"ชำระ · โอน · ชำระบัญชี",
+          apy_title:"อัตราฝาก", apy_desc:"31.4% APY (เดโม)", apy_hint:"เสถียร · สภาพคล่อง · ระยะยาว",
+          reward_title:"รางวัล", reward_desc:"ตามการมีส่วนร่วม", reward_hint:"บันทึก · ประเมิน · แจกจ่าย",
+          channels_div:"ช่องทางภายนอก", youtube_title:"YouTube", youtube_desc:"ช่องทางทางการ", tiktok_title:"TikTok", tiktok_desc:"ช่องทางทางการ",
+          sec2_title:"PHKBank Framework · โครงสร้าง", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank ไม่ใช่แค่แอป แต่เป็นระบบปฏิบัติการการเงินที่รวมการชำระเงิน อุตสาหกรรม เทคโนโลยี และ UBI",
+          framework_hint:"OS การเงิน · สถาปัตย์ · ขยาย",
+          global_title:"ขยายสู่สากล", global_desc:"PHKBank ขยายสู่โครงสร้างการชำระเงินและการเชื่อมอุตสาหกรรมทั่วโลก", global_hint:"เชื่อมต่อ · พันธมิตร · ขยาย",
+          pwb_title:"PWB Global", pwb_desc:"กรอบขยายสากลระดับย่อยภายใต้ PHKBank", pwb_hint:"Sub Framework",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"โมเดลคืนกำไรบางส่วนให้ประชาชนเป็นงวด\nจ่ายให้ผู้เข้าร่วมโดยไม่ขึ้นกับงาน",
+          alert_pay_title:"ชำระเงิน/โอน", alert_pay_body:"เลเยอร์หลักสำหรับชำระ โอน และชำระบัญชีในระบบ PHK",
+          alert_apy_title:"APY", alert_apy_body:"แสดงเป็นเดโม\nนโยบาย APY จะกำหนดตามเงื่อนไข",
+          alert_reward_title:"รางวัล", alert_reward_body:"แจกจ่ายตามการมีส่วนร่วมและการสนับสนุน",
+          alert_framework_title:"Framework", alert_framework_body:"PHKBank ออกแบบเป็น OS การเงิน",
+          alert_global_title:"ขยายสู่สากล", alert_global_body:"PHKBank ขยายโครงสร้างสู่ระดับโลก",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"กรอบย่อยระดับโลกภายใต้ PHKBank"
+        },
+
+        tr:{ /* Turkish */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Önce insanlar, sonra amaç",
+          sec1_title:"PHKBank Core · Yürütme", ubi_title:"Temel gelir", ubi_desc:"UBI ödülleri", ubi_hint:"Düzenli · Katılım · Geri dönüş",
+          pay_title:"Ödeme", pay_desc:"Ödeme · Transfer", pay_hint:"Ödeme · Transfer · Mutabakat",
+          apy_title:"Mevduat oranı", apy_desc:"31.4% APY (Demo)", apy_hint:"İstikrar · Likidite · Uzun vadeli",
+          reward_title:"Ödüller", reward_desc:"Katkı bazlı", reward_hint:"Kayıt · Değerlendirme · Dağıtım",
+          channels_div:"Dış kanallar", youtube_title:"YouTube", youtube_desc:"Resmi kanal", tiktok_title:"TikTok", tiktok_desc:"Resmi kanal",
+          sec2_title:"PHKBank Framework · Yapı", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank sadece bir uygulama değil; ödeme, sanayi, teknoloji ve UBI’yi entegre eden finansal bir işletim sistemidir.",
+          framework_hint:"Finans OS · Mimari · Ölçek",
+          global_title:"Küresel genişleme", global_desc:"PHKBank küresel ödeme, mutabakat ve sanayi bağlantı yapılarına genişler.", global_hint:"Uyumluluk · Ortaklık · Ölçek",
+          pwb_title:"PWB Global", pwb_desc:"PHKBank altında küresel alt çerçeve.", pwb_hint:"Alt çerçeve",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"Kârın bir kısmını düzenli olarak insanlara iade eden model.\nÇalışma durumundan bağımsız ödeme.",
+          alert_pay_title:"Ödeme & transfer", alert_pay_body:"PHK ekosisteminde ödeme, transfer ve mutabakatın çekirdek katmanı.",
+          alert_apy_title:"APY", alert_apy_body:"Şu an demo.\nAPY politikası şartlara göre belirlenecek.",
+          alert_reward_title:"Ödüller", alert_reward_body:"Katılım ve katkıya göre dağıtım.",
+          alert_framework_title:"Framework", alert_framework_body:"PHKBank finansal OS olarak tasarlanmıştır.",
+          alert_global_title:"Küresel genişleme", alert_global_body:"PHKBank küresel yapıya ölçeklenir.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"PHKBank altında küresel alt çerçeve."
+        },
+
+        fa:{ /* Persian (RTL) */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"یک جهان · یک Pi · یک آینده", slogan:"اول انسان، بعد هدف",
+          sec1_title:"هسته PHKBank · اجرا", ubi_title:"درآمد پایه", ubi_desc:"پاداش UBI", ubi_hint:"دوره ای · مشارکت · بازگشت",
+          pay_title:"پرداخت", pay_desc:"پرداخت · انتقال", pay_hint:"پرداخت · انتقال · تسویه",
+          apy_title:"نرخ سپرده", apy_desc:"31.4% APY (نمایشی)", apy_hint:"پایداری · نقدشوندگی · بلندمدت",
+          reward_title:"پاداش ها", reward_desc:"بر اساس مشارکت", reward_hint:"ثبت · ارزیابی · توزیع",
+          channels_div:"کانال های بیرونی", youtube_title:"YouTube", youtube_desc:"کانال رسمی", tiktok_title:"TikTok", tiktok_desc:"کانال رسمی",
+          sec2_title:"چارچوب PHKBank · ساختار", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank فقط یک اپ نیست؛ یک سیستم عامل مالی است که پرداخت، صنعت، فناوری و UBI را یکپارچه می کند.",
+          framework_hint:"سیستم عامل مالی · معماری · مقیاس پذیری",
+          global_title:"گسترش جهانی", global_desc:"PHKBank به ساختارهای جهانی پرداخت، تسویه و اتصال صنعت گسترش می یابد.", global_hint:"هم کنشی · مشارکت · مقیاس",
+          pwb_title:"PWB Global", pwb_desc:"چارچوب جهانیِ زیرمجموعه PHKBank.", pwb_hint:"زیرچارچوب",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"مدلی برای بازگرداندن بخشی از سود به مردم به صورت دوره ای.\nپرداخت به مشارکت کنندگان مستقل از وضعیت کار.",
+          alert_pay_title:"پرداخت و انتقال", alert_pay_body:"لایه اصلی پرداخت، انتقال و تسویه در اکوسیستم PHK.",
+          alert_apy_title:"APY", alert_apy_body:"در حال حاضر نمایشی است.\nسیاست APY بر اساس شرایط تعیین می شود.",
+          alert_reward_title:"پاداش ها", alert_reward_body:"توزیع بر اساس مشارکت و سهم.",
+          alert_framework_title:"Framework", alert_framework_body:"PHKBank به عنوان سیستم عامل مالی طراحی شده است.",
+          alert_global_title:"گسترش جهانی", alert_global_body:"PHKBank به ساختارهای جهانی مقیاس می یابد.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"زیرچارچوب جهانی زیرمجموعه PHKBank."
+        },
+
+        ms:{ /* Malay */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Manusia dahulu, kemudian tujuan",
+          sec1_title:"PHKBank Core · Pelaksanaan", ubi_title:"Pendapatan asas", ubi_desc:"Ganjaran UBI", ubi_hint:"Berkala · Penyertaan · Pulangan",
+          pay_title:"Pembayaran", pay_desc:"Bayar · Pindah", pay_hint:"Bayar · Pindah · Penyelesaian",
+          apy_title:"Kadar deposit", apy_desc:"31.4% APY (Demo)", apy_hint:"Stabil · Cecair · Jangka panjang",
+          reward_title:"Ganjaran", reward_desc:"Berdasarkan sumbangan", reward_hint:"Log · Penilaian · Agihan",
+          channels_div:"Saluran luar", youtube_title:"YouTube", youtube_desc:"Saluran rasmi", tiktok_title:"TikTok", tiktok_desc:"Saluran rasmi",
+          sec2_title:"PHKBank Framework · Struktur", framework_title:"PHKBank Framework",
+          framework_desc:"PHKBank bukan sekadar aplikasi, tetapi OS kewangan yang menggabungkan pembayaran, industri, teknologi dan UBI.",
+          framework_hint:"OS kewangan · Seni bina · Skala",
+          global_title:"Pengembangan global", global_desc:"PHKBank berkembang ke struktur pembayaran, penyelesaian dan industri global.", global_hint:"Kesalingoperasian · Rakan · Skala",
+          pwb_title:"PWB Global", pwb_desc:"Sub-kerangka global di bawah PHKBank.", pwb_hint:"Sub Framework",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"Model memulangkan sebahagian keuntungan kepada rakyat secara berkala.\nDibayar kepada peserta tanpa mengira pekerjaan.",
+          alert_pay_title:"Pembayaran & pindahan", alert_pay_body:"Lapisan teras pembayaran, pindahan dan penyelesaian dalam ekosistem PHK.",
+          alert_apy_title:"APY", alert_apy_body:"Ditunjukkan sebagai demo.\nPolisi APY akan ditetapkan mengikut syarat.",
+          alert_reward_title:"Ganjaran", alert_reward_body:"Agihan berdasarkan penyertaan dan sumbangan.",
+          alert_framework_title:"Framework", alert_framework_body:"PHKBank direka sebagai OS kewangan.",
+          alert_global_title:"Pengembangan global", alert_global_body:"PHKBank menskalakan struktur global.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Sub-kerangka global di bawah PHKBank."
+        },
+
+        tl:{ /* Filipino/Tagalog */
+          brand_name:"PHKBank", app_title:"PHKBank", tagline:"ONE WORLD · ONE PI · ONE FUTURE", slogan:"Tao muna, saka layunin",
+          sec1_title:"PHKBank Core · Pagpapatupad", ubi_title:"Batayang kita", ubi_desc:"UBI rewards", ubi_hint:"Regular · Partisipasyon · Balik-ecosystem",
+          pay_title:"Bayad", pay_desc:"Bayad · Transfer", pay_hint:"Bayad · Transfer · Settlement",
+          apy_title:"Rate ng deposito", apy_desc:"31.4% APY (Demo)", apy_hint:"Stability · Liquidity · Long-term",
+          reward_title:"Gantimpala", reward_desc:"Batay sa ambag", reward_hint:"Logs · Pagsusuri · Pamamahagi",
+          channels_div:"External Channels", youtube_title:"YouTube", youtube_desc:"Opisyal na channel", tiktok_title:"TikTok", tiktok_desc:"Opisyal na channel",
+          sec2_title:"PHKBank Framework · Estruktura", framework_title:"PHKBank Framework",
+          framework_desc:"Hindi lang app ang PHKBank: ito ay financial OS na pinagsasama ang bayad, industriya, teknolohiya at UBI.",
+          framework_hint:"Financial OS · Arkitektura · Scale",
+          global_title:"Global expansion", global_desc:"Lumalaki ang PHKBank sa global payment, settlement, at industry-linked structures.", global_hint:"Interoperability · Partners · Scale",
+          pwb_title:"PWB Global", pwb_desc:"Global sub-framework sa ilalim ng PHKBank.", pwb_hint:"Sub Framework",
+          footer_brand:"PHKBank", footer_line:"Financial Operating System",
+          alert_ubi_title:"UBI", alert_ubi_body:"Modelo ng regular na pagbabalik ng bahagi ng kita sa mga tao.\nBinabayaran ang kalahok kahit ano pa ang trabaho.",
+          alert_pay_title:"Bayad at transfer", alert_pay_body:"Core layer para sa bayad, transfer, at settlement sa PHK ecosystem.",
+          alert_apy_title:"APY", alert_apy_body:"Demo pa lang.\nAng APY policy ay itatakda batay sa kondisyon.",
+          alert_reward_title:"Gantimpala", alert_reward_body:"Pamamahagi batay sa partisipasyon at ambag.",
+          alert_framework_title:"Framework", alert_framework_body:"Dinisenyo ang PHKBank bilang financial OS.",
+          alert_global_title:"Global expansion", alert_global_body:"Lumalaki ang PHKBank sa global structures.",
+          alert_pwb_title:"PWB Global", alert_pwb_body:"Global sub-framework sa ilalim ng PHKBank."
+        }
+      };
+
+      function setLang(lang){
+        if(!LANG[lang]) lang = "ko";
+
+        document.documentElement.lang = lang;
+        document.documentElement.dir = RTL_LANGS.has(lang) ? "rtl" : "ltr";
+
+        document.querySelectorAll("[data-i18n]").forEach(el=>{
+          const key = el.getAttribute("data-i18n");
+          const val = LANG[lang][key];
+          if(typeof val === "string") el.textContent = val;
+        });
+      }
+
+      function showInfo(type){
+        const lang = document.documentElement.lang || "ko";
+        const t = LANG[lang] || LANG.ko;
+
+        const map = {
+          ubi: {title:t.alert_ubi_title, body:t.alert_ubi_body},
+          pay: {title:t.alert_pay_title, body:t.alert_pay_body},
+          apy: {title:t.alert_apy_title, body:t.alert_apy_body},
+          reward:{title:t.alert_reward_title, body:t.alert_reward_body},
+          framework:{title:t.alert_framework_title, body:t.alert_framework_body},
+          global:{title:t.alert_global_title, body:t.alert_global_body},
+          pwb: {title:t.alert_pwb_title, body:t.alert_pwb_body}
+        };
+
+        const item = map[type] || {title:"", body:""};
+        alert(item.title + "\n\n" + item.body);
+      }
+
+      // language selector
+      document.getElementById("langSelect").addEventListener("change", (e)=>{
+        setLang(e.target.value);
+      });
+
+      // default language
+      setLang("ko");
+    </script>
+  </main>
 </body>
 </html>
